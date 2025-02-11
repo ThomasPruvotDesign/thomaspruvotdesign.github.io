@@ -3,29 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Thomas Pruvot</title>
+    <title>Mon Portfolio</title>
     <style>
+        /* Reset des marges et du padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fond d'écran */
         body {
             background-image: url('Boisbrule.png');
             background-size: cover;
             background-position: center center;
-            background-attachment: fixed; 
-            margin: 0;
             height: 100vh;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        iframe {
-            width: 100%; 
+        /* Conteneur du PDF */
+        .pdf-container {
+            width: 70%;
             height: 100%;
-            border: none; 
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Embed du PDF */
+        .pdf-container embed {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    
-    <iframe src="Portfolio.pdf#toolbar=0&navpanes=0&zoom=100" width="100%" height="100%"></iframe>
+    <div class="pdf-container">
+        <embed src="Portfolio.pdf" type="application/pdf" id="pdfEmbed" />
+    </div>
+
+    <script>
+        // Fonction pour forcer l'affichage du PDF au zoom 100% sans barre de défilement
+        window.onload = function() {
+            var pdfEmbed = document.getElementById('pdfEmbed');
+            pdfEmbed.onload = function() {
+                // Ajuster le zoom à 100% pour certains navigateurs
+                var pdfUrl = pdfEmbed.src;
+                pdfEmbed.src = pdfUrl + '#zoom=100&toolbar=0&scrollbar=0';
+            };
+        };
+    </script>
 </body>
 </html>
