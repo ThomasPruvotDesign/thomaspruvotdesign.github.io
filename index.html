@@ -1,125 +1,101 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Thomas Pruvot</title>
-
-    <!-- Style CSS -->
+    <title>Portfolio PDF</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            background: url('Boisbrule.png') no-repeat center center fixed;
+            background-image: url('Boisbrule.png');
             background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             height: 100vh;
-            overflow: hidden;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
-
-        /* Conteneur du PDF */
-        #pdfContainer {
-            width: 80vw; /* 80% de la largeur sur ordinateur */
-            height: 100vh; /* Prend toute la hauteur de la fenêtre */
-            overflow-y: scroll; /* Défilement vertical */
-            display: none; /* Masquer initialement */
+        #pdf-container {
+            width: 80%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
         }
-
-        /* Canvas PDF : ajustement dynamique */
-        canvas {
-            width: 100%; /* Maximiser la largeur */
-            margin-bottom: 20px; /* Marge entre les pages */
+        #pdf-viewer {
+            width: 100%;
+            height: 100%;
         }
-
-        /* Fallback iframe pour Safari */
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            display: none;
         }
-
-        /* 📱 Adaptation pour mobile et tablette */
         @media (max-width: 768px) {
-            #pdfContainer, iframe {
-                width: 95vw; /* 95% de la largeur pour mobile/tablette */
-                height: 90vh; /* 90% de la hauteur */
+            #pdf-container {
+                width: 95%;
             }
         }
     </style>
 </head>
 <body>
+    <div id="pdf-container">
+        <div id="pdf-viewer">
+            <div id="pdf-js-viewer"></div>
+            <!-- L'iframe sera utilisé ici comme fallback si PDF.js échoue -->
+            <iframe id="pdf-iframe" style="display:none;" src="Portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
+        </div>
+    </div>
 
-    <!-- Conteneur pour le PDF -->
-    <div id="pdfContainer"></div>
-
-    <!-- Fallback iframe pour Safari -->
-    <iframe id="pdfFallback" src="Portfolio.pdf"></iframe>
-
-    <!-- Librairie PDF.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script>
-        const url = "Portfolio.pdf"; // URL de ton PDF
-        const pdfContainer = document.getElementById('pdfContainer');
-        const fallbackIframe = document.getElementById('pdfFallback');
+        var url = 'Portfolio.pdf';
 
-        // Fonction pour afficher le PDF avec PDF.js
-        pdfjsLib.getDocument(url).promise.then(pdf => {
-            console.log("📄 PDF chargé, pages :", pdf.numPages);
+        // Fonction pour rendre le PDF avec PDF.js
+        function renderPDF() {
+            var container = document.getElementById('pdf-js-viewer');
+            var iframe = document.getElementById('pdf-iframe');
+            var viewer = document.getElementById('pdf-js-viewer');
+            
+            // Tente de charger le PDF via PDF.js
+            pdfjsLib.getDocument(url).promise.then(function(pdf) {
+                var pageNumber = 1;
+                pdf.getPage(pageNumber).then(function(page) {
+                    var containerWidth = container.clientWidth;
+                    var containerHeight = container.clientHeight;
+                    
+                    // Calculer le facteur de mise à l'échelle pour que le PDF s'adapte à la fenêtre
+                    var scale = Math.min(containerWidth / page.getViewport({ scale: 1 }).width, containerHeight / page.getViewport({ scale: 1 }).height);
+                    
+                    var viewport = page.getViewport({ scale: scale });
 
-            const renderPage = (pageNumber) => {
-                pdf.getPage(pageNumber).then(page => {
-                    const scale = 1.5; // Ajuste le zoom ici
-                    const viewport = page.getViewport({ scale });
-
-                    // Création du canvas pour afficher la page
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
+                    // Créer un élément de canvas pour afficher la page
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
                     canvas.width = viewport.width;
+                    canvas.height = viewport.height;
 
-                    // Rendu de la page dans le canvas
-                    const renderContext = {
+                    // Afficher la page sur le canvas
+                    page.render({
                         canvasContext: context,
                         viewport: viewport
-                    };
-                    page.render(renderContext);
-
-                    // Ajouter la page rendue dans le conteneur
-                    pdfContainer.appendChild(canvas);
+                    }).promise.then(function() {
+                        // Ajouter le canvas au container
+                        viewer.innerHTML = '';  // Effacer le précédent contenu
+                        viewer.appendChild(canvas);
+                    });
                 });
-            };
+            }).catch(function() {
+                // Si PDF.js échoue, affiche le PDF via l'iframe
+                iframe.style.display = 'block';
+                viewer.style.display = 'none';
+            });
+        }
 
-            // Afficher toutes les pages du PDF
-            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                renderPage(pageNum);
-            }
-
-            // Afficher le conteneur PDF.js une fois le rendu terminé
-            pdfContainer.style.display = 'block';
-
-        }).catch(error => {
-            console.error("❌ Erreur lors du chargement du PDF :", error);
-            // Si PDF.js échoue, passer à l'iframe
-            fallbackIframe.style.display = 'block';
-        });
-
-        // Vérifie si le PDF se charge correctement, sinon passe à l'iframe
-        setTimeout(() => {
-            if (document.getElementById("pdfContainer").innerHTML.trim() === "") {
-                console.warn("⚠️ Fallback activé : iframe utilisé pour Safari...");
-                fallbackIframe.style.display = "block"; // Affiche l'iframe en cas de problème avec PDF.js
-            }
-        }, 3000);
+        renderPDF();
     </script>
-
 </body>
 </html>
