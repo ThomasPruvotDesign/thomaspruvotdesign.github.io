@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio</title>
     <style>
-        /* Reset des marges et du padding */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Fond d'écran */
         body {
             background-image: url('Boisbrule.png');
             background-size: cover;
-            background-position: center center;
+            background-position: center;
+            background-attachment: fixed;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,18 +23,16 @@
             overflow: hidden;
         }
 
-        /* Conteneur du PDF */
         .pdf-container {
-            width: 70%;
-            height: 100%;
-            overflow: hidden;
+            width: 70vw; /* 70% de la largeur de la fenêtre */
+            height: 100vh; /* 100% de la hauteur */
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
-        /* Embed du PDF */
-        .pdf-container embed {
+        iframe {
             width: 100%;
             height: 100%;
             border: none;
@@ -44,20 +41,7 @@
 </head>
 <body>
     <div class="pdf-container">
-        <!-- Modifier l'URL du PDF pour appliquer les paramètres de zoom -->
-      <iframe src="Portfolio.pdf#zoom=100" width="70%" height="100%"></iframe>
+        <iframe id="pdfViewer" src="Portfolio.pdf#view=FitH&zoom=100" allowfullscreen></iframe>
     </div>
-
-    <script>
-        // Fonction pour forcer l'affichage du PDF au zoom 100% sans barre de défilement
-        window.onload = function() {
-            var pdfEmbed = document.getElementById('pdfEmbed');
-            pdfEmbed.onload = function() {
-                // Ajuster le zoom à 100% pour certains navigateurs
-                var pdfUrl = pdfEmbed.src;
-                pdfEmbed.src = pdfUrl + '#zoom=100&toolbar=0&scrollbar=0';
-            };
-        };
-    </script>
 </body>
 </html>
