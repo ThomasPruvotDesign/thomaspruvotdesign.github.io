@@ -6,33 +6,42 @@
     <title>Portfolio PDF</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             background-image: url('Boisbrule.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             height: 100vh;
-            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
+
         #pdf-container {
             width: 80%;
             height: 100%;
+            overflow-y: auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-y: auto;
         }
+
         #pdf-viewer {
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
+
         @media (max-width: 768px) {
             #pdf-container {
                 width: 95%;
@@ -43,57 +52,13 @@
 <body>
     <div id="pdf-container">
         <div id="pdf-viewer">
-            <div id="pdf-js-viewer"></div>
-            <iframe id="pdf-iframe" style="display:none;" src="Portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
+            <!-- Affichage du PDF via un iframe -->
+            <iframe src="Portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0" title="Portfolio PDF"></iframe>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script>
-        var url = 'Portfolio.pdf';
-
-        // Fonction pour rendre le PDF avec PDF.js
-        function renderPDF() {
-            var container = document.getElementById('pdf-js-viewer');
-            var iframe = document.getElementById('pdf-iframe');
-            var viewer = document.getElementById('pdf-js-viewer');
-            
-            // Tente de charger le PDF via PDF.js
-            pdfjsLib.getDocument(url).promise.then(function(pdf) {
-                var pageNumber = 1;
-                pdf.getPage(pageNumber).then(function(page) {
-                    var containerWidth = container.clientWidth;
-                    var containerHeight = container.clientHeight;
-                    
-                    // Calculer le facteur de mise à l'échelle pour que le PDF s'adapte à la fenêtre
-                    var scale = Math.min(containerWidth / page.getViewport({ scale: 1 }).width, containerHeight / page.getViewport({ scale: 1 }).height);
-                    
-                    var viewport = page.getViewport({ scale: scale });
-
-                    // Créer un élément de canvas pour afficher la page
-                    var canvas = document.createElement('canvas');
-                    var context = canvas.getContext('2d');
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-
-                    // Afficher la page sur le canvas
-                    page.render({
-                        canvasContext: context,
-                        viewport: viewport
-                    }).promise.then(function() {
-                        // Ajouter le canvas au container
-                        viewer.innerHTML = '';  // Effacer le précédent contenu
-                        viewer.appendChild(canvas);
-                    });
-                });
-            }).catch(function() {
-                // Si PDF.js échoue, affiche le PDF via l'iframe
-                iframe.style.display = 'block';
-                viewer.style.display = 'none';
-            });
-        }
-
-        renderPDF();
+        // Aucune logique JavaScript supplémentaire nécessaire ici car l'iframe prend en charge l'affichage du PDF
     </script>
 </body>
 </html>
