@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
+    <title>Portfolio - Thomas Pruvot</title>
+
+    <!-- Style CSS -->
     <style>
         * {
             margin: 0;
@@ -12,36 +14,84 @@
         }
 
         body {
-            background-image: url('Boisbrule.png');
+            background: url('Boisbrule.png') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
             overflow: hidden;
         }
 
-        .pdf-container {
-            width: 80vw; /* Augmenté à 80% de la largeur de la fenêtre */
+        #pdfContainer, iframe {
+            width: 80vw;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
         }
 
         iframe {
-            width: 100%;
-            height: 100%;
+            display: none;
             border: none;
+        }
+
+        /* 📱 Adaptation pour mobile */
+        @media (max-width: 768px) {
+            #pdfContainer {
+                width: 95vw;
+                height: 90vh;
+            }
+            iframe {
+                width: 95vw;
+                height: 90vh;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="pdf-container">
-        <iframe id="pdfViewer" src="Portfolio.pdf#view=FitH&zoom=100" allowfullscreen></iframe>
-    </div>
+
+    <!-- Conteneur du PDF -->
+    <div id="pdfContainer"></div>
+
+    <!-- Fallback pour Safari (s'affiche si le canvas ne fonctionne pas) -->
+    <iframe id="pdfFallback" src="Portfolio.pdf"></iframe>
+
+    <!-- Librairie PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+    <script>
+        const url = "Portfolio.pdf";
+
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            console.log("📄 PDF chargé, nombre de pages :", pdf.numPages);
+
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                pdf.getPage(pageNum).then(page => {
+                    const scale = 1.5;
+                    const viewport = page.getViewport({ scale });
+
+                    // Création du canvas
+                    const canvas = document.createElement("canvas");
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    document.getElementById("pdfContainer").appendChild(canvas);
+
+                    const context = canvas.getContext("2d");
+                    const renderContext = { canvasContext: context, viewport: viewport };
+
+                    page.render(renderContext);
+                });
+            }
+        }).catch(error => {
+            console.error("❌ Erreur de chargement du PDF :", error);
+        });
+
+        // Vérification si le PDF se charge bien, sinon affichage de l'iframe
+        setTimeout(() => {
+            if (document.getElementById("pdfContainer").innerHTML.trim() === "") {
+                console.warn("⚠️ Problème d'affichage, activation de l'iframe...");
+                document.getElementById("pdfFallback").style.display = "block";
+            }
+        }, 3000);
+    </script>
+
 </body>
 </html>
