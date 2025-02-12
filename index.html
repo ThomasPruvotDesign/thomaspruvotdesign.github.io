@@ -23,23 +23,32 @@
             overflow: hidden;
         }
 
-        #pdfContainer, iframe {
+        /* Conteneur pour le PDF */
+        #pdfContainer {
+            width: 80vw; /* Augmenté à 80% pour meilleur affichage */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Canvas PDF */
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* Fallback pour Safari */
+        iframe {
             width: 80vw;
             height: 100vh;
-        }
-
-        iframe {
-            display: none;
             border: none;
+            display: none;
         }
 
-        /* 📱 Adaptation pour mobile */
+        /* 📱 Adaptation mobile */
         @media (max-width: 768px) {
-            #pdfContainer {
-                width: 95vw;
-                height: 90vh;
-            }
-            iframe {
+            #pdfContainer, iframe {
                 width: 95vw;
                 height: 90vh;
             }
@@ -51,7 +60,7 @@
     <!-- Conteneur du PDF -->
     <div id="pdfContainer"></div>
 
-    <!-- Fallback pour Safari (s'affiche si le canvas ne fonctionne pas) -->
+    <!-- Fallback pour Safari -->
     <iframe id="pdfFallback" src="Portfolio.pdf"></iframe>
 
     <!-- Librairie PDF.js -->
@@ -61,33 +70,34 @@
         const url = "Portfolio.pdf";
 
         pdfjsLib.getDocument(url).promise.then(pdf => {
-            console.log("📄 PDF chargé, nombre de pages :", pdf.numPages);
+            console.log("📄 PDF chargé, pages :", pdf.numPages);
 
-            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                pdf.getPage(pageNum).then(page => {
-                    const scale = 1.5;
-                    const viewport = page.getViewport({ scale });
+            // Récupère la 1ère page pour déterminer la taille optimale
+            pdf.getPage(1).then(page => {
+                const scale = 1.5;
+                const viewport = page.getViewport({ scale });
 
-                    // Création du canvas
-                    const canvas = document.createElement("canvas");
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-                    document.getElementById("pdfContainer").appendChild(canvas);
+                // Création du canvas
+                const canvas = document.createElement("canvas");
+                const context = canvas.getContext("2d");
 
-                    const context = canvas.getContext("2d");
-                    const renderContext = { canvasContext: context, viewport: viewport };
+                // Ajustement dynamique
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
 
-                    page.render(renderContext);
-                });
-            }
+                document.getElementById("pdfContainer").appendChild(canvas);
+
+                const renderContext = { canvasContext: context, viewport: viewport };
+                page.render(renderContext);
+            });
         }).catch(error => {
             console.error("❌ Erreur de chargement du PDF :", error);
         });
 
-        // Vérification si le PDF se charge bien, sinon affichage de l'iframe
+        // Vérifie si le PDF se charge bien, sinon affiche l'iframe
         setTimeout(() => {
             if (document.getElementById("pdfContainer").innerHTML.trim() === "") {
-                console.warn("⚠️ Problème d'affichage, activation de l'iframe...");
+                console.warn("⚠️ Activation de l'iframe...");
                 document.getElementById("pdfFallback").style.display = "block";
             }
         }, 3000);
