@@ -29,6 +29,7 @@
             width: 80vw; /* 80% de la largeur sur ordinateur */
             height: 100vh; /* Prend toute la hauteur de la fenêtre */
             overflow-y: scroll; /* Défilement vertical */
+            display: none; /* Masquer initialement */
         }
 
         /* Canvas PDF : ajustement dynamique */
@@ -101,8 +102,14 @@
             for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                 renderPage(pageNum);
             }
+
+            // Afficher le conteneur PDF.js une fois le rendu terminé
+            pdfContainer.style.display = 'block';
+
         }).catch(error => {
             console.error("❌ Erreur lors du chargement du PDF :", error);
+            // Si PDF.js échoue, passer à l'iframe
+            fallbackIframe.style.display = 'block';
         });
 
         // Vérifie si le PDF se charge correctement, sinon passe à l'iframe
