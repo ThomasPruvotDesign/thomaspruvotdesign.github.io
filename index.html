@@ -1,97 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio PDF</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-    /* Fond d'écran : Boisbrule.png occupe toute la fenêtre */
-    body {
-      background: url('Boisbrule.png') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    /* Conteneur du PDF :
-       - Sur ordinateur : 80% de la largeur, 100% de la hauteur de la fenêtre  
-       - Sur mobiles/tablettes : 95% de la largeur et 90% de la hauteur */
-    #pdf-container {
-      width: 80vw;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-      background: rgba(255,255,255,0.8); /* fond léger pour distinguer le PDF si besoin */
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-    @media (max-width: 768px) {
-      #pdf-container {
-        width: 95vw;
-        height: 90vh;
-      }
-    }
-    /* Le canvas prendra 100% de la taille calculée par PDF.js */
-    #pdf-canvas {
-      display: block;
-      margin: 0 auto;
-    }
-  </style>
-  <!-- Insertion de PDF.js depuis le CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Thomas Pruvot</title>
+    <style>
+        /* Appliquer l'image en arrière-plan */
+        body {
+            background-image: url('fond.jpg'); /* L'image de fond */
+            background-size: cover; /* L'image couvre toute la fenêtre */
+            background-position: center center; /* Centrer l'image */
+            background-attachment: fixed; /* Fixe l'image pendant le défilement */
+            margin: 0;
+            height: 100vh; /* Prend toute la hauteur de la fenêtre */
+            display: flex; /* Utilisation de Flexbox pour centrer */
+            justify-content: center; /* Centrer horizontalement */
+            align-items: center; /* Centrer verticalement */
+        }
+
+        /* L'iframe occupera 100% de la largeur et toute la hauteur */
+        iframe {
+            width: 100%; /* Réduit la largeur à 100% de la fenêtre */
+            height: 100%; /* L'iframe prend toute la hauteur de la fenêtre */
+            border: none; /* Supprime les bordures autour de l'iframe */
+        }
+    </style>
 </head>
 <body>
-  <div id="pdf-container">
-    <canvas id="pdf-canvas"></canvas>
-  </div>
-  <script>
-    const url = 'Portfolio.pdf'; // Chemin vers votre PDF
-    const container = document.getElementById('pdf-container');
-    const canvas = document.getElementById('pdf-canvas');
-    const context = canvas.getContext('2d');
-    let pdfDoc = null;
-    let pageNum = 1;  // On affiche la première page (adapter si besoin)
-
-    // La fonction renderPage calcule l'échelle pour que la page remplisse le conteneur
-    function renderPage() {
-      pdfDoc.getPage(pageNum).then(function(page) {
-        // Obtenir la taille native de la page (scale=1)
-        const initialViewport = page.getViewport({ scale: 1 });
-        // Dimensions du conteneur
-        const containerWidth = container.clientWidth;
-        const containerHeight = container.clientHeight;
-        // Calcul du facteur d'échelle pour que la page remplisse le conteneur
-        const scale = Math.min(containerWidth / initialViewport.width, containerHeight / initialViewport.height);
-        const viewport = page.getViewport({ scale: scale });
-        // Ajuster le canvas aux dimensions du viewport calculé
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        // Rendu de la page dans le canvas
-        page.render({
-          canvasContext: context,
-          viewport: viewport
-        });
-      });
-    }
-
-    // Chargement du PDF et rendu initial
-    pdfjsLib.getDocument(url).promise.then(function(pdf) {
-      pdfDoc = pdf;
-      renderPage();
-    }).catch(function(error) {
-      console.error('Erreur lors du chargement du PDF :', error);
-    });
-
-    // Réagir au redimensionnement de la fenêtre pour adapter le rendu
-    window.addEventListener('resize', function() {
-      if (pdfDoc) {
-        renderPage();
-      }
-    });
-  </script>
+    <!-- Utilisation de l'iframe pour afficher le PDF avec un zoom à 11% -->
+    <iframe src="Portfolio.pdf#zoom=11"></iframe>
 </body>
 </html>
