@@ -32,16 +32,6 @@
         #pdf-viewer {
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block; /* Évite les marges par défaut */
         }
 
         @media (max-width: 768px) {
@@ -50,13 +40,41 @@
             }
         }
     </style>
+
+    <!-- Ajouter le lien vers PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 </head>
 <body>
     <div id="pdf-container">
         <div id="pdf-viewer">
-            <!-- Affichage du PDF via un iframe -->
-            <iframe src="Portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0" title="Portfolio PDF"></iframe>
+            <!-- Zone où le PDF sera rendu -->
+            <canvas id="pdf-canvas"></canvas>
         </div>
     </div>
+
+    <script>
+        const url = 'Portfolio.pdf'; // Le chemin vers ton PDF
+        const canvas = document.getElementById('pdf-canvas');
+        const context = canvas.getContext('2d');
+
+        // Chargement du PDF
+        pdfjsLib.getDocument(url).promise.then(function(pdf) {
+            const pageNumber = 1; // Numéro de la page à afficher
+            pdf.getPage(pageNumber).then(function(page) {
+                const scale = 1; // Zoom à 100% (taille réelle)
+                const viewport = page.getViewport({ scale: scale });
+
+                // Ajuster la taille du canvas
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                // Rendu de la page sur le canvas
+                page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                });
+            });
+        });
+    </script>
 </body>
 </html>
