@@ -15,26 +15,26 @@
 
         body {
             background: url('Boisbrule.png') no-repeat center center fixed;
-            background-size: cover; /* Image de fond couvre tout */
+            background-size: cover;
             height: 100vh;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         /* Conteneur du PDF */
         #pdfContainer {
             width: 80vw; /* 80% de la largeur sur ordinateur */
             height: 100vh; /* Prend toute la hauteur de la fenêtre */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto; /* Centrer horizontalement */
+            overflow-y: scroll; /* Défilement vertical */
         }
 
         /* Canvas PDF : ajustement dynamique */
         canvas {
-            max-width: 100%; /* Maximiser la largeur */
-            max-height: 100%; /* Maximiser la hauteur */
-            object-fit: contain; /* Préserver le ratio du PDF */
+            width: 100%; /* Maximiser la largeur */
+            margin-bottom: 20px; /* Marge entre les pages */
         }
 
         /* Fallback iframe pour Safari */
@@ -66,30 +66,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
     <script>
-        const url = "Portfolio.pdf";
+        const url = "Portfolio.pdf"; // URL de ton PDF
+        const pdfContainer = document.getElementById('pdfContainer');
+        const fallbackIframe = document.getElementById('pdfFallback');
 
+        // Fonction pour afficher le PDF avec PDF.js
         pdfjsLib.getDocument(url).promise.then(pdf => {
             console.log("📄 PDF chargé, pages :", pdf.numPages);
 
-            // On récupère la première page pour calculer la taille optimale
-            pdf.getPage(1).then(page => {
-                const scale = 1.5; // Augmenter le zoom pour avoir une bonne taille
-                const viewport = page.getViewport({ scale });
+            const renderPage = (pageNumber) => {
+                pdf.getPage(pageNumber).then(page => {
+                    const scale = 1.5; // Ajuste le zoom ici
+                    const viewport = page.getViewport({ scale });
 
-                // Création d'un canvas pour chaque page du PDF
-                const canvas = document.createElement("canvas");
-                const context = canvas.getContext("2d");
+                    // Création du canvas pour afficher la page
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
 
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+                    // Rendu de la page dans le canvas
+                    const renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
 
-                // Ajout du canvas dans le conteneur PDF
-                document.getElementById("pdfContainer").appendChild(canvas);
+                    // Ajouter la page rendue dans le conteneur
+                    pdfContainer.appendChild(canvas);
+                });
+            };
 
-                // Rendu de la page dans le canvas
-                const renderContext = { canvasContext: context, viewport: viewport };
-                page.render(renderContext);
-            });
+            // Afficher toutes les pages du PDF
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                renderPage(pageNum);
+            }
         }).catch(error => {
             console.error("❌ Erreur lors du chargement du PDF :", error);
         });
@@ -98,7 +109,7 @@
         setTimeout(() => {
             if (document.getElementById("pdfContainer").innerHTML.trim() === "") {
                 console.warn("⚠️ Fallback activé : iframe utilisé pour Safari...");
-                document.getElementById("pdfFallback").style.display = "block";
+                fallbackIframe.style.display = "block"; // Affiche l'iframe en cas de problème avec PDF.js
             }
         }, 3000);
     </script>
