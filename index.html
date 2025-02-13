@@ -10,7 +10,7 @@
       padding: 0;
       height: 100%;
     }
-    /* Fond fixe avec Boisbrule.png, centré et étendu tout en gardant ses proportions */
+    /* Fond d'écran fixe avec Boisbrule.png, centré et étendu tout en gardant ses proportions */
     body {
       background: url('Boisbrule.png') no-repeat center center fixed;
       background-size: cover;
@@ -19,19 +19,18 @@
       align-items: center;
       overflow: auto;
     }
-    /* Conteneur du PDF */
+    /* Conteneur du PDF : 75% de la largeur et 100% de la hauteur sur ordinateur */
     #pdf-container {
-      width: 75vw;  /* 75% de la largeur sur ordinateur */
-      height: 100vh; /* 100% de la hauteur */
-      overflow-y: auto; /* Défilement vertical pour toutes les pages */
-      /* Pas de fond ici pour laisser apparaître le fond d'écran */
+      width: 75vw;
+      height: 100vh;
+      overflow-y: auto;
     }
-    /* Espacement de 19px (environ 5mm) entre les pages */
+    /* Chaque page PDF (canvas) : centré horizontalement avec une marge inférieure de 19px (5mm) */
     canvas {
       display: block;
       margin: 0 auto 19px auto;
     }
-    /* Adaptation pour mobile/tablette */
+    /* Pour mobiles/tablettes : ajustement à 95% de largeur et 90% de hauteur */
     @media (max-width: 768px) {
       #pdf-container {
         width: 95vw;
@@ -39,62 +38,50 @@
       }
     }
   </style>
-  <!-- Inclusion de PDF.js via CDN -->
+  <!-- Inclusion de PDF.js depuis le CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 </head>
 <body>
   <div id="pdf-container"></div>
+  
   <script>
-    const url = 'Portfolio.pdf';  // Chemin vers ton PDF
+    const url = 'Portfolio.pdf'; // Chemin vers le PDF
     const container = document.getElementById('pdf-container');
-    let pdfDoc = null;
-    
-    // Fonction qui charge et rend l'intégralité du PDF
+
     function renderPDF() {
-      container.innerHTML = ''; // Vider le conteneur pour éviter les doublons
-      pdfjsLib.getDocument(url).promise.then(function(pdf) {
-        pdfDoc = pdf;
-        // Pour chaque page du PDF...
-        for (let i = 1; i <= pdf.numPages; i++) {
-          renderPage(i);
+      // Vider le conteneur pour éviter les doublons lors d'un redimensionnement
+      container.innerHTML = '';
+
+      pdfjsLib.getDocument(url).promise.then(pdf => {
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+          pdf.getPage(pageNum).then(page => {
+            // Dimensions natives de la page (scale = 1)
+            const initialViewport = page.getViewport({ scale: 1 });
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            // Calcul du facteur d'échelle pour remplir le conteneur (upscaling autorisé)
+            const scale = Math.min(containerWidth / initialViewport.width, containerHeight / initialViewport.height);
+            const viewport = page.getViewport({ scale: scale });
+
+            const canvas = document.createElement('canvas');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            const context = canvas.getContext('2d');
+
+            page.render({
+              canvasContext: context,
+              viewport: viewport
+            });
+            container.appendChild(canvas);
+          });
         }
-      }).catch(function(error) {
+      }).catch(error => {
         console.error("Erreur lors du chargement du PDF :", error);
       });
     }
-    
-    // Fonction pour rendre une page donnée
-    function renderPage(pageNumber) {
-      pdfDoc.getPage(pageNumber).then(function(page) {
-        // Obtenir les dimensions natives de la page (à scale = 1)
-        const initialViewport = page.getViewport({ scale: 1 });
-        const containerWidth = container.clientWidth;
-        const containerHeight = container.clientHeight;
-        // Calculer le facteur d'échelle pour afficher la page à 100% sans upscaling
-        const scale = Math.min(1, containerWidth / initialViewport.width, containerHeight / initialViewport.height);
-        const viewport = page.getViewport({ scale: scale });
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        
-        // Rendre la page dans le canvas
-        page.render({
-          canvasContext: context,
-          viewport: viewport
-        });
-        
-        container.appendChild(canvas);
-      });
-    }
-    
-    // Rendu initial
+
     renderPDF();
-    
-    // Re-rendu lors du redimensionnement de la fenêtre
-    window.addEventListener('resize', function() {
-      renderPDF();
-    });
+    window.addEventListener('resize', renderPDF);
   </script>
 </body>
 </html>
