@@ -3,49 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio PDF</title>
+  <title>Portfolio PDF </title>
   <style>
-    /* Déclaration des polices avec @font-face et ajout de font-display: swap */
-    @font-face {
-      font-family: 'Poppins';
-      src: url('fonts/Poppins.woff2') format('woff2'),
-           url('fonts/Poppins.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap; /* Ajouté ici pour éviter le swap de police */
-    }
-
-    @font-face {
-      font-family: 'Poppins';
-      src: url('fonts/Poppins-Light.woff2') format('woff2'),
-           url('fonts/Poppins-Light.woff') format('woff');
-      font-weight: 300; /* Light */
-      font-style: normal;
-      font-display: swap; /* Ajouté ici pour éviter le swap de police */
-    }
-
-    @font-face {
-      font-family: 'Exo 2';
-      src: url('fonts/Exo2-Light.woff2') format('woff2'),
-           url('fonts/Exo2-Light.woff') format('woff');
-      font-weight: 300; /* Light */
-      font-style: normal;
-      font-display: swap; /* Ajouté ici pour éviter le swap de police */
-    }
-
-    /* Appliquer les polices au body ou à des éléments spécifiques */
-    body {
-      font-family: 'Poppins', sans-serif;
+    /* Réinitialisation globale et optimisation du rendu des polices */
+    html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* Désactive le défilement global */
-    -webkit-font-smoothing: antialiased; /* Pour Safari */
-  -moz-osx-font-smoothing: grayscale; /* Pour Firefox sur MacOS */
-  font-smoothing: antialiased; /* Pour d'autres navigateurs */
-	}
-
-    /* Fond d'écran fixe avec Boisbrule.png, centré et étendu tout en gardant ses proportions */
+      overflow: hidden; /* Empêche le défilement global horizontal */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    /* Fond d'écran fixe avec Boisbrule.png, centré et étendu */
     body {
       background: url('Boisbrule.png') no-repeat center center fixed;
       background-size: cover;
@@ -53,121 +23,111 @@
       justify-content: center;
       align-items: center;
     }
-
-    /* Conteneur du PDF : 75% de la largeur et 100% de la hauteur sur ordinateur */
+    /* Conteneur du PDF : 75vw x 100vh sur desktop, 95vw x 90vh sur mobile */
     #pdf-container {
       width: 75vw;
       height: 100vh;
-      overflow: auto; /* Permet le défilement horizontal et vertical */
+      overflow-y: auto;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-
-    /* Chaque page PDF (canvas) : centré horizontalement avec une marge inférieure de 19px (5mm) */
-    canvas {
-      display: block;
-      margin: 0 auto 19px auto;
-      image-rendering: -webkit-optimize-contrast; /* Améliore la netteté sur Chrome */
-      image-rendering: crisp-edges; /* Améliore la netteté sur Firefox */
-    }
-
-    /* Pour mobiles/tablettes : ajustement à 95% de largeur et 90% de hauteur */
     @media (max-width: 768px) {
       #pdf-container {
         width: 95vw;
         height: 90vh;
       }
     }
+    /* Chaque page PDF (canvas) : centré horizontalement avec une marge inférieure de 19px (~5mm) */
+    canvas {
+      display: block;
+      margin: 0 auto 19px auto;
+      max-width: 100%;
+      height: auto;
+      /* On demande un rendu net (ces propriétés sont interprétées différemment selon le navigateur) */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
   </style>
-  <!-- Inclusion de PDF.js et pdf.worker.js depuis le CDN -->
+  <!-- Inclusion de PDF.js et configuration du worker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
   <script>
-    // Spécifier le chemin du worker
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
   </script>
 </head>
 <body>
   <div id="pdf-container"></div>
-
+  
   <script>
-    const url = 'Portfolio.pdf'; // Chemin vers le PDF
+    const url = 'Portfolio.pdf'; // Chemin vers le PDF anglais
     const container = document.getElementById('pdf-container');
-    let pdfDoc = null;
 
-    // Charger le PDF
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-      pdfDoc = pdf;
-      renderPDF(); // Rendre le PDF initial
-      window.addEventListener('resize', handleResize); // Gérer le redimensionnement
-    }).catch(error => {
-      console.error("Erreur lors du chargement du PDF :", error);
-    });
-
-    // Fonction pour calculer l'échelle automatique
-    function calculateScale(page) {
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-      const viewport = page.getViewport({ scale: 1 }); // Vue initiale sans échelle
-
-      // Calculer l'échelle pour s'adapter à la largeur ou à la hauteur du conteneur
-      const scaleWidth = containerWidth / viewport.width;
-      const scaleHeight = containerHeight / viewport.height;
-
-      // Choisir l'échelle la plus petite pour que le PDF tienne dans le conteneur
-      return Math.min(scaleWidth, scaleHeight);
+    // Pour Firefox, on fixe le devicePixelRatio à 2 pour une meilleure netteté
+    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
+    function getDPR() {
+      return isFirefox ? 2 : (window.devicePixelRatio || 1);
     }
 
-    // Fonction pour rendre le PDF
     function renderPDF() {
       container.innerHTML = ''; // Vider le conteneur
 
-      if (!pdfDoc) return;
+      pdfjsLib.getDocument(url).promise.then(pdf => {
+        let currentPage = 1;
+        const totalPages = pdf.numPages;
 
-      const totalPages = pdfDoc.numPages;
-      let currentPage = 1;
+        function renderPage() {
+          if (currentPage > totalPages) return;
 
-      function renderPage() {
-        if (currentPage > totalPages) return;
+          pdf.getPage(currentPage).then(page => {
+            // Obtenir les dimensions natives de la page (scale=1)
+            const nativeViewport = page.getViewport({ scale: 1 });
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            // Calcul de l'échelle pour que la page tienne dans le conteneur
+            const scaleFactor = Math.min(containerWidth / nativeViewport.width, containerHeight / nativeViewport.height);
+            // Appliquer devicePixelRatio pour améliorer la résolution
+            const dpr = getDPR();
+            const finalScale = scaleFactor * dpr;
+            const viewport = page.getViewport({ scale: finalScale });
 
-        pdfDoc.getPage(currentPage).then(page => {
-          const scale = calculateScale(page); // Calculer l'échelle automatique
-          const viewport = page.getViewport({ scale: scale });
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            // Définir la taille du canvas en fonction du viewport multiplié par le dpr
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            // Ajuster la taille d'affichage (CSS) pour garder le bon ratio
+            canvas.style.width = `${viewport.width / dpr}px`;
+            canvas.style.height = `${viewport.height / dpr}px`;
+            // Appliquer la transformation pour compenser le dpr
+            context.setTransform(dpr, 0, 0, dpr, 0, 0);
+            context.imageSmoothingEnabled = true;
+            context.imageSmoothingQuality = 'high';
 
-          const canvas = document.createElement('canvas');
-          const scaleFactor = window.devicePixelRatio || 1;
-          const upscaleFactor = window.innerWidth <= 768 ? 2 : 1.5; // Upscaling x2 pour mobile, x1.5 pour desktop
-          canvas.width = viewport.width * scaleFactor * upscaleFactor; // Appliquer l'upscaling
-          canvas.height = viewport.height * scaleFactor * upscaleFactor;
-          canvas.style.width = `${viewport.width}px`;
-          canvas.style.height = `${viewport.height}px`;
-          const context = canvas.getContext('2d');
-          context.scale(scaleFactor * upscaleFactor, scaleFactor * upscaleFactor); // Appliquer l'upscaling
-
-          // Améliorer l'anticrénelage
-          context.imageSmoothingEnabled = true;
-          context.imageSmoothingQuality = 'high';
-
-          page.render({
-            canvasContext: context,
-            viewport: viewport
-          }).promise.then(() => {
-            container.appendChild(canvas);
-            currentPage++;
-            renderPage(); // Rend la page suivante
+            page.render({
+              canvasContext: context,
+              viewport: viewport
+            }).promise.then(() => {
+              container.appendChild(canvas);
+              currentPage++;
+              renderPage(); // Rendre la page suivante
+            });
           });
-        });
-      }
-
-      renderPage(); // Commence le rendu
+        }
+        renderPage();
+      }).catch(error => {
+        console.error("Erreur lors du chargement du PDF :", error);
+      });
     }
 
-    // Gérer le redimensionnement de la fenêtre
+    // Redéfinir le rendu lors du redimensionnement avec debounce
     let resizeTimeout;
-    function handleResize() {
+    window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(renderPDF, 100); // Délai plus court pour desktop
-    }
+      resizeTimeout = setTimeout(renderPDF, 200);
+    });
+
+    renderPDF();
   </script>
 </body>
 </html>
