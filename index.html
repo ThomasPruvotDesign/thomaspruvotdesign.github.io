@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio PDF</title>
+  <!-- Préchargement des polices -->
+  <link rel="preload" href="fonts/Poppins.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Poppins-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Exo2-Light.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     /* Déclaration des polices avec @font-face */
     @font-face {
@@ -45,6 +49,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      text-rendering: optimizeLegibility; /* Améliore la netteté des polices */
     }
 
     /* Conteneur du PDF : 75% de la largeur et 100% de la hauteur sur ordinateur */
@@ -63,6 +68,7 @@
       margin: 0 auto 19px auto;
       image-rendering: -webkit-optimize-contrast; /* Améliore la netteté sur Chrome */
       image-rendering: crisp-edges; /* Améliore la netteté sur Firefox */
+      will-change: transform; /* Optimise le rendu du canvas */
     }
 
     /* Pour mobiles/tablettes : ajustement à 95% de largeur et 90% de hauteur */
@@ -80,7 +86,7 @@
   <div id="pdf-container" role="document" aria-label="Portfolio PDF"></div>
 
   <script>
-    const url = 'Portfolio.pdf'; // Chemin vers le PDF
+    const url = 'EngPortfolio.pdf'; // Chemin vers le PDF
     const container = document.getElementById('pdf-container');
     let pdfDoc = null;
 
@@ -125,7 +131,7 @@
 
           const canvas = document.createElement('canvas');
           const scaleFactor = window.devicePixelRatio || 1;
-          const upscaleFactor = window.innerWidth <= 768 ? 3 : 2.5; // Augmenter l'upscaling
+          const upscaleFactor = window.innerWidth <= 768 ? 4 : 3; // Augmenter l'upscaling
           canvas.width = viewport.width * scaleFactor * upscaleFactor;
           canvas.height = viewport.height * scaleFactor * upscaleFactor;
           canvas.style.width = `${viewport.width}px`;
