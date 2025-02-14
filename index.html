@@ -12,6 +12,7 @@
            url('fonts/Poppins.woff') format('woff');
       font-weight: normal;
       font-style: normal;
+      font-display: swap; /* Ajouté pour améliorer l'affichage sous Firefox */
     }
 
     @font-face {
@@ -20,6 +21,7 @@
            url('fonts/Poppins-Light.woff') format('woff');
       font-weight: 300; /* Light */
       font-style: normal;
+      font-display: swap; /* Ajouté pour améliorer l'affichage sous Firefox */
     }
 
     @font-face {
@@ -28,6 +30,7 @@
            url('fonts/Exo2-Light.woff') format('woff');
       font-weight: 300; /* Light */
       font-style: normal;
+      font-display: swap; /* Ajouté pour améliorer l'affichage sous Firefox */
     }
 
     /* Appliquer les polices au body ou à des éléments spécifiques */
@@ -76,6 +79,12 @@
   </style>
   <!-- Inclusion de PDF.js depuis le CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+  <!-- Définir pdf.worker.js manuellement pour éviter les problèmes de compatibilité -->
+  <script>
+    // Spécifier le chemin du pdf.worker.js (si nécessaire)
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+  </script>
 </head>
 <body>
   <div id="pdf-container"></div>
@@ -105,7 +114,11 @@
       const scaleHeight = containerHeight / viewport.height;
 
       // Choisir l'échelle la plus petite pour que le PDF tienne dans le conteneur
-      return Math.min(scaleWidth, scaleHeight);
+      const scale = Math.min(scaleWidth, scaleHeight);
+
+      // Appliquer un léger facteur de mise à l'échelle pour les petits écrans
+      const upscaleFactor = window.innerWidth <= 768 ? 1.5 : 1.2; // Upscaling pour mobile et desktop
+      return scale * upscaleFactor; // Applique le facteur d'agrandissement
     }
 
     // Fonction pour rendre le PDF
@@ -155,8 +168,8 @@
     // Gérer le redimensionnement de la fenêtre
     let resizeTimeout;
     function handleResize() {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(renderPDF, 100); // Délai plus court pour desktop
+      clearTimeout(resizeTimeout); // Effacer l'ancien délai de redimensionnement
+      resizeTimeout = setTimeout(renderPDF, 100); // Appliquer le redimensionnement après 100ms
     }
   </script>
 </body>
