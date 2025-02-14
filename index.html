@@ -12,6 +12,7 @@
            url('fonts/Poppins.woff') format('woff');
       font-weight: normal;
       font-style: normal;
+      font-display: swap; /* Ajout de font-display: swap; */
     }
 
     @font-face {
@@ -20,6 +21,7 @@
            url('fonts/Poppins-Light.woff') format('woff');
       font-weight: 300; /* Light */
       font-style: normal;
+      font-display: swap; /* Ajout de font-display: swap; */
     }
 
     @font-face {
@@ -28,6 +30,7 @@
            url('fonts/Exo2-Light.woff') format('woff');
       font-weight: 300; /* Light */
       font-style: normal;
+      font-display: swap; /* Ajout de font-display: swap; */
     }
 
     /* Appliquer les polices au body ou à des éléments spécifiques */
@@ -77,7 +80,7 @@
   <div id="pdf-container" role="document" aria-label="Portfolio PDF"></div>
 
   <script>
-    const url = 'Portfolio.pdf'; // Chemin vers le PDF
+    const url = 'EngPortfolio.pdf'; // Chemin vers le PDF
     const container = document.getElementById('pdf-container');
     let pdfDoc = null;
 
@@ -122,7 +125,7 @@
 
           const canvas = document.createElement('canvas');
           const scaleFactor = window.devicePixelRatio || 1;
-          const upscaleFactor = window.innerWidth <= 768 ? 2.5 : 2; // Augmenter légèrement l'upscaling pour Firefox
+          const upscaleFactor = window.innerWidth <= 768 ? 3 : 2.5; // Augmenter l'upscaling
           canvas.width = viewport.width * scaleFactor * upscaleFactor;
           canvas.height = viewport.height * scaleFactor * upscaleFactor;
           canvas.style.width = `${viewport.width}px`;
