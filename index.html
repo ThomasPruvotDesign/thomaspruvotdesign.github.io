@@ -5,11 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio PDF</title>
   <style>
-    html, body {
+    /* Déclaration des polices avec @font-face */
+    @font-face {
+      font-family: 'Poppins';
+      src: url('fonts/Poppins.woff2') format('woff2'),
+           url('fonts/Poppins.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Poppins';
+      src: url('fonts/Poppins-Light.woff2') format('woff2'),
+           url('fonts/Poppins-Light.woff') format('woff');
+      font-weight: 300; /* Light */
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Exo 2';
+      src: url('fonts/Exo2-Light.woff2') format('woff2'),
+           url('fonts/Exo2-Light.woff') format('woff');
+      font-weight: 300; /* Light */
+      font-style: normal;
+    }
+
+    /* Appliquer les polices au body ou à des éléments spécifiques */
+    body {
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
       height: 100%;
+      overflow: hidden; /* Désactive le défilement global */
     }
+
     /* Fond d'écran fixe avec Boisbrule.png, centré et étendu tout en gardant ses proportions */
     body {
       background: url('Boisbrule.png') no-repeat center center fixed;
@@ -17,19 +46,26 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: auto;
     }
+
     /* Conteneur du PDF : 75% de la largeur et 100% de la hauteur sur ordinateur */
     #pdf-container {
       width: 75vw;
       height: 100vh;
-      overflow-y: auto;
+      overflow: auto; /* Permet le défilement horizontal et vertical */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
     /* Chaque page PDF (canvas) : centré horizontalement avec une marge inférieure de 19px (5mm) */
     canvas {
       display: block;
       margin: 0 auto 19px auto;
+      image-rendering: -webkit-optimize-contrast; /* Améliore la netteté sur Chrome */
+      image-rendering: crisp-edges; /* Améliore la netteté sur Firefox */
     }
+
     /* Pour mobiles/tablettes : ajustement à 95% de largeur et 90% de hauteur */
     @media (max-width: 768px) {
       #pdf-container {
@@ -43,45 +79,85 @@
 </head>
 <body>
   <div id="pdf-container"></div>
-  
+
   <script>
     const url = 'Portfolio.pdf'; // Chemin vers le PDF
     const container = document.getElementById('pdf-container');
+    let pdfDoc = null;
 
-    function renderPDF() {
-      // Vider le conteneur pour éviter les doublons lors d'un redimensionnement
-      container.innerHTML = '';
+    // Charger le PDF
+    pdfjsLib.getDocument(url).promise.then(pdf => {
+      pdfDoc = pdf;
+      renderPDF(); // Rendre le PDF initial
+      window.addEventListener('resize', handleResize); // Gérer le redimensionnement
+    }).catch(error => {
+      console.error("Erreur lors du chargement du PDF :", error);
+    });
 
-      pdfjsLib.getDocument(url).promise.then(pdf => {
-        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-          pdf.getPage(pageNum).then(page => {
-            // Dimensions natives de la page (scale = 1)
-            const initialViewport = page.getViewport({ scale: 1 });
-            const containerWidth = container.clientWidth;
-            const containerHeight = container.clientHeight;
-            // Calcul du facteur d'échelle pour remplir le conteneur (upscaling autorisé)
-            const scale = Math.min(containerWidth / initialViewport.width, containerHeight / initialViewport.height);
-            const viewport = page.getViewport({ scale: scale });
+    // Fonction pour calculer l'échelle automatique
+    function calculateScale(page) {
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+      const viewport = page.getViewport({ scale: 1 }); // Vue initiale sans échelle
 
-            const canvas = document.createElement('canvas');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            const context = canvas.getContext('2d');
+      // Calculer l'échelle pour s'adapter à la largeur ou à la hauteur du conteneur
+      const scaleWidth = containerWidth / viewport.width;
+      const scaleHeight = containerHeight / viewport.height;
 
-            page.render({
-              canvasContext: context,
-              viewport: viewport
-            });
-            container.appendChild(canvas);
-          });
-        }
-      }).catch(error => {
-        console.error("Erreur lors du chargement du PDF :", error);
-      });
+      // Choisir l'échelle la plus petite pour que le PDF tienne dans le conteneur
+      return Math.min(scaleWidth, scaleHeight);
     }
 
-    renderPDF();
-    window.addEventListener('resize', renderPDF);
+    // Fonction pour rendre le PDF
+    function renderPDF() {
+      container.innerHTML = ''; // Vider le conteneur
+
+      if (!pdfDoc) return;
+
+      const totalPages = pdfDoc.numPages;
+      let currentPage = 1;
+
+      function renderPage() {
+        if (currentPage > totalPages) return;
+
+        pdfDoc.getPage(currentPage).then(page => {
+          const scale = calculateScale(page); // Calculer l'échelle automatique
+          const viewport = page.getViewport({ scale: scale });
+
+          const canvas = document.createElement('canvas');
+          const scaleFactor = window.devicePixelRatio || 1;
+          const upscaleFactor = window.innerWidth <= 768 ? 2 : 1.5; // Upscaling x2 pour mobile, x1.5 pour desktop
+          canvas.width = viewport.width * scaleFactor * upscaleFactor; // Appliquer l'upscaling
+          canvas.height = viewport.height * scaleFactor * upscaleFactor;
+          canvas.style.width = `${viewport.width}px`;
+          canvas.style.height = `${viewport.height}px`;
+          const context = canvas.getContext('2d');
+          context.scale(scaleFactor * upscaleFactor, scaleFactor * upscaleFactor); // Appliquer l'upscaling
+
+          // Améliorer l'anticrénelage
+          context.imageSmoothingEnabled = true;
+          context.imageSmoothingQuality = 'high';
+
+          page.render({
+            canvasContext: context,
+            viewport: viewport
+          }).promise.then(() => {
+            container.appendChild(canvas);
+            currentPage++;
+            renderPage(); // Rend la page suivante
+          });
+        });
+      }
+
+      renderPage(); // Commence le rendu
+    }
+
+    // Gérer le redimensionnement de la fenêtre
+    let resizeTimeout;
+    function handleResize() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(renderPDF, 100); // Délai plus court pour desktop
+    }
   </script>
 </body>
 </html>
