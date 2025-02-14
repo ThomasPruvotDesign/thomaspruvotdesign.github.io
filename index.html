@@ -3,20 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio PDF</title>
-  <!-- Préchargement des polices -->
-  <link rel="preload" href="fonts/Poppins.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Poppins-Light.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Exo2-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Portfolio Thomas Pruvot</title>
   <style>
-    /* Déclaration des polices avec @font-face */
+    /* Déclaration des polices */
     @font-face {
       font-family: 'Poppins';
       src: url('fonts/Poppins.woff2') format('woff2'),
            url('fonts/Poppins.woff') format('woff');
       font-weight: normal;
       font-style: normal;
-      font-display: swap; /* Ajout de font-display: swap; */
+      font-display: swap;
     }
 
     @font-face {
@@ -25,7 +21,7 @@
            url('fonts/Poppins-Light.woff') format('woff');
       font-weight: 300; /* Light */
       font-style: normal;
-      font-display: swap; /* Ajout de font-display: swap; */
+      font-display: swap;
     }
 
     @font-face {
@@ -34,135 +30,125 @@
            url('fonts/Exo2-Light.woff') format('woff');
       font-weight: 300; /* Light */
       font-style: normal;
-      font-display: swap; /* Ajout de font-display: swap; */
+      font-display: swap;
     }
 
-    /* Appliquer les polices au body ou à des éléments spécifiques */
-    body {
-      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Styles de base */
+    body, html {
       margin: 0;
       padding: 0;
-      height: 100vh; /* Force la hauteur à 100% de la vue */
-      overflow: hidden; /* Masque les débordements */
-      background: url('Boisbrule.png') no-repeat center center fixed;
-      background-size: cover; /* Assure que l'image couvre tout l'écran */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-rendering: optimizeLegibility; /* Améliore la netteté des polices */
+      font-family: 'Poppins', sans-serif;
+      background-image: url('Boisbrule.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #333;
     }
 
-    /* Conteneur du PDF : 75% de la largeur et 100% de la hauteur sur ordinateur */
-    #pdf-container {
-      width: 75vw;
-      height: 100vh; /* Force la hauteur à 100% de la vue */
-      overflow: auto; /* Permet le défilement à l'intérieur du conteneur */
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 20px;
     }
 
-    /* Chaque page PDF (canvas) : centré horizontalement avec une marge inférieure de 19px (5mm) */
-    canvas {
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1200px; /* Ajuste selon la largeur maximale souhaitée */
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #fff; /* Fond blanc pour les pages */
+    }
+
+    .page img {
+      width: 100%;
+      height: auto;
       display: block;
-      margin: 0 auto 19px auto;
-      image-rendering: -webkit-optimize-contrast; /* Améliore la netteté sur Chrome */
-      image-rendering: crisp-edges; /* Améliore la netteté sur Firefox */
-      will-change: transform; /* Optimise le rendu du canvas */
     }
 
-    /* Pour mobiles/tablettes : ajustement à 95% de largeur et 90% de hauteur */
-    @media (max-width: 768px) {
-      #pdf-container {
-        width: 95vw;
-        height: 90vh;
-      }
+    .navigation {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .navigation button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .navigation button:hover {
+      background-color: #0056b3;
     }
   </style>
-  <!-- Inclusion de PDF.js depuis le CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 </head>
 <body>
-  <div id="pdf-container" role="document" aria-label="Portfolio PDF"></div>
+  <div class="container">
+    <h1>Portfolio Thomas Pruvot</h1>
+
+    <!-- Affichage des pages -->
+    <div id="gallery">
+      <div class="page">
+        <img src="Webp/Page1.webp" alt="Page 1" loading="lazy">
+      </div>
+      <div class="page">
+        <img src="Webp/Page2.webp" alt="Page 2" loading="lazy">
+      </div>
+      <!-- Ajoute les autres pages ici -->
+      <div class="page">
+        <img src="Webp/Page20.webp" alt="Page 20" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+      <button onclick="prevPage()">Précédent</button>
+      <button onclick="nextPage()">Suivant</button>
+    </div>
+  </div>
 
   <script>
-    const url = 'Portfolio.pdf'; // Chemin vers le PDF
-    const container = document.getElementById('pdf-container');
-    let pdfDoc = null;
+    // Script pour la navigation entre les pages
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
 
-    // Charger le PDF
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-      pdfDoc = pdf;
-      renderPDF(); // Rendre le PDF initial
-      window.addEventListener('resize', handleResize); // Gérer le redimensionnement
-    }).catch(error => {
-      console.error("Erreur lors du chargement du PDF :", error);
-    });
-
-    // Fonction pour calculer l'échelle automatique
-    function calculateScale(page) {
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-      const viewport = page.getViewport({ scale: 1 }); // Vue initiale sans échelle
-
-      // Calculer l'échelle pour s'adapter à la largeur ou à la hauteur du conteneur
-      const scaleWidth = containerWidth / viewport.width;
-      const scaleHeight = containerHeight / viewport.height;
-
-      // Choisir l'échelle la plus petite pour que le PDF tienne dans le conteneur
-      return Math.min(scaleWidth, scaleHeight);
+    function showPage(index) {
+      pages.forEach((page, i) => {
+        page.style.display = i === index ? 'block' : 'none';
+      });
     }
 
-    // Fonction pour rendre le PDF
-    function renderPDF() {
-      container.innerHTML = ''; // Vider le conteneur
-
-      if (!pdfDoc) return;
-
-      const totalPages = pdfDoc.numPages;
-      let currentPage = 1;
-
-      function renderPage() {
-        if (currentPage > totalPages) return;
-
-        pdfDoc.getPage(currentPage).then(page => {
-          const scale = calculateScale(page); // Calculer l'échelle automatique
-          const viewport = page.getViewport({ scale: scale });
-
-          const canvas = document.createElement('canvas');
-          const scaleFactor = window.devicePixelRatio || 1;
-          const upscaleFactor = window.innerWidth <= 768 ? 4 : 3; // Augmenter l'upscaling
-          canvas.width = viewport.width * scaleFactor * upscaleFactor;
-          canvas.height = viewport.height * scaleFactor * upscaleFactor;
-          canvas.style.width = `${viewport.width}px`;
-          canvas.style.height = `${viewport.height}px`;
-          const context = canvas.getContext('2d');
-          context.scale(scaleFactor * upscaleFactor, scaleFactor * upscaleFactor);
-
-          // Améliorer l'anticrénelage
-          context.imageSmoothingEnabled = true;
-          context.imageSmoothingQuality = 'high';
-
-          page.render({
-            canvasContext: context,
-            viewport: viewport
-          }).promise.then(() => {
-            container.appendChild(canvas);
-            currentPage++;
-            renderPage(); // Rend la page suivante
-          });
-        });
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
       }
-
-      renderPage(); // Commence le rendu
     }
 
-    // Gérer le redimensionnement de la fenêtre
-    let resizeTimeout;
-    function handleResize() {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(renderPDF, 100); // Délai plus court pour desktop
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
     }
+
+    // Afficher la première page au chargement
+    showPage(currentPage);
   </script>
 </body>
 </html>
