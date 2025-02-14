@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio PDF</title>
-  <!-- Préchargement des polices -->
-  <link rel="preload" href="fonts/Poppins.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Poppins-Light.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Exo2-Light.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     /* Déclaration des polices avec @font-face */
     @font-face {
@@ -39,14 +35,10 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      height: 100%;
-      overflow: hidden; /* Désactive le défilement global */
-    }
-
-    /* Fond d'écran fixe avec Boisbrule.png, centré et étendu tout en gardant ses proportions */
-    body {
+      height: 100vh; /* Force la hauteur à 100% de la vue */
+      overflow: hidden; /* Masque les débordements */
       background: url('Boisbrule.png') no-repeat center center fixed;
-      background-size: cover;
+      background-size: cover; /* Assure que l'image couvre tout l'écran */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -55,8 +47,8 @@
     /* Conteneur du PDF : 75% de la largeur et 100% de la hauteur sur ordinateur */
     #pdf-container {
       width: 75vw;
-      height: 100vh;
-      overflow: auto; /* Permet le défilement horizontal et vertical */
+      height: 100vh; /* Force la hauteur à 100% de la vue */
+      overflow: auto; /* Permet le défilement à l'intérieur du conteneur */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -130,13 +122,13 @@
 
           const canvas = document.createElement('canvas');
           const scaleFactor = window.devicePixelRatio || 1;
-          const upscaleFactor = window.innerWidth <= 768 ? 2 : 1.5; // Upscaling x2 pour mobile, x1.5 pour desktop
-          canvas.width = viewport.width * scaleFactor * upscaleFactor; // Appliquer l'upscaling
+          const upscaleFactor = window.innerWidth <= 768 ? 2.5 : 2; // Augmenter légèrement l'upscaling pour Firefox
+          canvas.width = viewport.width * scaleFactor * upscaleFactor;
           canvas.height = viewport.height * scaleFactor * upscaleFactor;
           canvas.style.width = `${viewport.width}px`;
           canvas.style.height = `${viewport.height}px`;
           const context = canvas.getContext('2d');
-          context.scale(scaleFactor * upscaleFactor, scaleFactor * upscaleFactor); // Appliquer l'upscaling
+          context.scale(scaleFactor * upscaleFactor, scaleFactor * upscaleFactor);
 
           // Améliorer l'anticrénelage
           context.imageSmoothingEnabled = true;
@@ -161,13 +153,6 @@
     function handleResize() {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(renderPDF, 100); // Délai plus court pour desktop
-    }
-
-    // Enregistrer le Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(registration => console.log('Service Worker enregistré'))
-        .catch(error => console.error('Échec de l\'enregistrement du Service Worker', error));
     }
   </script>
 </body>
