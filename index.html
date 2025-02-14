@@ -40,7 +40,10 @@
       padding: 0;
       height: 100%;
       overflow: hidden; /* Désactive le défilement global */
-    }
+    -webkit-font-smoothing: antialiased; /* Pour Safari */
+  -moz-osx-font-smoothing: grayscale; /* Pour Firefox sur MacOS */
+  font-smoothing: antialiased; /* Pour d'autres navigateurs */
+	}
 
     /* Fond d'écran fixe avec Boisbrule.png, centré et étendu tout en gardant ses proportions */
     body {
