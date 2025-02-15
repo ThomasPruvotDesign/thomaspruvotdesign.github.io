@@ -4,43 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio Thomas Pruvot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Déclaration des polices avec @font-face */
-    @font-face {
-      font-family: 'Poppins';
-      src: url('fonts/Poppins.woff2') format('woff2'),
-           url('fonts/Poppins.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Poppins';
-      src: url('fonts/Poppins-Light.woff2') format('woff2'),
-           url('fonts/Poppins-Light.woff') format('woff');
-      font-weight: 300; /* Light */
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Exo 2';
-      src: url('fonts/Exo2-Light.woff2') format('woff2'),
-           url('fonts/Exo2-Light.woff') format('woff');
-      font-weight: 300; /* Light */
-      font-style: normal;
-    }
-
-    /* Appliquer les polices au body ou à des éléments spécifiques */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* Désactive le défilement global */
-    }
-
-    /* Fond d'écran fixe avec Boisbrule.png, centré et étendu tout en gardant ses proportions */
-    body {
+      overflow: hidden;
       background: url('Boisbrule.png') no-repeat center center fixed;
       background-size: cover;
       display: flex;
@@ -48,37 +19,33 @@
       align-items: center;
     }
 
-    /* Conteneur du portfolio : 100% de la hauteur et largeur ajustée */
     #portfolio-container {
-      width: 75vw; /* Largeur de 75% de la largeur de la fenêtre */
-      height: 100vh; /* Hauteur de 100% de la hauteur de la fenêtre */
-      overflow-y: auto; /* Barre de défilement verticale */
+      width: 75vw;
+      height: 100vh;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 10px 0; /* Espace en haut et en bas */
+      padding: 10px 0;
     }
 
-    /* Chaque page du portfolio (image WebP) : centrée horizontalement avec une marge inférieure de 5mm */
     .portfolio-page {
       display: block;
-      margin: 0 auto 5mm auto; /* Marge inférieure de 5mm */
-      max-width: 100%; /* Assure que l'image ne dépasse pas la largeur du conteneur */
-      height: auto; /* Maintient le ratio de l'image */
+      margin: 0 auto 5mm auto;
+      max-width: 100%;
+      height: auto;
     }
 
-    /* Style pour les numéros de page */
     .page-number {
       text-align: center;
-      margin: 2mm 0 5mm 0; /* Marge pour l'espacement */
+      margin: 2mm 0 5mm 0;
       font-size: 14px;
       color: #333;
     }
 
-    /* Pour mobiles/tablettes : ajustement à 95% de largeur */
     @media (max-width: 768px) {
       #portfolio-container {
-        width: 95vw; /* Largeur de 95% sur mobile */
+        width: 95vw;
       }
     }
   </style>
@@ -93,11 +60,18 @@
     // Fonction pour charger et afficher les pages
     function loadPages() {
       for (let i = 1; i <= totalPages; i++) {
-        // Créer l'élément image
         const img = document.createElement('img');
-        img.src = `WebP/Page${i}.Webp`; // Chemin vers les fichiers WebP
+        img.src = `WebP/Page${i}.webp`;
         img.alt = `Page ${i}`;
         img.classList.add('portfolio-page');
+        img.setAttribute('aria-label', `Page ${i}`);
+
+        // Ajouter un écouteur d'événement pour détecter les erreurs de chargement
+        img.onerror = () => {
+          console.error(`Erreur de chargement : ${img.src}`);
+          img.style.display = 'none'; // Masquer l'image si elle ne se charge pas
+        };
+
         container.appendChild(img); // Ajoute l'image au conteneur
 
         // Ajouter un numéro de page sous chaque image
@@ -108,23 +82,8 @@
       }
     }
 
-    // Détecter la rotation de l'écran
-    function handleOrientationChange() {
-      if (window.matchMedia("(orientation: portrait)").matches) {
-        console.log("Mode portrait");
-        container.style.width = "95vw"; // Ajustement pour le mode portrait
-      } else if (window.matchMedia("(orientation: landscape)").matches) {
-        console.log("Mode paysage");
-        container.style.width = "75vw"; // Ajustement pour le mode paysage
-      }
-    }
-
     // Charger les pages au démarrage
     loadPages();
-
-    // Écouter les changements d'orientation
-    window.addEventListener("orientationchange", handleOrientationChange);
-    window.addEventListener("resize", handleOrientationChange);
   </script>
 </body>
 </html>
