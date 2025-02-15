@@ -61,7 +61,7 @@
     function loadPages() {
       for (let i = 1; i <= totalPages; i++) {
         const img = document.createElement('img');
-        img.src = `WebP/Page${i}.webp`;
+        img.src = `WebP/Page${i}.webp`; // Correction du chemin et de l'extension
         img.alt = `Page ${i}`;
         img.classList.add('portfolio-page');
         img.setAttribute('aria-label', `Page ${i}`);
@@ -70,6 +70,10 @@
         img.onerror = () => {
           console.error(`Erreur de chargement : ${img.src}`);
           img.style.display = 'none'; // Masquer l'image si elle ne se charge pas
+        };
+
+        img.onload = () => {
+          console.log(`Image chargée avec succès : ${img.src}`);
         };
 
         container.appendChild(img); // Ajoute l'image au conteneur
