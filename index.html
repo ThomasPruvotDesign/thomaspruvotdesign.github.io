@@ -1,121 +1,70 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Thomas Pruvot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      background: url('Boisbrule.png') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: url('Boisbrule.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    #portfolio-container {
-      width: 80vw; /* Largeur ajustée à 80% */
-      height: 100vh;
-      overflow-y: auto; /* Permet le défilement vertical */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px 0;
-      position: relative; /* Assure que le conteneur est positionné correctement */
-    }
+#portfolio-container {
+  width: 80vw; /* Largeur ajustée à 80% */
+  height: 100vh;
+  overflow-y: auto; /* Permet le défilement vertical */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  position: relative; /* Assure que le conteneur est positionné correctement */
+}
 
-    /* Personnalisation de la barre de défilement pour WebKit (Chrome, Safari) */
-    #portfolio-container::-webkit-scrollbar {
-      width: 12px; /* Largeur de la barre de défilement */
-    }
+/* Personnalisation de la barre de défilement pour WebKit (Chrome, Safari) */
+#portfolio-container::-webkit-scrollbar {
+  width: 12px; /* Largeur de la barre de défilement */
+}
 
-    #portfolio-container::-webkit-scrollbar-track {
-      background: url('Images/Barredefilement.png') repeat-y; /* Image pour la piste */
-      background-size: cover; /* Ajuster l'image pour qu'elle couvre entièrement la piste */
-    }
+#portfolio-container::-webkit-scrollbar-track {
+  background: url('Images/Barredefilement.png') repeat-y; /* Image pour la piste */
+  background-size: contain; /* Ajuster l'image pour qu'elle s'adapte à la taille de la piste */
+}
 
-    #portfolio-container::-webkit-scrollbar-thumb {
-      background: url('Images/Curseurdefilement.png') no-repeat; /* Image pour le curseur */
-      background-size: cover; /* Ajuster l'image pour qu'elle couvre entièrement le curseur */
-      border-radius: 10px; /* Arrondir les coins du curseur */
-    }
+#portfolio-container::-webkit-scrollbar-thumb {
+  background: url('Images/Curseurdefilement.png') no-repeat; /* Image pour le curseur */
+  background-size: contain; /* Ajuster l'image pour qu'elle s'adapte à la taille du curseur */
+  border-radius: 10px; /* Arrondir les coins du curseur */
+}
 
-    #portfolio-container::-webkit-scrollbar-thumb:hover {
-      background: url('Images/Curseurdefilement-hover.png') no-repeat; /* Image pour le curseur au survol */
-      background-size: cover; /* Ajuster l'image pour qu'elle couvre entièrement le curseur */
-    }
+#portfolio-container::-webkit-scrollbar-thumb:hover {
+  background: url('Images/Curseurdefilement-hover.png') no-repeat; /* Image pour le curseur au survol */
+  background-size: contain; /* Ajuster l'image pour qu'elle s'adapte à la taille du curseur */
+}
 
-    /* Personnalisation de la barre de défilement pour Firefox */
-    #portfolio-container {
-      scrollbar-width: thin; /* Largeur de la barre de défilement */
-      scrollbar-color: #CD7F32 #989898; /* Couleur du curseur et de la piste */
-    }
+/* Personnalisation de la barre de défilement pour Firefox */
+#portfolio-container {
+  scrollbar-width: thin; /* Largeur de la barre de défilement */
+  scrollbar-color: dark transparent; /* Utiliser des couleurs transparentes pour forcer l'utilisation des images */
+}
 
-    .portfolio-page {
-      display: block;
-      margin: 0 auto 5mm auto;
-      max-width: 100%;
-      height: auto;
-    }
+.portfolio-page {
+  display: block;
+  margin: 0 auto 5mm auto;
+  max-width: 100%;
+  height: auto;
+}
 
-    .page-number {
-      text-align: center;
-      margin: 2mm 0 5mm 0;
-      font-size: 14px;
-      color: #333;
-    }
+.page-number {
+  text-align: center;
+  margin: 2mm 0 5mm 0;
+  font-size: 14px;
+  color: #333;
+}
 
-    @media (max-width: 768px) {
-      #portfolio-container {
-        width: 95vw;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="portfolio-container"></div>
-
-  <script>
-    const totalPages = 20; // Nombre total de pages
-    const container = document.getElementById('portfolio-container');
-
-    // Fonction pour charger et afficher les pages
-    function loadPages() {
-      for (let i = 1; i <= totalPages; i++) {
-        const img = document.createElement('img');
-        img.src = `Wbep/Page${i}.webp`; // Chemin correct avec "Wbep"
-        img.alt = `Page ${i}`;
-        img.classList.add('portfolio-page');
-        img.setAttribute('aria-label', `Page ${i}`);
-
-        // Ajouter un écouteur d'événement pour détecter les erreurs de chargement
-        img.onerror = () => {
-          console.error(`Erreur de chargement : ${img.src}`);
-          img.style.display = 'none'; // Masquer l'image si elle ne se charge pas
-        };
-
-        img.onload = () => {
-          console.log(`Image chargée avec succès : ${img.src}`);
-        };
-
-        container.appendChild(img); // Ajoute l'image au conteneur
-
-        // Ajouter un numéro de page sous chaque image
-        const pageNumber = document.createElement('p');
-        pageNumber.textContent = `Page ${i}`;
-        pageNumber.classList.add('page-number');
-        container.appendChild(pageNumber); // Ajoute le numéro de page
-      }
-    }
-
-    // Charger les pages au démarrage
-    loadPages();
-  </script>
-</body>
-</html>
+@media (max-width: 768px) {
+  #portfolio-container {
+    width: 95vw;
+  }
+}
