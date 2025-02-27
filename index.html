@@ -62,13 +62,6 @@
       height: auto;
     }
 
-    .page-number {
-      text-align: center;
-      margin: 2mm 0 5mm 0;
-      font-size: 14px;
-      color: #333;
-    }
-
     @media (max-width: 768px) {
       #portfolio-container {
         width: 95vw;
@@ -103,11 +96,6 @@
         };
 
         container.appendChild(img);
-
-        const pageNumber = document.createElement('p');
-        pageNumber.textContent = `Page ${i}`;
-        pageNumber.classList.add('page-number');
-        container.appendChild(pageNumber);
       }
     }
 
