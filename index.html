@@ -20,41 +20,39 @@
     }
 
     #portfolio-container {
-      width: 80vw; /* Largeur ajustée à 80% */
+      width: 80vw;
       height: 100vh;
-      overflow-y: auto; /* Permet le défilement vertical */
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 10px 0;
-      position: relative; /* Assure que le conteneur est positionné correctement */
+      position: relative;
     }
 
-    /* Personnalisation de la barre de défilement pour WebKit (Chrome, Safari) */
     #portfolio-container::-webkit-scrollbar {
-      width: 12px; /* Largeur de la barre de défilement */
+      width: 12px;
     }
 
     #portfolio-container::-webkit-scrollbar-track {
-      background: url('Images/Barredefilement.png') repeat-y; /* Image pour la piste */
-      background-size: contain; /* Ajuster l'image pour qu'elle s'adapte à la taille de la piste */
+      background: url('Images/Barredefilement.png') repeat-y;
+      background-size: contain;
     }
 
     #portfolio-container::-webkit-scrollbar-thumb {
-      background: url('Images/Curseurdefilement.png') no-repeat; /* Image pour le curseur */
-      background-size: contain; /* Ajuster l'image pour qu'elle s'adapte à la taille du curseur */
-      border-radius: 10px; /* Arrondir les coins du curseur */
+      background: url('Images/Curseurdefilement.png') no-repeat;
+      background-size: contain;
+      border-radius: 10px;
     }
 
     #portfolio-container::-webkit-scrollbar-thumb:hover {
-      background: url('Images/Curseurdefilement-hover.png') no-repeat; /* Image pour le curseur au survol */
-      background-size: contain; /* Ajuster l'image pour qu'elle s'adapte à la taille du curseur */
+      background: url('Images/Curseurdefilement-hover.png') no-repeat;
+      background-size: contain;
     }
 
-    /* Personnalisation de la barre de défilement pour Firefox */
     #portfolio-container {
-      scrollbar-width: thin; /* Largeur de la barre de défilement */
-      scrollbar-color: dark transparent; /* Utiliser des couleurs transparentes pour forcer l'utilisation des images */
+      scrollbar-width: thin;
+      scrollbar-color: dark transparent;
     }
 
     .portfolio-page {
@@ -82,42 +80,38 @@
   <div id="portfolio-container"></div>
 
   <script>
-    const totalPages = 20; // Nombre total de pages
+    const totalPages = 38;
     const container = document.getElementById('portfolio-container');
+    const isMobile = window.innerWidth <= 768;
+    const imageFolder = isMobile ? '~/WbepA4' : '~/WbepA3';
 
-    // Fonction pour charger et afficher les pages
     function loadPages() {
       for (let i = 1; i <= totalPages; i++) {
         const img = document.createElement('img');
-        img.src = `Webp/Page${i}.webp`; // Chemin correct avec "Webp"
+        img.src = `${imageFolder}/Page${i}.webp`;
         img.alt = `Page ${i}`;
         img.classList.add('portfolio-page');
         img.setAttribute('aria-label', `Page ${i}`);
 
-        // Ajouter un écouteur d'événement pour détecter les erreurs de chargement
         img.onerror = () => {
           console.error(`Erreur de chargement : ${img.src}`);
-          img.style.display = 'none'; // Masquer l'image si elle ne se charge pas
+          img.style.display = 'none';
         };
 
         img.onload = () => {
           console.log(`Image chargée avec succès : ${img.src}`);
         };
 
-        container.appendChild(img); // Ajoute l'image au conteneur
+        container.appendChild(img);
 
-        // Ajouter un numéro de page sous chaque image
         const pageNumber = document.createElement('p');
         pageNumber.textContent = `Page ${i}`;
         pageNumber.classList.add('page-number');
-        container.appendChild(pageNumber); // Ajoute le numéro de page
+        container.appendChild(pageNumber);
       }
     }
 
-    // Charger les pages au démarrage
     loadPages();
   </script>
 </body>
 </html>
-
-
