@@ -31,7 +31,7 @@
     }
 
     /* Masquer la barre de défilement sur mobile et tablette tout en permettant le défilement */
-    @media (max-width: 768px) {
+    @media (max-width: 768px), (max-height: 480px) {
       #portfolio-container {
         width: 95vw;
         scrollbar-width: none; /* Pour Firefox */
@@ -51,26 +51,28 @@
 
       #portfolio-container {
         overflow-y: scroll; /* Activer le défilement dans le conteneur */
-        margin-right: 20px; /* Espace pour la barre de défilement */
+        margin-right: 0; /* Pas de marge à droite */
       }
 
       /* Styles pour la barre de défilement */
-      ::-webkit-scrollbar {
+      #portfolio-container::-webkit-scrollbar {
         width: 12px;
+        position: absolute;
+        right: 0;
       }
 
-      ::-webkit-scrollbar-track {
+      #portfolio-container::-webkit-scrollbar-track {
         background: url('Images/Barredefilement.png') repeat-y;
         background-size: contain;
       }
 
-      ::-webkit-scrollbar-thumb {
+      #portfolio-container::-webkit-scrollbar-thumb {
         background: url('Images/Curseurdefilement.png') no-repeat;
         background-size: contain;
         border-radius: 10px;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
+      #portfolio-container::-webkit-scrollbar-thumb:hover {
         background: url('Images/Curseurdefilement-hover.png') no-repeat;
         background-size: contain;
       }
@@ -90,7 +92,7 @@
   <script>
     const totalPages = 38;
     const container = document.getElementById('portfolio-container');
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 768 || window.innerHeight <= 480;
     const imageFolder = isMobile ? 'WbepA4' : 'WbepA3';
 
     function loadPages() {
