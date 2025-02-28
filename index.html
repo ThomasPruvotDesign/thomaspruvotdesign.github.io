@@ -56,7 +56,7 @@
 
       /* Styles pour la barre de défilement */
       #portfolio-container::-webkit-scrollbar {
-        width: 12px;
+        width: 6px;
       }
 
       #portfolio-container::-webkit-scrollbar-track {
@@ -69,13 +69,14 @@
         background-size: contain;
         border-radius: 10px;
         background-position: center; /* Centrer l'image dans le thumb */
+        z-index: 10; /* Assurez-vous que le thumb est au-dessus */
       }
 
       #portfolio-container::-webkit-scrollbar-thumb:hover {
         background: url('Images/Curseurdefilement-hover.png') no-repeat;
         background-size: contain;
         background-position: center; /* Centrer l'image dans le thumb */
-        opacity: 1; /* Assurez-vous que l'image reste visible */
+        z-index: 10; /* Assurez-vous que le thumb est au-dessus */
       }
     }
 
