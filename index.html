@@ -51,28 +51,28 @@
 
       #portfolio-container {
         overflow-y: scroll; /* Activer le défilement dans le conteneur */
-        margin-right: 0; /* Pas de marge à droite */
       }
 
       /* Styles pour la barre de défilement */
-      #portfolio-container::-webkit-scrollbar {
+      ::-webkit-scrollbar {
         width: 12px;
-        position: absolute;
+        position: fixed;
         right: 0;
+        height: 100%;
       }
 
-      #portfolio-container::-webkit-scrollbar-track {
+      ::-webkit-scrollbar-track {
         background: url('Images/Barredefilement.png') repeat-y;
         background-size: contain;
       }
 
-      #portfolio-container::-webkit-scrollbar-thumb {
+      ::-webkit-scrollbar-thumb {
         background: url('Images/Curseurdefilement.png') no-repeat;
         background-size: contain;
         border-radius: 10px;
       }
 
-      #portfolio-container::-webkit-scrollbar-thumb:hover {
+      ::-webkit-scrollbar-thumb:hover {
         background: url('Images/Curseurdefilement-hover.png') no-repeat;
         background-size: contain;
       }
