@@ -30,11 +30,16 @@
       position: relative;
     }
 
-    /* Masquer la barre de défilement sur mobile et tablette */
+    /* Masquer la barre de défilement sur mobile et tablette tout en permettant le défilement */
     @media (max-width: 768px) {
       #portfolio-container {
         width: 95vw;
-        overflow-y: hidden; /* Masquer le défilement */
+        scrollbar-width: none; /* Pour Firefox */
+        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+      }
+
+      #portfolio-container::-webkit-scrollbar {
+        display: none; /* Pour Chrome, Safari et Opera */
       }
     }
 
@@ -50,8 +55,6 @@
 
       #portfolio-container::-webkit-scrollbar {
         width: 12px;
-        position: absolute;
-        right: 0;
       }
 
       #portfolio-container::-webkit-scrollbar-track {
