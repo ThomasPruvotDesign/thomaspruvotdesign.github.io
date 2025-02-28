@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Thomas Pruvot</title>
+  <title>Portfolio de Thomas Pruvot - Designer</title>
+  <meta name="description" content="Découvrez le portfolio de Thomas Pruvot, designer spécialisé dans le design graphique et web.">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -79,7 +80,13 @@
   </style>
 </head>
 <body>
-  <div id="portfolio-container"></div>
+  <header>
+    <h1>Portfolio de Thomas Pruvot</h1>
+  </header>
+  <main id="portfolio-container"></main>
+  <footer>
+    <p>&copy; 2023 Thomas Pruvot. Tous droits réservés.</p>
+  </footer>
 
   <script>
     const totalPages = 38;
@@ -91,9 +98,10 @@
       for (let i = 1; i <= totalPages; i++) {
         const img = document.createElement('img');
         img.src = `${imageFolder}/Page${i}.webp`;
-        img.alt = `Page ${i}`;
+        img.alt = `Design de la page ${i} par Thomas Pruvot`;
         img.classList.add('portfolio-page');
         img.setAttribute('aria-label', `Page ${i}`);
+        img.loading = "lazy"; // Chargement différé pour les images
 
         img.onerror = () => {
           console.error(`Erreur de chargement : ${img.src}`);
