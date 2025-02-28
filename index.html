@@ -51,12 +51,14 @@
 
       #portfolio-container {
         overflow-y: scroll; /* Activer le défilement dans le conteneur */
-        margin-right: 12px; /* Espace pour la barre de défilement */
+        padding-right: 20px; /* Espace pour la barre de défilement */
       }
 
       /* Styles pour la barre de défilement */
       #portfolio-container::-webkit-scrollbar {
         width: 12px;
+        position: absolute;
+        right: 0;
       }
 
       #portfolio-container::-webkit-scrollbar-track {
