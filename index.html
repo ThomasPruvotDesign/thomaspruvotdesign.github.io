@@ -21,22 +21,24 @@
 
     #portfolio-container {
       width: 80vw;
-      height: auto;
+      height: 100vh;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 10px 0;
+      position: relative;
     }
 
     /* Masquer la barre de défilement sur mobile et tablette tout en permettant le défilement */
     @media (max-width: 768px), (max-height: 480px) {
-      body {
-        overflow-y: scroll; /* Activer le défilement dans le body */
+      #portfolio-container {
+        width: 95vw;
         scrollbar-width: none; /* Pour Firefox */
         -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
       }
 
-      body::-webkit-scrollbar {
+      #portfolio-container::-webkit-scrollbar {
         display: none; /* Pour Chrome, Safari et Opera */
       }
     }
@@ -44,28 +46,31 @@
     /* Personnalisation de la barre de défilement pour desktop */
     @media (min-width: 769px) {
       body {
-        overflow-y: scroll; /* Activer le défilement dans le body */
-        scrollbar-color: transparent transparent; /* Pour Firefox */
-        scrollbar-width: thin; /* Pour Firefox */
+        overflow: hidden; /* Empêcher le défilement de la page */
+      }
+
+      #portfolio-container {
+        overflow-y: scroll; /* Activer le défilement dans le conteneur */
+        padding-right: 20px; /* Espace pour la barre de défilement */
       }
 
       /* Styles pour la barre de défilement */
-      body::-webkit-scrollbar {
-        width: 6px; /* Réduit la largeur de la barre de défilement */
+      #portfolio-container::-webkit-scrollbar {
+        width: 12px;
       }
 
-      body::-webkit-scrollbar-track {
+      #portfolio-container::-webkit-scrollbar-track {
         background: url('Images/Barredefilement.png') repeat-y;
         background-size: contain;
       }
 
-      body::-webkit-scrollbar-thumb {
+      #portfolio-container::-webkit-scrollbar-thumb {
         background: url('Images/Curseurdefilement.png') no-repeat;
         background-size: contain;
         border-radius: 10px;
       }
 
-      body::-webkit-scrollbar-thumb:hover {
+      #portfolio-container::-webkit-scrollbar-thumb:hover {
         background: url('Images/Curseurdefilement-hover.png') no-repeat;
         background-size: contain;
       }
