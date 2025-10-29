@@ -92,30 +92,22 @@
         }
         
         /* ========================================
-           SCROLLBAR PERSONNALISÉE (TES IMAGES)
+           SCROLLBAR PERSONNALISÉE (TES IMAGES EXACTES)
            ======================================== */
         ::-webkit-scrollbar {
             width: 20px;
-            height: 20px;
         }
         
         ::-webkit-scrollbar-track {
-            background-image: url('Images/Barre-defilement.webp');
-            background-size: contain;
-            background-repeat: repeat-y;
-            background-position: center;
+            background: url('Images/Barre-defilement.webp') center/cover;
         }
         
         ::-webkit-scrollbar-thumb {
-            background-image: url('Images/Curseur-defilement.webp');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border: none;
+            background: url('Images/Curseur-defilement.webp') center/contain no-repeat;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            opacity: 0.8;
+            opacity: 0.9;
         }
         
         * {
@@ -183,7 +175,7 @@
         }
         
         /* ========================================
-           LIGHTBOX PLEIN ÉCRAN
+           LIGHTBOX PLEIN ÉCRAN (VRAIMENT GRAND)
            ======================================== */
         .lightbox {
             display: none;
@@ -191,9 +183,9 @@
             z-index: 9999;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.98);
             justify-content: center;
             align-items: center;
         }
@@ -203,17 +195,19 @@
         }
         
         .lightbox-content {
-            max-width: 95%;
-            max-height: 95%;
+            max-width: 98vw;
+            max-height: 98vh;
+            width: auto;
+            height: auto;
             object-fit: contain;
-            box-shadow: 0 0 50px rgba(35, 106, 154, 0.5);
+            box-shadow: 0 0 60px rgba(35, 106, 154, 0.6);
             animation: lightboxZoom 0.3s ease-out;
             pointer-events: auto;
         }
         
         @keyframes lightboxZoom {
             from {
-                transform: scale(0.8);
+                transform: scale(0.85);
                 opacity: 0;
             }
             to {
@@ -224,9 +218,9 @@
         
         .lightbox-close {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 50px;
+            top: 25px;
+            right: 35px;
+            font-size: 55px;
             color: #a6a6a6;
             cursor: pointer;
             transition: color 0.3s;
@@ -244,10 +238,10 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 60px;
+            font-size: 70px;
             color: #a6a6a6;
             cursor: pointer;
-            padding: 20px;
+            padding: 25px;
             transition: color 0.3s;
             user-select: none;
             font-weight: 300;
@@ -259,66 +253,77 @@
         }
         
         .lightbox-prev {
-            left: 20px;
+            left: 25px;
         }
         
         .lightbox-next {
-            right: 20px;
+            right: 25px;
         }
         
         .lightbox-counter {
             position: absolute;
-            bottom: 20px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
             color: #a6a6a6;
-            font-size: 1.2rem;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            border-radius: 20px;
+            font-size: 1.3rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 12px 25px;
+            border-radius: 25px;
             pointer-events: none;
         }
         
         /* ========================================
-           HEADER
+           HEADER AVEC BANDEAU LOGO
            ======================================== */
         header {
-            background: rgba(26, 26, 26, 0.9);
+            background: url('Images/Logo.webp') center/cover;
+            background-color: rgba(26, 26, 26, 0.85);
+            background-blend-mode: overlay;
             color: #fff;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             border-bottom: 3px solid #236a9a;
+            position: relative;
         }
         
-        .header-logo {
-            width: 150px;
-            height: auto;
-            margin: 0 auto 1.5rem;
-            pointer-events: auto;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 26, 0.7);
+            z-index: 0;
+        }
+        
+        header > * {
+            position: relative;
+            z-index: 1;
         }
         
         header h1 {
             font-family: 'Garamond', 'Georgia', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
             font-weight: 300;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
         }
         
         header .subtitle {
             font-family: 'Garamond', 'Georgia', serif;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
             font-style: italic;
             color: #236a9a;
             margin-bottom: 0.3rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         
         header .tagline {
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
             color: #ccc;
             font-weight: 300;
         }
@@ -353,18 +358,18 @@
         }
         
         /* ========================================
-           CONTAINER (LARGEUR AUGMENTÉE PC)
+           CONTAINER (ULTRA LARGE PC)
            ======================================== */
         .container {
-            max-width: 1600px;
+            max-width: 2000px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 3rem 2.5rem;
         }
         
         section {
             margin-bottom: 5rem;
             background: rgba(26, 26, 26, 0.75);
-            padding: 3rem 2.5rem;
+            padding: 3rem 3rem;
             border-radius: 8px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.6);
             border: 1px solid rgba(35, 106, 154, 0.3);
@@ -372,7 +377,7 @@
         
         h2 {
             font-family: 'Garamond', 'Georgia', serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
             font-weight: 300;
             margin-bottom: 2.5rem;
             text-align: center;
@@ -386,7 +391,7 @@
         
         h3.collection-category {
             font-family: 'Garamond', 'Georgia', serif;
-            font-size: clamp(1.7rem, 3vw, 2.5rem);
+            font-size: clamp(1.8rem, 3.5vw, 2.7rem);
             font-weight: 300;
             margin: 3rem 0 1.5rem;
             color: #236a9a;
@@ -399,8 +404,8 @@
         
         .intro {
             text-align: center;
-            font-size: clamp(1.05rem, 2vw, 1.2rem);
-            max-width: 1200px;
+            font-size: clamp(1.08rem, 2.2vw, 1.25rem);
+            max-width: 1400px;
             margin: 0 auto 3rem;
             line-height: 1.9;
             color: #a6a6a6;
@@ -412,19 +417,19 @@
             text-align: center;
             color: #ccc;
             margin: 2rem auto;
-            max-width: 800px;
-            font-size: 1.15rem;
+            max-width: 900px;
+            font-size: 1.2rem;
             border-left: 3px solid #236a9a;
             padding-left: 1.5rem;
         }
         
         /* ========================================
-           ÉCHANTILLONS DE MATIÈRES
+           ÉCHANTILLONS DE MATIÈRES (GRANDES VIGNETTES)
            ======================================== */
         .materials-samples {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
             margin: 2rem 0 3rem;
         }
         
@@ -432,18 +437,18 @@
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
             transition: transform 0.3s;
             border: 1px solid rgba(35, 106, 154, 0.3);
         }
         
         .material-sample:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
         
         .material-sample img {
             width: 100%;
-            height: 250px;
+            height: 350px;
             object-fit: cover;
         }
         
@@ -452,10 +457,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
             color: #236a9a;
-            padding: 1rem 0.5rem 0.5rem;
-            font-size: 0.9rem;
+            padding: 1.2rem 0.8rem 0.8rem;
+            font-size: 1rem;
             text-align: center;
             font-weight: 500;
             letter-spacing: 1px;
@@ -463,12 +468,12 @@
         }
         
         /* ========================================
-           GALERIE COLLECTIONS (GRANDES IMAGES)
+           GALERIE COLLECTIONS
            ======================================== */
         .collections {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3.5rem;
             margin-top: 2rem;
         }
         
@@ -490,7 +495,7 @@
             position: relative;
             overflow: hidden;
             background: #1a1a1a;
-            height: 550px;
+            height: 600px;
         }
         
         .collection-images {
@@ -513,7 +518,7 @@
         
         .collection-title {
             font-family: 'Garamond', 'Georgia', serif;
-            font-size: 2rem;
+            font-size: 2.1rem;
             margin-bottom: 1rem;
             color: #236a9a;
             font-weight: 400;
@@ -521,19 +526,34 @@
         }
         
         .collection-description {
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             line-height: 1.8;
             color: #a6a6a6;
         }
         
         /* ========================================
-           LUMINAIRES (GRANDES IMAGES)
+           LUMINAIRES (GRILLE 3 COLONNES PUIS 2)
            ======================================== */
         .luminaires-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3.5rem;
             margin-top: 3rem;
+        }
+        
+        /* Les 2 derniers prennent 1.5 colonnes chacun */
+        .luminaire:nth-child(4),
+        .luminaire:nth-child(5) {
+            grid-column: span 1;
+        }
+        
+        /* Centrer les 2 derniers */
+        .luminaire:nth-child(4) {
+            margin-right: 1.75rem;
+        }
+        
+        .luminaire:nth-child(5) {
+            margin-left: 1.75rem;
         }
         
         .luminaire {
@@ -543,6 +563,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             transition: transform 0.3s;
             border: 1px solid rgba(35, 106, 154, 0.3);
+            min-width: 0;
         }
         
         .luminaire:hover {
@@ -554,7 +575,7 @@
             position: relative;
             overflow: hidden;
             background: #1a1a1a;
-            height: 600px;
+            height: 650px;
         }
         
         .luminaire-images {
@@ -579,14 +600,14 @@
             display: flex;
             gap: 10px;
             z-index: 10;
-            background: rgba(0,0,0,0.6);
-            padding: 8px 15px;
-            border-radius: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 18px;
+            border-radius: 25px;
         }
         
         .gallery-dot {
-            width: 12px;
-            height: 12px;
+            width: 13px;
+            height: 13px;
             border-radius: 50%;
             background: rgba(166, 166, 166, 0.5);
             cursor: pointer;
@@ -597,20 +618,20 @@
         .gallery-dot.active {
             background: #236a9a;
             border-color: #236a9a;
-            transform: scale(1.2);
+            transform: scale(1.3);
         }
         
         .gallery-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(35, 106, 154, 0.8);
+            background: rgba(35, 106, 154, 0.85);
             color: white;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             cursor: pointer;
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
             z-index: 10;
             opacity: 0;
@@ -638,7 +659,7 @@
         
         .luminaire-title {
             font-family: 'Garamond', 'Georgia', serif;
-            font-size: 2rem;
+            font-size: 2.1rem;
             margin-bottom: 0.8rem;
             color: #236a9a;
             font-weight: 400;
@@ -646,14 +667,14 @@
         }
         
         .luminaire-materials {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #888;
             font-style: italic;
             margin-bottom: 1rem;
         }
         
         .luminaire-description {
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             line-height: 1.8;
             color: #a6a6a6;
         }
@@ -672,14 +693,14 @@
         
         .contact p {
             margin: 1rem 0;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #a6a6a6;
         }
         
         .contact a {
             color: #236a9a;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 500;
             transition: all 0.3s;
         }
@@ -690,7 +711,7 @@
         
         .contact-card {
             margin: 2rem auto 0;
-            max-width: 500px;
+            max-width: 550px;
         }
         
         .contact-card img {
@@ -728,6 +749,17 @@
         /* ========================================
            RESPONSIVE
            ======================================== */
+        @media (max-width: 1400px) {
+            .luminaires-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .luminaire:nth-child(4),
+            .luminaire:nth-child(5) {
+                margin: 0;
+            }
+        }
+        
         @media (max-width: 1024px) {
             .container {
                 max-width: 100%;
@@ -740,21 +772,22 @@
             }
             
             .collection-gallery {
-                height: 450px;
+                height: 500px;
             }
             
             .luminaire-gallery {
-                height: 500px;
+                height: 550px;
+            }
+            
+            .luminaire:nth-child(4),
+            .luminaire:nth-child(5) {
+                margin: 0;
             }
         }
         
         @media (max-width: 768px) {
             header {
                 padding: 3rem 1.5rem;
-            }
-            
-            .header-logo {
-                width: 120px;
             }
             
             nav a {
@@ -767,39 +800,39 @@
             }
             
             .collection-gallery {
-                height: 400px;
+                height: 420px;
             }
             
             .luminaire-gallery {
-                height: 450px;
+                height: 480px;
             }
             
             .materials-samples {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 1rem;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
             }
             
             .material-sample img {
-                height: 180px;
+                height: 250px;
             }
             
             .lightbox-close {
-                font-size: 40px;
-                top: 10px;
-                right: 15px;
+                font-size: 45px;
+                top: 15px;
+                right: 20px;
             }
             
             .lightbox-nav {
-                font-size: 40px;
-                padding: 10px;
+                font-size: 50px;
+                padding: 15px;
             }
             
             .lightbox-prev {
-                left: 10px;
+                left: 15px;
             }
             
             .lightbox-next {
-                right: 10px;
+                right: 15px;
             }
         }
         
@@ -837,13 +870,13 @@
             }
             
             .luminaire-gallery {
-                height: 400px;
+                height: 420px;
             }
             
             .gallery-arrow {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
             }
             
             .gallery-arrow.prev { left: 10px; }
@@ -851,6 +884,10 @@
             
             .materials-samples {
                 grid-template-columns: 1fr 1fr;
+            }
+            
+            .material-sample img {
+                height: 200px;
             }
         }
     </style>
@@ -866,9 +903,8 @@
         <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
-    <!-- HEADER -->
+    <!-- HEADER AVEC BANDEAU LOGO -->
     <header>
-        <img src="Images/Logo.webp" alt="Logo Thomas Pruvot Artisan d'Art" class="header-logo" onerror="this.style.display='none'">
         <h1>THOMAS PRUVOT</h1>
         <p class="subtitle">Artisan d'art</p>
         <p class="tagline">Mobilier d'exception</p>
@@ -935,8 +971,8 @@
                 <article class="collection-card">
                     <div class="collection-gallery">
                         <div class="collection-images">
-                            <img src="Images/Console-mica.webp" alt="Console Mica" class="collection-image" loading="lazy" onerror="this.src='Images/Organique-ecailles.webp'">
-                            <img src="Images/Console-et-miroir-mica-en-situation.webp" alt="Console et miroir Mica en situation" class="collection-image" loading="lazy" onerror="this.style.display='none'">
+                            <img src="Images/Console-mica.webp" alt="Console Mica" class="collection-image" loading="lazy">
+                            <img src="Images/Console-et-miroir-mica-en-situation.webp" alt="Console et miroir Mica en situation" class="collection-image" loading="lazy">
                         </div>
                         <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)" aria-label="Image précédente">‹</button>
                         <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)" aria-label="Image suivante">›</button>
@@ -999,7 +1035,7 @@
                     <div class="material-label">Flèches</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Cosmati-terre-d-ombre.webp" alt="Cosmati Terre d'ombre" loading="lazy" onerror="this.src='Images/Cosmati-etoile.webp'">
+                    <img src="Images/Cosmati-terre-d-ombre.webp" alt="Cosmati Terre d'ombre" loading="lazy">
                     <div class="material-label">Terre d'ombre</div>
                 </div>
             </div>
@@ -1116,7 +1152,7 @@
                         <h3 class="luminaire-title">Émanation</h3>
                         <p class="luminaire-materials">Améthyste indienne sculptée à la main | 52 × 24 × 16 cm</p>
                         <p class="luminaire-description">
-                            Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée, parfaite pour les espaces dédiés à la contemplation et à la créativité. La texture brute de l'améthyste contraste magnifiquement avec la finesse de la sculpture, créant un dialogue fascinant entre nature et artisanat.
+                            Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée, parfaite pour les espaces dédiés à la contemplation et à la créativité.
                         </p>
                     </div>
                 </article>
@@ -1141,7 +1177,7 @@
                         <h3 class="luminaire-title">Céleste</h3>
                         <p class="luminaire-materials">Améthyste indienne, Peau de Gesso, bois de sipo gougé à la main | 42 × 33 × 16 cm</p>
                         <p class="luminaire-description">
-                            Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. L'améthyste est utilisée depuis des millénaires à travers les civilisations comme symbole puissant de la sagesse, de l'intelligence pure et de la spiritualité élevée. Cette "pierre de l'âme" diffuse son aura lumineuse violette dans une atmosphère chaleureuse et apaisante, créant un espace sacré favorable à la concentration et à l'introspection. Le cadre en Peau de Gesso et bois de sipo finement travaillé ajoute une dimension tactile et visuelle qui enrichit l'expérience contemplative.
+                            Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. L'améthyste est utilisée depuis des millénaires à travers les civilisations comme symbole puissant de la sagesse, de l'intelligence pure et de la spiritualité élevée. Cette "pierre de l'âme" diffuse son aura lumineuse violette dans une atmosphère chaleureuse et apaisante.
                         </p>
                     </div>
                 </article>
@@ -1170,7 +1206,7 @@
                         <h3 class="luminaire-title">Chartres</h3>
                         <p class="luminaire-materials">Mosaïque d'agates du Brésil, Peau de Gesso, bois de sipo gougé | 42 × 33 × 16 cm</p>
                         <p class="luminaire-description">
-                            Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées, pierre qui selon les traditions ancestrales aurait le pouvoir de dynamiser les performances mentales et d'harmoniser les énergies. Cette création ornementera de sa lumière chaude, envoûtante et mystique les pièces dédiées au travail intellectuel, à l'étude ou à la méditation, demandant concentration et clarté d'esprit. Les images en situation montrent sa capacité remarquable à transformer différents espaces, du salon intime à l'espace sacré.
+                            Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées.
                         </p>
                     </div>
                 </article>
@@ -1195,7 +1231,7 @@
                         <h3 class="luminaire-title">Éclat</h3>
                         <p class="luminaire-materials">Agate de sel indienne translucide, gesso argenté, bois de sipo gougé | 42 × 33 × 16 cm</p>
                         <p class="luminaire-description">
-                            Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle et apaisante. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. Les vibrations énergétiques émanant naturellement de l'agate sont réputées depuis l'antiquité pour harmoniser parfaitement le yin et le yang, les forces complémentaires de l'univers. Grâce à ses vertus profondément apaisantes et équilibrantes reconnues à travers les âges, elle aide significativement à se concentrer, à méditer paisiblement et à maintenir un état d'esprit serein. Éclat illuminera avec élégance un lieu de vie quotidien ou un espace de travail exigeant, favorisant le calme mental, la productivité harmonieuse et le bien-être général.
+                            Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle et apaisante. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. Les vibrations énergétiques émanant naturellement de l'agate sont réputées depuis l'antiquité pour harmoniser parfaitement le yin et le yang.
                         </p>
                     </div>
                 </article>
@@ -1220,7 +1256,7 @@
                         <h3 class="luminaire-title">Intime</h3>
                         <p class="luminaire-materials">Quartz rose indien, glacis rosé nacré artisanal, bois de sipo gougé | 42 × 33 × 16 cm</p>
                         <p class="luminaire-description">
-                            Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde, pierre douce aux nuances subtiles. Depuis la nuit des temps et à travers toutes les civilisations, le quartz rose entretient une relation intime, profonde et privilégiée avec l'amour universel, les émotions du cœur et les liens affectifs. Visuellement, il inspire immédiatement la douceur, la tendresse et la bienveillance par ses teintes rosées apaisantes. Particulièrement recommandé et bénéfique pour les chambres d'enfants, cette pierre précieuse délivre une énergie infiniment douce, protectrice et maternelle qui enveloppe l'espace d'une aura réconfortante. Intime trouvera naturellement sa place privilégiée dans une chambre à coucher ou un salon familial, créant une atmosphère de sécurité émotionnelle et d'harmonie relationnelle propice aux échanges sincères et à la détente profonde.
+                            Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde, pierre douce aux nuances subtiles. Depuis la nuit des temps et à travers toutes les civilisations, le quartz rose entretient une relation intime, profonde et privilégiée avec l'amour universel, les émotions du cœur et les liens affectifs.
                         </p>
                     </div>
                 </article>
@@ -1329,94 +1365,4 @@
             counter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxGallery.length}`;
         }
         
-        // Navigation clavier dans le lightbox
-        document.addEventListener('keydown', function(e) {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox.classList.contains('active')) {
-                if (e.key === 'Escape') {
-                    lightbox.classList.remove('active');
-                    document.body.style.overflow = '';
-                } else if (e.key === 'ArrowLeft') {
-                    changeLightboxImage(-1, e);
-                } else if (e.key === 'ArrowRight') {
-                    changeLightboxImage(1, e);
-                }
-            }
-        });
-        
-        // Ajoute le click sur toutes les images des galeries
-        document.addEventListener('DOMContentLoaded', function() {
-            const galleries = document.querySelectorAll('.collection-gallery, .luminaire-gallery');
-            galleries.forEach(gallery => {
-                const images = gallery.querySelectorAll('.collection-image, .luminaire-image');
-                images.forEach(img => {
-                    img.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        openLightbox(this, gallery);
-                    });
-                });
-            });
-        });
-        
-        // ========================================
-        // NAVIGATION GALERIE MINIATURES
-        // ========================================
-        let galleryIndexes = {};
-        
-        function changeGalleryImage(button, direction) {
-            const card = button.closest('.collection-card, .luminaire');
-            const gallery = card.querySelector('.collection-images, .luminaire-images');
-            const dots = card.querySelectorAll('.gallery-dot');
-            const images = card.querySelectorAll('.collection-image, .luminaire-image');
-            const totalImages = images.length;
-            
-            const cardId = Array.from(card.parentElement.children).indexOf(card);
-            const parentId = card.parentElement.className;
-            const uniqueId = parentId + '-' + cardId;
-            
-            if (!galleryIndexes[uniqueId]) galleryIndexes[uniqueId] = 0;
-            
-            galleryIndexes[uniqueId] = (galleryIndexes[uniqueId] + direction + totalImages) % totalImages;
-            
-            gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-            
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === galleryIndexes[uniqueId]);
-            });
-        }
-        
-        function showGalleryImage(dot, index) {
-            const card = dot.closest('.collection-card, .luminaire');
-            const gallery = card.querySelector('.collection-images, .luminaire-images');
-            const dots = card.querySelectorAll('.gallery-dot');
-            
-            const cardId = Array.from(card.parentElement.children).indexOf(card);
-            const parentId = card.parentElement.className;
-            const uniqueId = parentId + '-' + cardId;
-            
-            galleryIndexes[uniqueId] = index;
-            
-            gallery.style.transform = `translateX(-${index * 100}%)`;
-            
-            dots.forEach((d, i) => {
-                d.classList.toggle('active', i === index);
-            });
-        }
-        
-        // Navigation clavier galerie
-        document.addEventListener('keydown', function(e) {
-            const lightbox = document.getElementById('lightbox');
-            if (!lightbox.classList.contains('active')) {
-                if (e.key === 'ArrowLeft') {
-                    const activeArrow = document.querySelector('.collection-card:hover .gallery-arrow.prev, .luminaire:hover .gallery-arrow.prev');
-                    if (activeArrow) activeArrow.click();
-                } else if (e.key === 'ArrowRight') {
-                    const activeArrow = document.querySelector('.collection-card:hover .gallery-arrow.next, .luminaire:hover .gallery-arrow.next');
-                    if (activeArrow) activeArrow.click();
-                }
-            }
-        });
-    </script>
-    
-</body>
-</html>
+        //
