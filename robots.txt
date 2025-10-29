@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://thomaspruvotdesign.github.io/sitemap.xml
