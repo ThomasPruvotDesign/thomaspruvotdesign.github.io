@@ -815,23 +815,24 @@
                 background-size: cover;
             }
             
-            /* BACKGROUND MOBILE SHARP ET NET */
+            /* BACKGROUND MOBILE  NET - VERSION OPTIMISEE */
             body {
-                background: url('Images/Bois-brule.webp') center/cover no-repeat;
-                background-attachment: local;
+                background-image: url('Images/Bois-brule.webp');
+                background-position: center top;
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                -webkit-background-size: 100% auto;
+				position: relative;
+                width: 100vw !important;
+                overflow-x: hidden !important;
             }
             
             html {
                 overflow-x: hidden !important;
                 width: 100vw !important;
             }
-            
-            body {
-                position: relative;
-                width: 100vw !important;
-                overflow-x: hidden !important;
-            }
-            
+                  
             header {
                 height: 200px;
                 background-size: contain !important;
