@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -160,14 +161,24 @@
             display: none;
         }
         
-        /* HEADER LOGO */
+        /* HEADER LOGO AVEC BORDURE TEXTURE */
         header {
             background: url('Images/Logo.webp') center/cover no-repeat;
             height: 300px;
-            border-bottom: 3px solid #236a9a;
+            position: relative;
         }
         
-        /* NAV : CURSEUR INACTIF + GARAMOND HOVER */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+        }
+        
+        /* NAV : CURSEUR INACTIF + GARAMOND HOVER + BORDURE TEXTURE */
         nav {
             background: rgba(44, 44, 44, 0.95);
             padding: 1.2rem;
@@ -175,7 +186,17 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid #236a9a;
+            position: relative;
+        }
+        
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: url('Images/Texture-garamond.webp') center/cover;
         }
         
         nav a {
@@ -207,16 +228,34 @@
             overflow-x: hidden !important;
         }
         
-        /* SECTIONS ANGLES DROITS + BORDURE TEXTURE */
+        /* SECTIONS AVEC BORDURE TEXTURE */
         section {
             margin-bottom: 5rem;
             background: rgba(26, 26, 26, 0.75);
             padding: 3rem;
             border-radius: 0;
-            border: 2px solid #236a9a;
             max-width: 100%;
             overflow-x: hidden !important;
             position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 3px;
+            pointer-events: none;
+            z-index: -1;
         }
         
         /* H2 : GARAMOND TEXTURE + TRAIT TEXTURE */
@@ -234,8 +273,18 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            border-bottom: 3px solid #236a9a;
             position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: url('Images/Texture-garamond.webp') center/cover;
         }
         
         /* H3 COLLECTIONS : GARAMOND TEXTURE */
@@ -301,12 +350,36 @@
             text-align: center;
         }
         
+        /* IMAGES ÉCHANTILLONS AVEC BORDURE TEXTURE */
         .material-sample img {
             width: 100%;
             border-radius: 0;
             box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-            border: 2px solid #236a9a;
             margin-bottom: 1rem;
+            position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .material-sample {
+            position: relative;
+        }
+        
+        .material-sample::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 0;
+            right: 0;
+            bottom: 1rem;
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 3px;
+            pointer-events: none;
+            z-index: 1;
         }
         
         .materials-samples.organique img {
@@ -348,12 +421,32 @@
             overflow-x: hidden !important;
         }
         
+        /* CARTES AVEC BORDURE TEXTURE */
         .collection-card {
             background: rgba(40, 40, 40, 0.6);
             border-radius: 0;
             overflow: visible;
-            border: 2px solid #236a9a;
             max-width: 100%;
+            position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 3px;
+            pointer-events: none;
+            z-index: 0;
         }
         
         /* GALERIE FOND TRANSPARENT */
@@ -380,6 +473,8 @@
         
         .collection-info {
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         /* TITRES COLLECTIONS : GARAMOND TEXTURE */
@@ -438,8 +533,27 @@
             background: rgba(40, 40, 40, 0.6);
             border-radius: 0;
             overflow: visible;
-            border: 2px solid #236a9a;
             max-width: 100%;
+            position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .luminaire::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 3px;
+            pointer-events: none;
+            z-index: 0;
         }
         
         /* GALERIE LUMINAIRES FOND TRANSPARENT */
@@ -464,38 +578,65 @@
             flex-shrink: 0;
         }
         
-        /* NAVIGATION GALERIE : SOUS LES PHOTOS */
+        /* NAVIGATION GALERIE SOUS LES PHOTOS AVEC BORDURE TEXTURE */
         .gallery-nav {
             display: flex;
             justify-content: center;
             gap: 10px;
             padding: 15px;
-            background: rgba(35, 106, 154, 0.3);
-            border-top: 2px solid #236a9a;
+            background: rgba(90, 138, 138, 0.15);
+            position: relative;
+            z-index: 1;
         }
         
+        .gallery-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+        }
+        
+        /* DOTS AVEC BORDURE TEXTURE */
         .gallery-dot {
             width: 13px;
             height: 13px;
             border-radius: 0;
-            background: rgba(166, 166, 166, 0.5);
+            background: rgba(166, 166, 166, 0.3);
             cursor: pointer;
-            border: 2px solid #236a9a;
             pointer-events: auto;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        
+        .gallery-dot::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 2px;
+            pointer-events: none;
         }
         
         .gallery-dot.active {
-            background: #236a9a;
-            border-color: #236a9a;
+            background: url('Images/Texture-garamond.webp') center/cover;
         }
         
-        /* FLECHES GALERIES PAGE : CURSEUR TEXTURE */
+        /* FLECHES GALERIES PAGE : CURSEUR TEXTURE + BORDURE GARAMOND */
         .gallery-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(35, 106, 154, 0.85);
-            border: 2px solid #236a9a;
+            background: rgba(90, 138, 138, 0.85);
             width: 55px;
             height: 55px;
             cursor: pointer;
@@ -507,6 +648,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 3px solid transparent;
+        }
+        
+        .gallery-arrow::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 3px;
+            pointer-events: none;
         }
         
         .gallery-arrow::before {
@@ -517,6 +675,7 @@
             -webkit-text-fill-color: transparent;
             color: transparent;
             font-size: 28px;
+            z-index: 1;
         }
         
         .gallery-arrow.prev::before {
@@ -537,6 +696,8 @@
         
         .luminaire-info {
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         /* TITRES LUMINAIRES : GARAMOND TEXTURE */
@@ -578,13 +739,31 @@
             color: transparent;
         }
         
-        /* CONTACT */
+        /* CONTACT AVEC BORDURE TEXTURE */
         .contact {
             background: rgba(40, 40, 40, 0.7);
             padding: 3.5rem 2.5rem;
             border-radius: 0;
             text-align: center;
-            border: 2px solid #236a9a;
+            position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 3px;
+            pointer-events: none;
         }
         
         .contact p {
@@ -626,13 +805,23 @@
             pointer-events: auto;
         }
         
-        /* FOOTER */
+        /* FOOTER AVEC BORDURE TEXTURE */
         footer {
             background: rgba(26, 26, 26, 0.95);
             text-align: center;
             padding: 2.5rem;
             margin-top: 5rem;
-            border-top: 2px solid #236a9a;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: url('Images/Texture-garamond.webp') center/cover;
         }
         
         footer p {
@@ -683,7 +872,7 @@
             }
         }
         
-        /* VERSION MOBILE : SCROLL LATERAL ELIMINE */
+        /* VERSION MOBILE */
         @media (max-width: 768px) {
             html {
                 overflow-x: hidden !important;
@@ -801,10 +990,15 @@
                 max-width: calc(100vw - 2rem) !important;
             }
             
-            /* EMAIL CENTRE MOBILE */
+            /* EMAIL ADAPTATIF MOBILE */
             .contact a {
                 display: block;
                 text-align: center;
+                font-size: clamp(0.8rem, 4vw, 1.25rem) !important;
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-break: break-all;
+                padding: 0 0.5rem;
             }
             
             .lightbox-close {
@@ -875,6 +1069,12 @@
                 width: 45px;
                 height: 45px;
                 font-size: 22px;
+            }
+            
+            /* EMAIL ENCORE PLUS PETIT */
+            .contact a {
+                font-size: 0.85rem !important;
+                word-break: break-all;
             }
         }
     </style>
