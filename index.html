@@ -3,9 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thomas Pruvot - Artisan d'Art</title>
-    <meta name="description" content="Thomas Pruvot, artisan d'art dans le Val-de-Marne, crée du mobilier d'exception et des luminaires uniques.">
+    
+    <!-- BASIC SEO -->
+    <title>Thomas Pruvot - Artisan d'Art | Mobilier Gesso & Luminaires Uniques</title>
+    <meta name="description" content="Thomas Pruvot, artisan d'art dans le Val-de-Marne, crée du mobilier d'exception en gesso et des luminaires uniques pour intérieurs de luxe.">
+    <meta name="keywords" content="artisan d'art, mobilier gesso, luminaires, design, Val-de-Marne, furniture design, luminaires design">
+    <meta name="author" content="Thomas Pruvot">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="French">
+    
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="Thomas Pruvot - Artisan d'Art | Mobilier Gesso & Luminaires">
+    <meta property="og:description" content="Créations exceptionnelles en gesso et luminaires uniques pour intérieurs de luxe">
+    <meta property="og:image" content="https://thomaspruvotdesign.github.io/Images/Logo.webp">
+    <meta property="og:url" content="https://thomaspruvotdesign.github.io">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Thomas Pruvot - Artisan d'Art">
+    
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Thomas Pruvot - Artisan d'Art">
+    <meta name="twitter:description" content="Mobilier gesso & luminaires pour intérieurs de luxe">
+    <meta name="twitter:image" content="https://thomaspruvotdesign.github.io/Images/Logo.webp">
+    
+    <!-- CANONICAL -->
+    <link rel="canonical" href="https://thomaspruvotdesign.github.io">
+    
+    <!-- FAVICON -->
     <link rel="icon" type="image/webp" href="Images/Logo.webp">
+    <link rel="apple-touch-icon" href="Images/Logo.webp">
+    
+    <!-- SCHEMA.ORG - LocalBusiness + Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Thomas Pruvot - Artisan d'Art",
+      "image": "https://thomaspruvotdesign.github.io/Images/Logo.webp",
+      "description": "Artisan d'art créant du mobilier d'exception en gesso et des luminaires uniques pour intérieurs de luxe",
+      "url": "https://thomaspruvotdesign.github.io",
+      "telephone": "+33627272121",
+      "email": "thomaspruvotdesign@protonmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chennevières-sur-Marne",
+        "addressRegion": "Val-de-Marne",
+        "postalCode": "94430",
+        "addressCountry": "FR"
+      },
+      "priceRange": "$$$$",
+      "areaServed": {
+        "@type": "Country",
+        "name": "France"
+      },
+      "contactType": "Customer Service",
+      "availableLanguage": ["fr", "en"]
+    }
+    </script>
+    
+    <!-- SCHEMA.ORG - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Thomas Pruvot - Artisan d'Art",
+      "url": "https://thomaspruvotdesign.github.io",
+      "logo": "https://thomaspruvotdesign.github.io/Images/Logo.webp",
+      "description": "Créations exceptionnelles en gesso et luminaires uniques",
+      "sameAs": [
+        "https://github.com/thomaspruvotdesign"
+      ]
+    }
+    </script>
     
     <style>
         * {
@@ -28,7 +98,6 @@
             max-width: 100vw !important;
         }
         
-        /* SCROLLBAR NOIRE + CURSEUR VISIBLE */
         ::-webkit-scrollbar {
             width: 20px;
         }
@@ -46,7 +115,6 @@
             opacity: 0.8;
         }
         
-        /* PROTECTION COPYRIGHT */
         img {
             max-width: 100%;
             height: auto;
@@ -65,7 +133,6 @@
             pointer-events: auto !important;
         }
         
-        /* LIGHTBOX AVEC FOND FLOU */
         .lightbox {
             display: none;
             position: fixed;
@@ -77,6 +144,18 @@
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+        }
+        
+        @supports (-webkit-backdrop-filter: blur(10px)) {
+            .lightbox {
+                -webkit-backdrop-filter: blur(10px);
+            }
+        }
+        
+        @supports not (-webkit-backdrop-filter: blur(10px)) {
+            .lightbox {
+                background: rgba(0, 0, 0, 0.6);
+            }
         }
         
         .lightbox.active {
@@ -93,7 +172,6 @@
             box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
         
-        /* CROIX LIGHTBOX : TEXTURE GARAMOND */
         .lightbox-close {
             position: fixed;
             top: 30px;
@@ -114,7 +192,6 @@
             opacity: 0.7;
         }
         
-        /* FLECHES LIGHTBOX : TEXTURE GARAMOND */
         .lightbox-nav {
             position: fixed;
             top: 50%;
@@ -155,12 +232,10 @@
             color: transparent;
         }
         
-        /* MASQUER FLECHES LIGHTBOX SI UNE SEULE IMAGE */
         .lightbox.single-image .lightbox-nav {
             display: none;
         }
         
-        /* HEADER LOGO AVEC BORDURE TEXTURE 1PX */
         header {
             background: url('Images/Logo.webp') center/cover no-repeat;
             height: 300px;
@@ -177,7 +252,6 @@
             background: url('Images/Texture-garamond.webp') center/cover;
         }
         
-        /* NAV : CURSEUR INACTIF + GARAMOND HOVER + BORDURE TEXTURE 1PX */
         nav {
             background: rgba(44, 44, 44, 0.95);
             padding: 1.2rem;
@@ -219,14 +293,12 @@
             -webkit-text-fill-color: transparent;
         }
         
-        /* CONTAINER : PAS DE OVERFLOW */
         .container {
             max-width: 2000px;
             margin: 0 auto;
             padding: 3rem 2.5rem;
         }
         
-        /* SECTIONS AVEC BORDURE TEXTURE 1PX */
         section {
             margin-bottom: 5rem;
             background: rgba(26, 26, 26, 0.75);
@@ -255,7 +327,6 @@
             z-index: 0;
         }
         
-        /* H2 : GARAMOND TEXTURE + TRAIT TEXTURE 1PX */
         h2 {
             font-family: 'Garamond', serif;
             font-size: 2.5rem;
@@ -284,7 +355,6 @@
             background: url('Images/Texture-garamond.webp') center/cover;
         }
         
-        /* H3 COLLECTIONS : GARAMOND TEXTURE */
         h3.collection-category {
             font-family: 'Garamond', serif;
             font-size: 2rem;
@@ -301,7 +371,6 @@
             color: transparent;
         }
         
-        /* INTRO : TAHOMA TEXTURE */
         .intro {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             text-align: center;
@@ -316,7 +385,6 @@
             color: transparent;
         }
         
-        /* QUOTE : CURSEUR TEXTURE */
         .quote {
             font-family: 'Garamond', serif;
             font-style: italic;
@@ -333,7 +401,6 @@
             color: transparent;
         }
         
-        /* ECHANTILLONS */
         .materials-samples {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -347,7 +414,6 @@
             position: relative;
         }
         
-        /* IMAGES ÉCHANTILLONS AVEC BORDURE 1PX */
         .material-sample img {
             width: 100%;
             border-radius: 0;
@@ -372,7 +438,6 @@
             object-fit: cover;
         }
         
-        /* LABELS : TAHOMA TEXTURE */
         .material-label {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1rem;
@@ -385,7 +450,6 @@
             color: transparent;
         }
         
-        /* COLLECTIONS */
         .collections {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -394,7 +458,6 @@
             max-width: 100%;
         }
         
-        /* CARTES AVEC BORDURE TEXTURE 1PX */
         .collection-card {
             background: rgba(40, 40, 40, 0.6);
             border-radius: 0;
@@ -422,7 +485,6 @@
             z-index: 0;
         }
         
-        /* GALERIE FOND TRANSPARENT */
         .collection-gallery {
             width: 100%;
             position: relative;
@@ -450,7 +512,6 @@
             z-index: 1;
         }
         
-        /* TITRES COLLECTIONS : GARAMOND TEXTURE */
         .collection-title {
             font-family: 'Garamond', serif;
             font-size: 2rem;
@@ -464,7 +525,6 @@
             color: transparent;
         }
         
-        /* DESCRIPTIONS : TAHOMA TEXTURE */
         .collection-description {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
@@ -476,7 +536,6 @@
             color: transparent;
         }
         
-        /* DIMENSIONS MOBILIER */
         .collection-dimensions {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 0.95rem;
@@ -489,7 +548,6 @@
             color: transparent;
         }
         
-        /* LUMINAIRES 3 COLONNES */
         .luminaires-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -528,7 +586,6 @@
             z-index: 0;
         }
         
-        /* GALERIE LUMINAIRES FOND TRANSPARENT */
         .luminaire-gallery {
             width: 100%;
             position: relative;
@@ -550,7 +607,6 @@
             flex-shrink: 0;
         }
         
-        /* NAVIGATION GALERIE SOUS LES PHOTOS */
         .gallery-nav {
             display: flex;
             justify-content: center;
@@ -561,7 +617,6 @@
             z-index: 1;
         }
         
-        /* DOTS : BORDURE 1PX NON SÉLECTIONNÉ */
         .gallery-dot {
             width: 13px;
             height: 13px;
@@ -572,13 +627,11 @@
             border: 1px solid rgba(90, 138, 138, 0.6);
         }
         
-        /* DOTS SÉLECTIONNÉS : PLEIN TEXTURE GARAMOND */
         .gallery-dot.active {
             background: url('Images/Texture-garamond.webp') center/cover;
             border: none;
         }
         
-        /* FLECHES GALERIES : CARRÉ PLEIN TEXTURE GARAMOND */
         .gallery-arrow {
             position: absolute;
             top: 50%;
@@ -598,7 +651,6 @@
             border: none;
         }
         
-        /* SYMBOLE FLECHE : CURSEUR TEXTURE */
         .gallery-arrow::before {
             content: attr(data-arrow);
             background: url('Images/Curseur-defilement.webp') center/cover;
@@ -632,7 +684,6 @@
             z-index: 1;
         }
         
-        /* TITRES LUMINAIRES : GARAMOND TEXTURE */
         .luminaire-title {
             font-family: 'Garamond', serif;
             font-size: 2rem;
@@ -646,7 +697,6 @@
             color: transparent;
         }
         
-        /* MATERIAUX : TAHOMA TEXTURE */
         .luminaire-materials {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
@@ -659,7 +709,6 @@
             color: transparent;
         }
         
-        /* DESCRIPTIONS : TAHOMA TEXTURE */
         .luminaire-description {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
@@ -671,7 +720,6 @@
             color: transparent;
         }
         
-        /* CONTACT AVEC BORDURE 1PX */
         .contact {
             background: rgba(40, 40, 40, 0.7);
             padding: 3.5rem 2.5rem;
@@ -709,7 +757,6 @@
             color: transparent;
         }
         
-        /* LIENS : TAHOMA + TEXTURE GARAMOND */
         .contact a {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             text-decoration: none;
@@ -737,7 +784,6 @@
             pointer-events: auto;
         }
         
-        /* FOOTER AVEC BORDURE 1PX */
         footer {
             background: rgba(26, 26, 26, 0.95);
             text-align: center;
@@ -771,7 +817,6 @@
             font-style: italic;
         }
         
-        /* RESPONSIVE OPTIMISE */
         @media (max-width: 1400px) {
             .luminaires-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -803,9 +848,7 @@
             }
         }
         
-        /* VERSION MOBILE */
         @media (max-width: 768px) {
-            /* SCROLLBAR MOBILE PLUS FINE */
             ::-webkit-scrollbar {
                 width: 8px;
             }
@@ -815,15 +858,14 @@
                 background-size: cover;
             }
             
-            /* BACKGROUND MOBILE  NET - VERSION OPTIMISEE */
             body {
-                background-image: url('Images/Bois-brule.webp');
-                background-position: center;
-                background-size: cover;
-                background-repeat: repeat;
-                background-attachment: fixed;
-                -webkit-background-size: cover;
-				position: relative;
+                background-image: url('Images/Bois-brule.webp') !important;
+                background-position: center !important;
+                background-size: cover !important;
+                background-repeat: repeat !important;
+                background-attachment: fixed !important;
+                -webkit-background-size: cover !important;
+                position: relative;
                 width: 100vw !important;
                 overflow-x: hidden !important;
             }
@@ -832,13 +874,12 @@
                 overflow-x: hidden !important;
                 width: 100vw !important;
             }
-                  
+            
             header {
-                height: 200px;
-				 background: url('Images/Logo-2.webp') center center/cover no-repeat !important;
-                 background-position: 35% center !important;
+                height: 160px;
+                background: url('Images/Logo-2.webp') 40% center/cover no-repeat !important;
                 width: 100vw !important;
-				display: flex;
+                display: flex;
                 align-items: center;
                 justify-content: center;
             }
@@ -887,7 +928,6 @@
                 height: 450px;
             }
             
-            /* COSMATI : PAS DE ROTATION + 1 COLONNE */
             .materials-samples.cosmati {
                 grid-template-columns: 1fr !important;
                 gap: 2rem !important;
@@ -940,7 +980,6 @@
                 max-width: calc(100vw - 2rem) !important;
             }
             
-            /* DOTS MOBILE : MEME STYLE QUE DESKTOP */
             .gallery-dot {
                 width: 13px;
                 height: 13px;
@@ -953,7 +992,6 @@
                 border: none;
             }
             
-            /* FLECHES MOBILE : MEME STYLE QUE DESKTOP */
             .gallery-arrow {
                 width: 45px;
                 height: 45px;
@@ -969,7 +1007,6 @@
                 -webkit-text-fill-color: transparent;
             }
             
-            /* EMAIL ADAPTATIF MOBILE */
             .contact a {
                 display: block;
                 text-align: center;
@@ -1048,7 +1085,6 @@
                 height: 200px;
             }
             
-            /* EMAIL ENCORE PLUS PETIT */
             .contact a {
                 font-size: 0.85rem !important;
                 word-break: break-all;
@@ -1097,12 +1133,12 @@
             
             <div class="materials-samples organique">
                 <div class="material-sample">
-                    <img src="Images/Organique-ecailles.webp" alt="Organique Ecailles">
-                    <div class="material-label">Ecailles</div>
+                    <img src="Images/Organique-ecailles.webp" alt="Organique Écailles">
+                    <div class="material-label">Écailles</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Organique-ecailles-nacrees.webp" alt="Organique Ecailles nacrées">
-                    <div class="material-label">Ecailles nacrées</div>
+                    <img src="Images/Organique-ecailles-nacrees.webp" alt="Organique Écailles nacrées">
+                    <div class="material-label">Écailles nacrées</div>
                 </div>
             </div>
             
@@ -1157,8 +1193,8 @@
             
             <div class="materials-samples cosmati">
                 <div class="material-sample">
-                    <img src="Images/Cosmati-etoile.webp" alt="Cosmati Etoile">
-                    <div class="material-label">Etoile</div>
+                    <img src="Images/Cosmati-etoile.webp" alt="Cosmati Étoile">
+                    <div class="material-label">Étoile</div>
                 </div>
                 <div class="material-sample">
                     <img src="Images/Cosmati-dedale.webp" alt="Cosmati Dédale">
@@ -1443,7 +1479,6 @@
             lightboxImg.src = img.src;
             lightbox.classList.add('active');
             
-            // MASQUER FLECHES SI UNE SEULE IMAGE
             if (currentLightboxGallery.length === 1) {
                 lightbox.classList.add('single-image');
             } else {
@@ -1493,7 +1528,6 @@
             }
         });
         
-        // CLICK SUR IMAGES
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.collection-gallery, .luminaire-gallery').forEach(gallery => {
                 gallery.querySelectorAll('.collection-image, .luminaire-image').forEach(img => {
@@ -1504,7 +1538,6 @@
                 });
             });
             
-            // ECHANTILLONS CLIQUABLES
             document.querySelectorAll('.material-sample img').forEach(img => {
                 img.addEventListener('click', function(e) {
                     e.stopPropagation();
