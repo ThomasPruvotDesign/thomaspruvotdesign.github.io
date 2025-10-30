@@ -3,27 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <title>Thomas Pruvot - Artisan d'Art | Mobilier d'Exception & Luminaires Val-de-Marne</title>
-    <meta name="description" content="Thomas Pruvot, artisan d'art dans le Val-de-Marne, crée du mobilier d'exception et des luminaires uniques en améthyste, gesso et bois précieux.">
-    <meta name="author" content="Thomas Pruvot">
-    <meta name="copyright" content="© 2025 Thomas Pruvot - Tous droits réservés">
-    
+    <title>Thomas Pruvot - Artisan d'Art</title>
+    <meta name="description" content="Thomas Pruvot, artisan d'art dans le Val-de-Marne, crée du mobilier d'exception et des luminaires uniques.">
     <link rel="icon" type="image/webp" href="Images/Logo.webp">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         body {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             line-height: 1.7;
@@ -32,21 +18,13 @@
             overflow-x: hidden;
         }
         
-        /* SCROLLBAR AVEC TES IMAGES */
-        ::-webkit-scrollbar {
-            width: 20px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: url('Images/Barre-defilement.webp') repeat-y center;
-        }
-        
+        ::-webkit-scrollbar { width: 20px; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
             background: url('Images/Curseur-defilement.webp') no-repeat center;
             background-size: contain;
         }
         
-        /* PROTECTION COPYRIGHT */
         img {
             max-width: 100%;
             height: auto;
@@ -56,13 +34,11 @@
             pointer-events: none;
         }
         
-        .collection-image,
-        .luminaire-image {
+        .collection-image, .luminaire-image {
             cursor: pointer;
             pointer-events: auto !important;
         }
         
-        /* LIGHTBOX VRAIMENT PLEIN ECRAN */
         .lightbox {
             display: none;
             position: fixed;
@@ -71,7 +47,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.98);
+            background: transparent;
         }
         
         .lightbox.active {
@@ -92,31 +68,28 @@
             top: 30px;
             right: 40px;
             font-size: 60px;
-            color: #a6a6a6;
+            color: #236a9a;
             cursor: pointer;
             z-index: 10000;
             pointer-events: auto;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         
-        .lightbox-close:hover {
-            color: #236a9a;
-        }
+        .lightbox-close:hover { color: #fff; }
         
         .lightbox-nav {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
             font-size: 80px;
-            color: #a6a6a6;
+            color: #236a9a;
             cursor: pointer;
             z-index: 10000;
             pointer-events: auto;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         
-        .lightbox-nav:hover {
-            color: #236a9a;
-        }
-        
+        .lightbox-nav:hover { color: #fff; }
         .lightbox-prev { left: 30px; }
         .lightbox-next { right: 30px; }
         
@@ -125,22 +98,20 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            color: #fff;
+            color: #236a9a;
             font-size: 1.5rem;
-            background: rgba(0,0,0,0.8);
+            background: rgba(26,26,26,0.9);
             padding: 15px 30px;
             border-radius: 30px;
             z-index: 10000;
         }
         
-        /* HEADER SANS FILTRE NI TEXTE */
         header {
             background: url('Images/Logo.webp') center/cover no-repeat;
             height: 300px;
             border-bottom: 3px solid #236a9a;
         }
         
-        /* NAVIGATION */
         nav {
             background: rgba(44, 44, 44, 0.95);
             padding: 1.2rem;
@@ -161,11 +132,8 @@
             letter-spacing: 1px;
         }
         
-        nav a:hover {
-            color: #236a9a;
-        }
+        nav a:hover { color: #236a9a; }
         
-        /* CONTAINER LARGE */
         .container {
             max-width: 2000px;
             margin: 0 auto;
@@ -178,15 +146,6 @@
             padding: 3rem;
             border-radius: 8px;
             border: 1px solid rgba(35, 106, 154, 0.3);
-        }
-        
-        h1 {
-            font-family: 'Garamond', serif;
-            font-size: 3rem;
-            text-align: center;
-            color: #236a9a;
-            margin: 2rem 0;
-            letter-spacing: 3px;
         }
         
         h2 {
@@ -207,17 +166,19 @@
             font-size: 2rem;
             margin: 3rem 0 1.5rem;
             color: #236a9a;
-            border-left: 4px solid #236a9a;
-            padding-left: 1rem;
             text-transform: uppercase;
+            padding-left: 0;
+            border: none;
         }
         
         .intro {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
             text-align: center;
             font-size: 1.1rem;
             max-width: 1400px;
             margin: 0 auto 3rem;
             line-height: 1.9;
+            color: #a6a6a6;
         }
         
         .quote {
@@ -227,12 +188,11 @@
             color: #ccc;
             margin: 2rem auto;
             font-size: 1.2rem;
-            border-left: 3px solid #236a9a;
-            padding-left: 1.5rem;
+            padding: 0;
             max-width: 900px;
+            border: none;
         }
         
-        /* ECHANTILLONS GRANDES VIGNETTES */
         .materials-samples {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -240,28 +200,40 @@
             margin: 2rem 0 3rem;
         }
         
-        .material-sample {
-            text-align: center;
-        }
+        .material-sample { text-align: center; }
         
         .material-sample img {
             width: 100%;
-            height: 350px;
-            object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 6px 20px rgba(0,0,0,0.5);
             border: 1px solid rgba(35, 106, 154, 0.3);
             margin-bottom: 1rem;
         }
         
+        .materials-samples.organique img {
+            height: 450px;
+            object-fit: cover;
+        }
+        
+        .materials-samples.cosmati img {
+            height: 500px;
+            object-fit: cover;
+            transform: rotate(90deg);
+        }
+        
+        .materials-samples.peau-gesso img {
+            height: 500px;
+            object-fit: cover;
+        }
+        
         .material-label {
-            color: #236a9a;
+            font-family: 'Tahoma', 'Verdana', sans-serif;
+            color: #a6a6a6;
             font-size: 1rem;
             font-weight: 500;
             letter-spacing: 1px;
         }
         
-        /* COLLECTIONS */
         .collections {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -280,14 +252,14 @@
             width: 100%;
             position: relative;
             background: #1a1a1a;
-            height: 600px;
+            height: 700px;
             overflow: hidden;
         }
         
         .collection-images {
             display: flex;
             height: 100%;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease-in-out;
         }
         
         .collection-image {
@@ -297,9 +269,7 @@
             flex-shrink: 0;
         }
         
-        .collection-info {
-            padding: 2rem;
-        }
+        .collection-info { padding: 2rem; }
         
         .collection-title {
             font-family: 'Garamond', serif;
@@ -309,12 +279,12 @@
         }
         
         .collection-description {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
             line-height: 1.8;
             color: #a6a6a6;
         }
         
-        /* LUMINAIRES 3 COLONNES */
         .luminaires-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -343,7 +313,7 @@
         .luminaire-images {
             display: flex;
             height: 100%;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease-in-out;
         }
         
         .luminaire-image {
@@ -399,16 +369,12 @@
         }
         
         .luminaire:hover .gallery-arrow,
-        .collection-card:hover .gallery-arrow {
-            opacity: 1;
-        }
+        .collection-card:hover .gallery-arrow { opacity: 1; }
         
         .gallery-arrow.prev { left: 15px; }
         .gallery-arrow.next { right: 15px; }
         
-        .luminaire-info {
-            padding: 2rem;
-        }
+        .luminaire-info { padding: 2rem; }
         
         .luminaire-title {
             font-family: 'Garamond', serif;
@@ -418,6 +384,7 @@
         }
         
         .luminaire-materials {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
             color: #888;
             font-style: italic;
@@ -425,12 +392,12 @@
         }
         
         .luminaire-description {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
             line-height: 1.8;
             color: #a6a6a6;
         }
         
-        /* CONTACT */
         .contact {
             background: rgba(40, 40, 40, 0.7);
             padding: 3.5rem 2.5rem;
@@ -440,19 +407,20 @@
         }
         
         .contact p {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
             margin: 1rem 0;
             font-size: 1.15rem;
+            color: #a6a6a6;
         }
         
         .contact a {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
             color: #236a9a;
             text-decoration: none;
             font-size: 1.25rem;
         }
         
-        .contact a:hover {
-            text-decoration: underline;
-        }
+        .contact a:hover { text-decoration: underline; }
         
         .contact-card {
             margin: 2rem auto 0;
@@ -465,7 +433,6 @@
             pointer-events: auto;
         }
         
-        /* FOOTER */
         footer {
             background: rgba(26, 26, 26, 0.95);
             color: #a6a6a6;
@@ -475,6 +442,8 @@
             border-top: 2px solid #236a9a;
         }
         
+        footer p { font-family: 'Tahoma', 'Verdana', sans-serif; }
+        
         .copyright-notice {
             font-size: 0.85rem;
             color: #888;
@@ -482,37 +451,20 @@
             font-style: italic;
         }
         
-        /* RESPONSIVE */
         @media (max-width: 1400px) {
-            .luminaires-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .luminaires-grid { grid-template-columns: repeat(2, 1fr); }
             .luminaire:nth-child(4),
-            .luminaire:nth-child(5) {
-                margin: 0;
-            }
+            .luminaire:nth-child(5),
+            .luminaire:nth-child(6) { margin: 0; }
         }
         
         @media (max-width: 1024px) {
-            .collections,
-            .luminaires-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .materials-samples {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-            .material-sample img {
-                height: 250px;
-            }
+            .collections, .luminaires-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
         <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1, event)">‹</span>
@@ -521,49 +473,43 @@
         <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
-    <!-- HEADER LOGO PUR -->
     <header></header>
     
-    <h1>THOMAS PRUVOT</h1>
-    
-    <!-- NAV -->
     <nav>
-        <a href="#a-propos">A propos</a>
-        <a href="#mobilier">Mobilier en Gesso</a>
-        <a href="#luminaires">Luminaires</a>
-        <a href="#contact">Contact</a>
+        <a href="#a-propos">A PROPOS</a>
+        <a href="#mobilier">MOBILIER EN GESSO</a>
+        <a href="#luminaires">LUMINAIRES</a>
+        <a href="#contact">CONTACT</a>
     </nav>
     
     <div class="container">
         
-        <!-- A PROPOS -->
         <section id="a-propos">
-            <h2>A propos</h2>
+            <h2>A PROPOS</h2>
             <div class="intro">
-                <p>Les créations de Thomas Pruvot transcendent le simple mobilier pour s'inscrire dans un dialogue subtil entre l'art et la fonctionnalité. Destinées à des intérieurs d'exception, ses œuvres trouvent leur place dans les galeries de design, les boutiques spécialisées et les collections privées.</p>
-                <p style="margin-top: 1.5rem;">Dans ses mains, le gesso, matériau noble et ancestral, se métamorphose en une peau vibrante, à la fois tactile et visuelle, évoquant tantôt la douceur organique, tantôt la rigueur géométrique.</p>
-                <p style="margin-top: 1.5rem;">Ces œuvres ne se contentent pas d'orner un espace : elles invitent à la contemplation, suscitent l'émotion, et redéfinissent la notion même de design.</p>
+                <p>Les créations de Thomas Pruvot transcendent le simple mobilier pour s'inscrire dans un dialogue subtil entre l'art et la fonctionnalité. Destinées à des intérieurs d'exception, ses œuvres trouvent leur place dans les galeries de design, les boutiques spécialisées et les collections privées. Elles s'adressent à ceux qui recherchent l'unique, le rare, et le fait-main.</p>
+                <p style="margin-top: 1.5rem;">Dans ses mains, le gesso, matériau noble et ancestral, se métamorphose en une peau vibrante, à la fois tactile et visuelle, évoquant tantôt la douceur organique, tantôt la rigueur géométrique. Chacune de ses pièces raconte une histoire, celle d'un artisan-poète, où les lignes et les textures dialoguent pour créer une présence intemporelle.</p>
+                <p style="margin-top: 1.5rem;">Ces œuvres ne se contentent pas d'orner un espace : elles invitent à la contemplation, suscitent l'émotion, et redéfinissent la notion même de design. Elles sont destinées à habiter les lieux où l'élégance, la créativité et le respect du savoir-faire artisanal convergent pour créer une atmosphère unique et inspirante.</p>
             </div>
             <div class="quote">"L'œuvre d'art est vivante, car elle contient l'esprit de celui qui l'a créée." — Paolo Coelho</div>
         </section>
         
-        <!-- MOBILIER -->
         <section id="mobilier">
-            <h2>Mobilier en Gesso</h2>
+            <h2>MOBILIER EN GESSO</h2>
             
-            <h3 class="collection-category">Collection Organique</h3>
+            <h3 class="collection-category">COLLECTION ORGANIQUE</h3>
             <div class="intro" style="margin-bottom: 2rem;">
-                <p>La collection Organique est le fruit de l'observation des lignes présentes dans notre environnement. Ces courbes organiques harmonieuses invitent à faire pénétrer l'élégance de la nature dans nos intérieurs.</p>
+                <p>La collection Organique est le fruit de l'observation des lignes présentes dans notre environnement. Ces courbes organiques harmonieuses invitent à faire pénétrer l'élégance de la nature dans nos intérieurs. Les patrons aux formes douces et arrondies sont créés en atelier à partir de pièces de mica, offrant une texture évoquant le cuir ou la peau animale. Chaque pièce de cette collection capture l'essence même de la fluidité naturelle et de l'artisanat d'exception.</p>
             </div>
             
-            <div class="materials-samples">
+            <div class="materials-samples organique">
                 <div class="material-sample">
-                    <img src="Images/Organique-ecailles.webp" alt="Organique Ecailles" loading="lazy">
+                    <img src="Images/Organique-ecailles.webp" alt="Organique Ecailles">
                     <div class="material-label">Ecailles</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Organique-ecailles-nacrees.webp" alt="Organique Ecailles nacrees" loading="lazy">
-                    <div class="material-label">Ecailles nacrees</div>
+                    <img src="Images/Organique-ecailles-nacrees.webp" alt="Organique Ecailles nacrées">
+                    <div class="material-label">Ecailles nacrées</div>
                 </div>
             </div>
             
@@ -571,8 +517,8 @@
                 <article class="collection-card">
                     <div class="collection-gallery">
                         <div class="collection-images">
-                            <img src="Images/Console-mica.webp" alt="Console Mica" class="collection-image" loading="lazy">
-                            <img src="Images/Console-et-miroir-mica-en-situation.webp" alt="Console et miroir Mica" class="collection-image" loading="lazy">
+                            <img src="Images/Console-mica.webp" alt="Console Mica" class="collection-image">
+                            <img src="Images/Console-et-miroir-mica-en-situation.webp" alt="Console et miroir Mica" class="collection-image">
                         </div>
                         <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
                         <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
@@ -583,15 +529,15 @@
                     </div>
                     <div class="collection-info">
                         <h3 class="collection-title">Console Mica</h3>
-                        <p class="collection-description">Console en marqueterie de gesso aux formes douces et arrondies, créée à partir de pièces de mica offrant une texture évoquant le cuir ou la peau animale.</p>
+                        <p class="collection-description">Console en marqueterie de gesso aux formes douces et arrondies, créée à partir de pièces de mica offrant une texture évoquant le cuir ou la peau animale. Cette pièce unique allie fonctionnalité et esthétique raffinée, s'intégrant harmonieusement dans les intérieurs d'exception. Le travail minutieux de la matière révèle des jeux de lumière subtils qui transforment l'espace environnant.</p>
                     </div>
                 </article>
                 
                 <article class="collection-card">
                     <div class="collection-gallery">
                         <div class="collection-images">
-                            <img src="Images/Miroir-mica-en-situation.webp" alt="Miroir Mica" class="collection-image" loading="lazy">
-                            <img src="Images/Vase-mica-en-situation.webp" alt="Vase Mica" class="collection-image" loading="lazy">
+                            <img src="Images/Miroir-mica-en-situation.webp" alt="Miroir Mica" class="collection-image">
+                            <img src="Images/Vase-mica-en-situation.webp" alt="Vase Mica" class="collection-image">
                         </div>
                         <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
                         <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
@@ -602,31 +548,31 @@
                     </div>
                     <div class="collection-info">
                         <h3 class="collection-title">Miroir & Vase Mica</h3>
-                        <p class="collection-description">Ensemble harmonieux en marqueterie de gesso Mica, où les courbes organiques s'intègrent naturellement dans des intérieurs d'exception.</p>
+                        <p class="collection-description">Ensemble harmonieux en marqueterie de gesso Mica, où les courbes organiques s'intègrent naturellement dans des intérieurs d'exception. Le miroir et le vase dialoguent ensemble pour créer une composition équilibrée et élégante. Ces pièces témoignent d'un savoir-faire ancestral réinterprété avec une sensibilité contemporaine, invitant à la contemplation et à l'émerveillement quotidien.</p>
                     </div>
                 </article>
             </div>
             
-            <h3 class="collection-category" style="margin-top: 4rem;">Collection Cosmati</h3>
+            <h3 class="collection-category" style="margin-top: 4rem;">COLLECTION COSMATI</h3>
             <div class="intro" style="margin-bottom: 2rem;">
-                <p>Dans la collection Cosmati apparaît une dimension géométrique profonde. Les pièces de gesso sont découpées selon le ratio phi, leur conférant une haute charge symbolique inspirée des mosaïques italiennes.</p>
+                <p>Dans la collection Cosmati apparaît une dimension géométrique profonde. Les pièces de gesso sont découpées selon le ratio phi, leur conférant une haute charge symbolique inspirée des mosaïques italiennes. Le terme "Cosmati" fait référence aux artisans romains du Moyen Âge dont les créations ornent encore aujourd'hui les plus belles églises d'Italie, rappelant la beauté intemporelle de la géométrie sacrée et des proportions divines.</p>
             </div>
             
-            <div class="materials-samples">
+            <div class="materials-samples cosmati">
                 <div class="material-sample">
-                    <img src="Images/Cosmati-etoile.webp" alt="Cosmati Etoile" loading="lazy">
+                    <img src="Images/Cosmati-etoile.webp" alt="Cosmati Etoile">
                     <div class="material-label">Etoile</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Cosmati-dedale.webp" alt="Cosmati Dedale" loading="lazy">
-                    <div class="material-label">Dedale</div>
+                    <img src="Images/Cosmati-dedale.webp" alt="Cosmati Dédale">
+                    <div class="material-label">Dédale</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Cosmati-fleches.webp" alt="Cosmati Fleches" loading="lazy">
-                    <div class="material-label">Fleches</div>
+                    <img src="Images/Cosmati-fleches.webp" alt="Cosmati Flèches">
+                    <div class="material-label">Flèches</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Cosmati-terre-d-ombre.webp" alt="Cosmati Terre d'ombre" loading="lazy">
+                    <img src="Images/Cosmati-terre-d-ombre.webp" alt="Cosmati Terre d'ombre">
                     <div class="material-label">Terre d'ombre</div>
                 </div>
             </div>
@@ -635,9 +581,9 @@
                 <article class="collection-card">
                     <div class="collection-gallery">
                         <div class="collection-images">
-                            <img src="Images/Miroir-iris-en-situation.webp" alt="Miroir Iris" class="collection-image" loading="lazy">
-                            <img src="Images/Miroir-iris-detail-1.webp" alt="Miroir Iris detail 1" class="collection-image" loading="lazy">
-                            <img src="Images/Miroir-iris-detail-2.webp" alt="Miroir Iris detail 2" class="collection-image" loading="lazy">
+                            <img src="Images/Miroir-iris-en-situation.webp" alt="Miroir Iris" class="collection-image">
+                            <img src="Images/Miroir-iris-detail-1.webp" alt="Miroir Iris détail 1" class="collection-image">
+                            <img src="Images/Miroir-iris-detail-2.webp" alt="Miroir Iris détail 2" class="collection-image">
                         </div>
                         <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
                         <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
@@ -649,27 +595,27 @@
                     </div>
                     <div class="collection-info">
                         <h3 class="collection-title">Miroir Iris</h3>
-                        <p class="collection-description">Miroir en marqueterie de gesso géométrique selon le ratio phi. Les motifs Cosmati rappellent la beauté intemporelle de la géométrie sacrée.</p>
+                        <p class="collection-description">Miroir en marqueterie de gesso géométrique selon le ratio phi. Les motifs Cosmati rappellent la beauté intemporelle de la géométrie sacrée et des proportions divines utilisées dans l'architecture religieuse italienne. Cette pièce majestueuse transforme l'espace qu'elle habite, créant un point focal à la fois contemplatif et majestueux. Les détails complexes révèlent un travail d'une précision extrême, fruit d'heures de création méticuleuse.</p>
                     </div>
                 </article>
             </div>
             
-            <h3 class="collection-category" style="margin-top: 4rem;">Peau de Gesso</h3>
+            <h3 class="collection-category" style="margin-top: 4rem;">PEAU DE GESSO</h3>
             <div class="intro" style="margin-bottom: 2rem;">
-                <p>La collection Peau de Gesso a été créée comme la suite logique et la synthèse des deux premières collections. L'effet obtenu allie la précision géométrique à la texture naturelle organique.</p>
+                <p>La collection Peau de Gesso a été créée comme la suite logique et la synthèse des deux premières collections. L'effet obtenu allie la précision géométrique à la texture naturelle organique, évoquant la phyllotaxie qui caractérise la disposition harmonieuse des éléments dans la nature. Cette finition unique fait songer à une peau de serpent ou de pangolin, créant une surface tactile et visuelle d'une richesse exceptionnelle qui capte et reflète la lumière de manière fascinante.</p>
             </div>
             
-            <div class="materials-samples">
+            <div class="materials-samples peau-gesso">
                 <div class="material-sample">
-                    <img src="Images/Peau-de-gesso-azurite.webp" alt="Peau de Gesso Azurite" loading="lazy">
+                    <img src="Images/Peau-de-gesso-azurite.webp" alt="Peau de Gesso Azurite">
                     <div class="material-label">Azurite</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Peau-de-gesso-variations.webp" alt="Peau de Gesso Variations" loading="lazy">
+                    <img src="Images/Peau-de-gesso-variations.webp" alt="Peau de Gesso Variations">
                     <div class="material-label">Variations</div>
                 </div>
                 <div class="material-sample">
-                    <img src="Images/Peau-de-gesso-mercure.webp" alt="Peau de Gesso Mercure" loading="lazy">
+                    <img src="Images/Peau-de-gesso-mercure.webp" alt="Peau de Gesso Mercure">
                     <div class="material-label">Mercure</div>
                 </div>
             </div>
@@ -678,9 +624,9 @@
                 <article class="collection-card">
                     <div class="collection-gallery">
                         <div class="collection-images">
-                            <img src="Images/Miroir-azurite.webp" alt="Miroir Azurite" class="collection-image" loading="lazy">
-                            <img src="Images/Miroir-azurite-detail-face.webp" alt="Miroir Azurite detail face" class="collection-image" loading="lazy">
-                            <img src="Images/Miroir-azurite-detail-trois-quart.webp" alt="Miroir Azurite detail" class="collection-image" loading="lazy">
+                            <img src="Images/Miroir-azurite.webp" alt="Miroir Azurite" class="collection-image">
+                            <img src="Images/Miroir-azurite-detail-face.webp" alt="Miroir Azurite détail face" class="collection-image">
+                            <img src="Images/Miroir-azurite-detail-trois-quart.webp" alt="Miroir Azurite détail" class="collection-image">
                         </div>
                         <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
                         <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
@@ -692,99 +638,28 @@
                     </div>
                     <div class="collection-info">
                         <h3 class="collection-title">Miroir Azurite</h3>
-                        <p class="collection-description">Miroir en Peau de Gesso aux finitions évoquant une peau de serpent ou de pangolin. Cette texture unique entre en résonance avec la phyllotaxie naturelle.</p>
+                        <p class="collection-description">Miroir en Peau de Gesso aux finitions évoquant une peau de serpent ou de pangolin. Cette texture unique entre en résonance avec la phyllotaxie naturelle, créant une œuvre d'une complexité visuelle extraordinaire. Le jeu subtil entre géométrie et organicité confère à cette pièce une présence magnétique qui attire le regard et invite à découvrir les innombrables détails de sa surface. Un chef-d'œuvre d'artisanat contemporain qui honore les techniques ancestrales tout en proposant une esthétique résolument moderne.</p>
                     </div>
                 </article>
             </div>
         </section>
         
-        <!-- LUMINAIRES -->
+        <!-- LUMINAIRES : ORDRE ECLAT, INTIME, CELESTE, CHARTRES, EMANATION + 6EME SANS TITRE -->
         <section id="luminaires">
-            <h2>Les Luminaires</h2>
+            <h2>LES LUMINAIRES</h2>
             <div class="intro">
-                <p>Ces créations originales s'inscrivent avant tout dans une démarche spirituelle et contemplative. Réalisées dans la paix et le recueillement, elles incarnent la matière devenue esprit.</p>
+                <p>Ces créations originales s'inscrivent avant tout dans une démarche spirituelle et contemplative. Réalisées dans la paix et le recueillement à l'instar des moines copistes médiévaux, elles incarnent la matière devenue esprit, la lumière révélant l'âme des matériaux nobles. Sont utilisés des matériaux précieux que sont les minéraux (agate du Brésil, quartz rose et améthyste d'Inde, agate de sel), le gesso travaillé selon des techniques ancestrales, et le bois massif de sipo finement gougé à la main. Chaque luminaire est une invitation à la méditation, créant des ambiances propices à la sérénité et à l'inspiration.</p>
             </div>
             
             <div class="luminaires-grid">
                 
+                <!-- ECLAT -->
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
-                            <img src="Images/Emanation-face.webp" alt="Emanation" class="luminaire-image" loading="lazy">
-                            <img src="Images/Emanation-en-situation.webp" alt="Emanation en situation" class="luminaire-image" loading="lazy">
-                            <img src="Images/Emanation-arriere.webp" alt="Emanation arriere" class="luminaire-image" loading="lazy">
-                            <img src="Images/Emanation-en-situation-contre-plongee.webp" alt="Emanation contre-plongee" class="luminaire-image" loading="lazy">
-                        </div>
-                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
-                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
-                        <div class="gallery-nav">
-                            <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 3)"></span>
-                        </div>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Emanation</h3>
-                        <p class="luminaire-materials">Amethyste indienne sculptee | 52 × 24 × 16 cm</p>
-                        <p class="luminaire-description">Stele lumineuse realisee à partir d'un bloc d'amethyste indien, sculpte entierement à la main. La lumiere diffuse par voie indirecte cree une atmosphere onirique.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Celeste-allumee.webp" alt="Celeste" class="luminaire-image" loading="lazy">
-                            <img src="Images/Celeste-eteinte.webp" alt="Celeste eteinte" class="luminaire-image" loading="lazy">
-                            <img src="Images/Celeste-detail.webp" alt="Celeste detail" class="luminaire-image" loading="lazy">
-                        </div>
-                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
-                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
-                        <div class="gallery-nav">
-                            <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                        </div>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Celeste</h3>
-                        <p class="luminaire-materials">Amethyste indienne, Peau de Gesso, sipo | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Propice à la lecture et la meditation, cette creation degage le calme et la serenite grace à un assemblage de douze carreaux d'amethyste.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Chartres-allumee.webp" alt="Chartres" class="luminaire-image" loading="lazy">
-                            <img src="Images/Chartres-eteinte.webp" alt="Chartres eteinte" class="luminaire-image" loading="lazy">
-                            <img src="Images/Chartres-detail.webp" alt="Chartres detail" class="luminaire-image" loading="lazy">
-                            <img src="Images/Chartres-en-situation-salon-baba.webp" alt="Chartres salon" class="luminaire-image" loading="lazy">
-                            <img src="Images/Chartres-en-situation-eglise.webp" alt="Chartres eglise" class="luminaire-image" loading="lazy">
-                        </div>
-                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
-                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
-                        <div class="gallery-nav">
-                            <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 3)"></span>
-                            <span class="gallery-dot" onclick="showGalleryImage(this, 4)"></span>
-                        </div>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Chartres</h3>
-                        <p class="luminaire-materials">Mosaique d'agates du Bresil, Peau de Gesso, sipo | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Luminaire sacre cree pour favoriser la paix interieure. Inspire par la cathedrale Notre-Dame de Chartres et ses vitraux.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Eclat-allumee.webp" alt="Eclat" class="luminaire-image" loading="lazy">
-                            <img src="Images/Eclat-eteinte.webp" alt="Eclat eteinte" class="luminaire-image" loading="lazy">
-                            <img src="Images/Eclat-detail.webp" alt="Eclat detail" class="luminaire-image" loading="lazy">
+                            <img src="Images/Eclat-allumee.webp" alt="Eclat" class="luminaire-image">
+                            <img src="Images/Eclat-eteinte.webp" alt="Eclat éteinte" class="luminaire-image">
+                            <img src="Images/Eclat-detail.webp" alt="Eclat détail" class="luminaire-image">
                         </div>
                         <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
                         <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
@@ -796,17 +671,18 @@
                     </div>
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Eclat</h3>
-                        <p class="luminaire-materials">Agate de sel indienne, gesso argente, sipo | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Concu pour les ambiances claires necessitant le maximum de luminosite. Assemblage de douze carreaux d'agate de sel.</p>
+                        <p class="luminaire-materials">Agate de sel indienne translucide, gesso argenté, bois de sipo gougé | 42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle et apaisante. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. Les vibrations énergétiques émanant naturellement de l'agate sont réputées depuis l'antiquité pour harmoniser parfaitement le yin et le yang, les forces complémentaires de l'univers. Grâce à ses vertus profondément apaisantes et équilibrantes reconnues à travers les âges, elle aide significativement à se concentrer, à méditer paisiblement et à maintenir un état d'esprit serein. Eclat illuminera avec élégance un lieu de vie quotidien ou un espace de travail exigeant, favorisant le calme mental, la productivité harmonieuse et le bien-être général.</p>
                     </div>
                 </article>
                 
+                <!-- INTIME -->
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
-                            <img src="Images/Intime-allumee.webp" alt="Intime" class="luminaire-image" loading="lazy">
-                            <img src="Images/Intime-eteinte.webp" alt="Intime eteinte" class="luminaire-image" loading="lazy">
-                            <img src="Images/Intime-detail.webp" alt="Intime detail" class="luminaire-image" loading="lazy">
+                            <img src="Images/Intime-allumee.webp" alt="Intime" class="luminaire-image">
+                            <img src="Images/Intime-eteinte.webp" alt="Intime éteinte" class="luminaire-image">
+                            <img src="Images/Intime-detail.webp" alt="Intime détail" class="luminaire-image">
                         </div>
                         <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
                         <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
@@ -818,8 +694,100 @@
                     </div>
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Intime</h3>
-                        <p class="luminaire-materials">Quartz rose indien, glacis rose nacre, sipo | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Caractere delicat et feminin. Assemblage de douze carreaux de quartz rose d'Inde. Pierre delivrant une energie douce et maternelle.</p>
+                        <p class="luminaire-materials">Quartz rose indien, glacis rosé nacré artisanal, bois de sipo gougé | 42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde, pierre douce aux nuances subtiles. Depuis la nuit des temps et à travers toutes les civilisations, le quartz rose entretient une relation intime, profonde et privilégiée avec l'amour universel, les émotions du cœur et les liens affectifs. Visuellement, il inspire immédiatement la douceur, la tendresse et la bienveillance par ses teintes rosées apaisantes. Particulièrement recommandé et bénéfique pour les chambres d'enfants, cette pierre précieuse délivre une énergie infiniment douce, protectrice et maternelle qui enveloppe l'espace d'une aura réconfortante. Intime trouvera naturellement sa place privilégiée dans une chambre à coucher ou un salon familial, créant une atmosphère de sécurité émotionnelle et d'harmonie relationnelle propice aux échanges sincères et à la détente profonde.</p>
+                    </div>
+                </article>
+                
+                <!-- CELESTE -->
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Celeste-allumee.webp" alt="Céleste" class="luminaire-image">
+                            <img src="Images/Celeste-eteinte.webp" alt="Céleste éteinte" class="luminaire-image">
+                            <img src="Images/Celeste-detail.webp" alt="Céleste détail" class="luminaire-image">
+                        </div>
+                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
+                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
+                        <div class="gallery-nav">
+                            <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                        </div>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Céleste</h3>
+                        <p class="luminaire-materials">Améthyste indienne, Peau de Gesso, bois de sipo gougé à la main | 42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. L'améthyste est utilisée depuis des millénaires à travers les civilisations comme symbole puissant de la sagesse, de l'intelligence pure et de la spiritualité élevée. Cette "pierre de l'âme" diffuse son aura lumineuse violette dans une atmosphère chaleureuse et apaisante, créant un espace sacré favorable à la concentration et à l'introspection. Le cadre en Peau de Gesso et bois de sipo finement travaillé ajoute une dimension tactile et visuelle qui enrichit l'expérience contemplative.</p>
+                    </div>
+                </article>
+                
+                <!-- CHARTRES -->
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Chartres-allumee.webp" alt="Chartres" class="luminaire-image">
+                            <img src="Images/Chartres-eteinte.webp" alt="Chartres éteinte" class="luminaire-image">
+                            <img src="Images/Chartres-detail.webp" alt="Chartres détail" class="luminaire-image">
+                        </div>
+                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
+                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
+                        <div class="gallery-nav">
+                            <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                        </div>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Chartres</h3>
+                        <p class="luminaire-materials">Mosaïque d'agates du Brésil, Peau de Gesso, bois de sipo gougé | 42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées, pierre qui selon les traditions ancestrales aurait le pouvoir de dynamiser les performances mentales et d'harmoniser les énergies. Cette création ornementera de sa lumière chaude, envoûtante et mystique les pièces dédiées au travail intellectuel, à l'étude ou à la méditation, demandant concentration et clarté d'esprit.</p>
+                    </div>
+                </article>
+                
+                <!-- EMANATION -->
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Emanation-face.webp" alt="Emanation" class="luminaire-image">
+                            <img src="Images/Emanation-en-situation.webp" alt="Emanation en situation" class="luminaire-image">
+                            <img src="Images/Emanation-arriere.webp" alt="Emanation arrière" class="luminaire-image">
+                        </div>
+                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
+                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
+                        <div class="gallery-nav">
+                            <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                        </div>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Emanation</h3>
+                        <p class="luminaire-materials">Améthyste indienne sculptée à la main | 52 × 24 × 16 cm</p>
+                        <p class="luminaire-description">Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée, parfaite pour les espaces dédiés à la contemplation et à la créativité. La texture brute de l'améthyste contraste magnifiquement avec la finesse de la sculpture, créant un dialogue fascinant entre nature et artisanat.</p>
+                    </div>
+                </article>
+                
+                <!-- 6EME SANS TITRE -->
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Chartres-en-situation-salon-baba.webp" alt="Luminaires en situation" class="luminaire-image">
+                            <img src="Images/Chartres-en-situation-eglise.webp" alt="Chartres église" class="luminaire-image">
+                            <img src="Images/Emanation-en-situation-contre-plongee.webp" alt="Emanation contre-plongée" class="luminaire-image">
+                            <img src="Images/Emanation-vitrail.webp" alt="Emanation vitrail" class="luminaire-image">
+                        </div>
+                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)">‹</button>
+                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)">›</button>
+                        <div class="gallery-nav">
+                            <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                            <span class="gallery-dot" onclick="showGalleryImage(this, 3)"></span>
+                        </div>
+                    </div>
+                    <div class="luminaire-info">
+                        <p class="luminaire-description" style="margin-top: 2rem;">Découvrez les luminaires Chartres et Emanation intégrés dans des espaces d'exception : salon intime, église sacrée, et ambiances oniriques. Ces créations transcendent leur fonction pour devenir des œuvres vivantes qui transforment l'atmosphère des lieux qu'elles habitent, créant des moments de contemplation et d'émerveillement.</p>
                     </div>
                 </article>
                 
@@ -829,13 +797,13 @@
         <!-- CONTACT -->
         <section id="contact">
             <div class="contact">
-                <h2>Contact</h2>
+                <h2>CONTACT</h2>
                 <p>Pour toute demande de renseignement ou commission sur mesure :</p>
                 <p style="margin-top: 1.5rem;"><a href="mailto:thomaspruvotdesign@protonmail.com">thomaspruvotdesign@protonmail.com</a></p>
                 <p style="margin-top: 1rem;"><a href="tel:+33627272121">+33 6 27 27 21 21</a></p>
                 <p style="margin-top: 0.5rem; color: #ccc;">Val-de-Marne, France</p>
                 <div class="contact-card">
-                    <img src="Images/Carte-de-visite.webp" alt="Carte de visite Thomas Pruvot" loading="lazy">
+                    <img src="Images/Carte-de-visite.webp" alt="Carte de visite">
                 </div>
             </div>
         </section>
@@ -844,7 +812,7 @@
     
     <footer>
         <p>&copy; 2025 Thomas Pruvot - Artisan d'Art</p>
-        <p class="copyright-notice">Toutes les creations et photographies presentees sur ce site sont protegees par le droit d'auteur. Toute reproduction, meme partielle, est strictement interdite sans autorisation ecrite prealable.</p>
+        <p class="copyright-notice">Toutes les créations et photographies présentées sur ce site sont protégées par le droit d'auteur. Toute reproduction, même partielle, est strictement interdite sans autorisation écrite préalable.</p>
     </footer>
     
     <script>
