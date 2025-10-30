@@ -815,11 +815,10 @@
                 background-size: cover;
             }
             
-           /* BACKGROUND MOBILE NET */
-    body {
-        background: url('Images/Bois-brule.webp') center top no-repeat;
-        background-size: cover;
-        background-attachment: scroll;
+            /* BACKGROUND MOBILE SHARP ET NET */
+            body {
+                background: url('Images/Bois-brule.webp') center/cover no-repeat;
+                background-attachment: local;
             }
             
             html {
@@ -936,16 +935,33 @@
                 max-width: calc(100vw - 2rem) !important;
             }
             
-            /* FLECHES MOBILE : MEME STYLE */
+            /* DOTS MOBILE : MEME STYLE QUE DESKTOP */
+            .gallery-dot {
+                width: 13px;
+                height: 13px;
+                border: 1px solid rgba(90, 138, 138, 0.6);
+                background: transparent;
+            }
+            
+            .gallery-dot.active {
+                background: url('Images/Texture-garamond.webp') center/cover;
+                border: none;
+            }
+            
+            /* FLECHES MOBILE : MEME STYLE QUE DESKTOP */
             .gallery-arrow {
                 width: 45px;
                 height: 45px;
-                font-size: 22px;
                 background: url('Images/Texture-garamond.webp') center/cover;
+                font-size: 22px;
             }
             
             .gallery-arrow::before {
                 font-size: 22px;
+                background: url('Images/Curseur-defilement.webp') center/cover;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
             
             /* EMAIL ADAPTATIF MOBILE */
@@ -989,6 +1005,10 @@
         }
         
         @media (max-width: 480px) {
+            ::-webkit-scrollbar {
+                width: 6px;
+            }
+            
             .container {
                 padding: 0.8rem 0.5rem !important;
             }
