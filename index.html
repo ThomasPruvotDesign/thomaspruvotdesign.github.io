@@ -8,23 +8,50 @@
     <link rel="icon" type="image/webp" href="Images/Logo.webp">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-        body {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            line-height: 1.7;
-            color: #a6a6a6;
-            background: url('Images/Bois-brule.webp') fixed center/cover no-repeat;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
             overflow-x: hidden;
         }
         
-        ::-webkit-scrollbar { width: 20px; }
-        ::-webkit-scrollbar-track { background: transparent; }
+        body {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
+            line-height: 1.7;
+            background: url('Images/Bois-brule.webp') fixed center/cover no-repeat;
+            overflow-x: hidden;
+            max-width: 100vw;
+            /* Texture Tahoma pour le corps du texte */
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('Images/Bois-brule.webp');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #a6a6a6;
+        }
+        
+        /* SCROLLBAR TRANSPARENTE + CURSEUR VISIBLE */
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
         ::-webkit-scrollbar-thumb {
             background: url('Images/Curseur-defilement.webp') no-repeat center;
             background-size: contain;
         }
         
+        ::-webkit-scrollbar-thumb:hover {
+            opacity: 0.8;
+        }
+        
+        /* PROTECTION COPYRIGHT */
         img {
             max-width: 100%;
             height: auto;
@@ -34,11 +61,14 @@
             pointer-events: none;
         }
         
-        .collection-image, .luminaire-image {
+        .collection-image,
+        .luminaire-image,
+        .material-sample img {
             cursor: pointer;
             pointer-events: auto !important;
         }
         
+        /* LIGHTBOX AVEC FOND FLOU */
         .lightbox {
             display: none;
             position: fixed;
@@ -47,7 +77,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         
         .lightbox.active {
@@ -61,6 +93,7 @@
             max-height: 95vh;
             object-fit: contain;
             pointer-events: auto;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
         
         .lightbox-close {
@@ -75,7 +108,9 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         
-        .lightbox-close:hover { color: #fff; }
+        .lightbox-close:hover {
+            color: #fff;
+        }
         
         .lightbox-nav {
             position: fixed;
@@ -89,7 +124,10 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         
-        .lightbox-nav:hover { color: #fff; }
+        .lightbox-nav:hover {
+            color: #fff;
+        }
+        
         .lightbox-prev { left: 30px; }
         .lightbox-next { right: 30px; }
         
@@ -102,16 +140,18 @@
             font-size: 1.5rem;
             background: rgba(26,26,26,0.9);
             padding: 15px 30px;
-            border-radius: 30px;
+            border-radius: 0;
             z-index: 10000;
         }
         
+        /* HEADER LOGO */
         header {
             background: url('Images/Logo.webp') center/cover no-repeat;
             height: 300px;
             border-bottom: 3px solid #236a9a;
         }
         
+        /* NAV */
         nav {
             background: rgba(44, 44, 44, 0.95);
             padding: 1.2rem;
@@ -132,45 +172,64 @@
             letter-spacing: 1px;
         }
         
-        nav a:hover { color: #236a9a; }
+        nav a:hover {
+            color: #236a9a;
+        }
         
+        /* CONTAINER LARGE */
         .container {
             max-width: 2000px;
             margin: 0 auto;
             padding: 3rem 2.5rem;
         }
         
+        /* SECTIONS ANGLES DROITS */
         section {
             margin-bottom: 5rem;
             background: rgba(26, 26, 26, 0.75);
             padding: 3rem;
-            border-radius: 8px;
+            border-radius: 0;
             border: 1px solid rgba(35, 106, 154, 0.3);
         }
         
+        /* H2 : GARAMOND TEXTURE + RESSERRÉ */
         h2 {
             font-family: 'Garamond', serif;
             font-size: 2.5rem;
             font-weight: 300;
             margin-bottom: 2.5rem;
             text-align: center;
-            color: #236a9a;
             border-bottom: 2px solid #236a9a;
             padding-bottom: 1rem;
-            letter-spacing: 3px;
+            letter-spacing: -0.9px;
             text-transform: uppercase;
+            /* Texture Garamond */
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
         
+        /* H3 COLLECTIONS : GARAMOND TEXTURE + RESSERRÉ */
         h3.collection-category {
             font-family: 'Garamond', serif;
             font-size: 2rem;
+            font-weight: 300;
             margin: 3rem 0 1.5rem;
-            color: #236a9a;
             text-transform: uppercase;
             padding-left: 0;
             border: none;
+            letter-spacing: -0.9px;
+            /* Texture Garamond */
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
         
+        /* INTRO : TAHOMA TEXTURE */
         .intro {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             text-align: center;
@@ -181,18 +240,25 @@
             color: #a6a6a6;
         }
         
+        /* QUOTE : GARAMOND TEXTURE */
         .quote {
             font-family: 'Garamond', serif;
             font-style: italic;
             text-align: center;
-            color: #ccc;
             margin: 2rem auto;
             font-size: 1.2rem;
             padding: 0;
             max-width: 900px;
             border: none;
+            /* Texture Garamond */
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
         
+        /* ECHANTILLONS */
         .materials-samples {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -200,11 +266,13 @@
             margin: 2rem 0 3rem;
         }
         
-        .material-sample { text-align: center; }
+        .material-sample {
+            text-align: center;
+        }
         
         .material-sample img {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 0;
             box-shadow: 0 6px 20px rgba(0,0,0,0.5);
             border: 1px solid rgba(35, 106, 154, 0.3);
             margin-bottom: 1rem;
@@ -226,6 +294,7 @@
             object-fit: cover;
         }
         
+        /* LABELS : TAHOMA */
         .material-label {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             color: #a6a6a6;
@@ -234,6 +303,7 @@
             letter-spacing: 1px;
         }
         
+        /* COLLECTIONS */
         .collections {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -243,15 +313,16 @@
         
         .collection-card {
             background: rgba(40, 40, 40, 0.6);
-            border-radius: 8px;
+            border-radius: 0;
             overflow: hidden;
             border: 1px solid rgba(35, 106, 154, 0.3);
         }
         
+        /* GALERIE FOND TRANSPARENT */
         .collection-gallery {
             width: 100%;
             position: relative;
-            background: #1a1a1a;
+            background: transparent;
             height: 700px;
             overflow: hidden;
         }
@@ -269,15 +340,26 @@
             flex-shrink: 0;
         }
         
-        .collection-info { padding: 2rem; }
+        .collection-info {
+            padding: 2rem;
+        }
         
+        /* TITRES COLLECTIONS : GARAMOND TEXTURE + RESSERRÉ */
         .collection-title {
             font-family: 'Garamond', serif;
             font-size: 2rem;
+            font-weight: 300;
             margin-bottom: 1rem;
-            color: #236a9a;
+            letter-spacing: -0.9px;
+            /* Texture Garamond */
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
         
+        /* DESCRIPTIONS : TAHOMA */
         .collection-description {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
@@ -285,6 +367,7 @@
             color: #a6a6a6;
         }
         
+        /* LUMINAIRES 3 COLONNES */
         .luminaires-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -297,15 +380,16 @@
         
         .luminaire {
             background: rgba(40, 40, 40, 0.6);
-            border-radius: 8px;
+            border-radius: 0;
             overflow: hidden;
             border: 1px solid rgba(35, 106, 154, 0.3);
         }
         
+        /* GALERIE LUMINAIRES FOND TRANSPARENT */
         .luminaire-gallery {
             width: 100%;
             position: relative;
-            background: #1a1a1a;
+            background: transparent;
             height: 650px;
             overflow: hidden;
         }
@@ -333,13 +417,13 @@
             z-index: 10;
             background: rgba(0,0,0,0.7);
             padding: 10px 18px;
-            border-radius: 25px;
+            border-radius: 0;
         }
         
         .gallery-dot {
             width: 13px;
             height: 13px;
-            border-radius: 50%;
+            border-radius: 0;
             background: rgba(166, 166, 166, 0.5);
             cursor: pointer;
             border: 2px solid rgba(166, 166, 166, 0.6);
@@ -364,25 +448,38 @@
             font-size: 28px;
             z-index: 10;
             opacity: 0;
-            border-radius: 50%;
+            border-radius: 0;
             pointer-events: auto;
         }
         
         .luminaire:hover .gallery-arrow,
-        .collection-card:hover .gallery-arrow { opacity: 1; }
+        .collection-card:hover .gallery-arrow {
+            opacity: 1;
+        }
         
         .gallery-arrow.prev { left: 15px; }
         .gallery-arrow.next { right: 15px; }
         
-        .luminaire-info { padding: 2rem; }
+        .luminaire-info {
+            padding: 2rem;
+        }
         
+        /* TITRES LUMINAIRES : GARAMOND TEXTURE + RESSERRÉ */
         .luminaire-title {
             font-family: 'Garamond', serif;
             font-size: 2rem;
+            font-weight: 300;
             margin-bottom: 0.8rem;
-            color: #236a9a;
+            letter-spacing: -0.9px;
+            /* Texture Garamond */
+            background: url('Images/Texture-garamond.webp') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
         
+        /* MATERIAUX : TAHOMA */
         .luminaire-materials {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
@@ -391,6 +488,7 @@
             margin-bottom: 1rem;
         }
         
+        /* DESCRIPTIONS : TAHOMA */
         .luminaire-description {
             font-family: 'Tahoma', 'Verdana', sans-serif;
             font-size: 1.05rem;
@@ -398,10 +496,11 @@
             color: #a6a6a6;
         }
         
+        /* CONTACT */
         .contact {
             background: rgba(40, 40, 40, 0.7);
             padding: 3.5rem 2.5rem;
-            border-radius: 8px;
+            border-radius: 0;
             text-align: center;
             border: 1px solid rgba(35, 106, 154, 0.3);
         }
@@ -420,7 +519,9 @@
             font-size: 1.25rem;
         }
         
-        .contact a:hover { text-decoration: underline; }
+        .contact a:hover {
+            text-decoration: underline;
+        }
         
         .contact-card {
             margin: 2rem auto 0;
@@ -429,10 +530,11 @@
         
         .contact-card img {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 0;
             pointer-events: auto;
         }
         
+        /* FOOTER */
         footer {
             background: rgba(26, 26, 26, 0.95);
             color: #a6a6a6;
@@ -442,7 +544,9 @@
             border-top: 2px solid #236a9a;
         }
         
-        footer p { font-family: 'Tahoma', 'Verdana', sans-serif; }
+        footer p {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
+        }
         
         .copyright-notice {
             font-size: 0.85rem;
@@ -451,20 +555,188 @@
             font-style: italic;
         }
         
+        /* RESPONSIVE OPTIMISÉ */
         @media (max-width: 1400px) {
-            .luminaires-grid { grid-template-columns: repeat(2, 1fr); }
+            .luminaires-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
             .luminaire:nth-child(4),
             .luminaire:nth-child(5),
-            .luminaire:nth-child(6) { margin: 0; }
+            .luminaire:nth-child(6) {
+                margin: 0;
+            }
         }
         
         @media (max-width: 1024px) {
-            .collections, .luminaires-grid { grid-template-columns: 1fr; }
+            .container {
+                max-width: 100vw;
+                padding: 2rem 1.5rem;
+            }
+            
+            .collections,
+            .luminaires-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .collection-gallery {
+                height: 500px;
+            }
+            
+            .luminaire-gallery {
+                height: 550px;
+            }
+        }
+        
+        /* VERSION MOBILE OPTIMISÉE */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+            
+            .container {
+                max-width: 100vw;
+                padding: 1.5rem 1rem;
+                overflow-x: hidden;
+            }
+            
+            header {
+                height: 200px;
+            }
+            
+            nav {
+                padding: 0.8rem 0.5rem;
+            }
+            
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 2rem 1.5rem;
+                margin-bottom: 3rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h3.collection-category {
+                font-size: 1.7rem;
+            }
+            
+            .intro {
+                font-size: 1rem;
+            }
+            
+            .collection-gallery {
+                height: 400px;
+            }
+            
+            .luminaire-gallery {
+                height: 450px;
+            }
+            
+            .materials-samples {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .material-sample img {
+                height: 250px;
+            }
+            
+            .materials-samples.organique img {
+                height: 300px;
+            }
+            
+            .materials-samples.cosmati img {
+                height: 350px;
+            }
+            
+            .materials-samples.peau-gesso img {
+                height: 350px;
+            }
+            
+            .collections {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .luminaires-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .lightbox-close {
+                font-size: 45px;
+                top: 15px;
+                right: 20px;
+            }
+            
+            .lightbox-nav {
+                font-size: 50px;
+                padding: 15px;
+            }
+            
+            .lightbox-prev { left: 15px; }
+            .lightbox-next { right: 15px; }
+            
+            /* Textes raccourcis mobile */
+            .intro p {
+                display: none;
+            }
+            
+            .intro p:first-child {
+                display: block;
+            }
+            
+            .collection-description,
+            .luminaire-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem 0.8rem;
+            }
+            
+            section {
+                padding: 1.5rem 1rem;
+            }
+            
+            .collection-gallery {
+                height: 350px;
+            }
+            
+            .luminaire-gallery {
+                height: 400px;
+            }
+            
+            .materials-samples {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            
+            .material-sample img {
+                height: 200px;
+            }
+            
+            .gallery-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
         <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1, event)">‹</span>
@@ -473,8 +745,10 @@
         <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
+    <!-- HEADER -->
     <header></header>
     
+    <!-- NAV -->
     <nav>
         <a href="#a-propos">A PROPOS</a>
         <a href="#mobilier">MOBILIER EN GESSO</a>
@@ -484,6 +758,7 @@
     
     <div class="container">
         
+        <!-- A PROPOS -->
         <section id="a-propos">
             <h2>A PROPOS</h2>
             <div class="intro">
@@ -494,6 +769,7 @@
             <div class="quote">"L'œuvre d'art est vivante, car elle contient l'esprit de celui qui l'a créée." — Paolo Coelho</div>
         </section>
         
+        <!-- MOBILIER -->
         <section id="mobilier">
             <h2>MOBILIER EN GESSO</h2>
             
@@ -672,7 +948,7 @@
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Eclat</h3>
                         <p class="luminaire-materials">Agate de sel indienne translucide, gesso argenté, bois de sipo gougé | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle et apaisante. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. Les vibrations énergétiques émanant naturellement de l'agate sont réputées depuis l'antiquité pour harmoniser parfaitement le yin et le yang, les forces complémentaires de l'univers. Grâce à ses vertus profondément apaisantes et équilibrantes reconnues à travers les âges, elle aide significativement à se concentrer, à méditer paisiblement et à maintenir un état d'esprit serein. Eclat illuminera avec élégance un lieu de vie quotidien ou un espace de travail exigeant, favorisant le calme mental, la productivité harmonieuse et le bien-être général.</p>
+                        <p class="luminaire-description">Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. Eclat illuminera avec élégance un lieu de vie quotidien ou un espace de travail exigeant.</p>
                     </div>
                 </article>
                 
@@ -695,7 +971,7 @@
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Intime</h3>
                         <p class="luminaire-materials">Quartz rose indien, glacis rosé nacré artisanal, bois de sipo gougé | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde, pierre douce aux nuances subtiles. Depuis la nuit des temps et à travers toutes les civilisations, le quartz rose entretient une relation intime, profonde et privilégiée avec l'amour universel, les émotions du cœur et les liens affectifs. Visuellement, il inspire immédiatement la douceur, la tendresse et la bienveillance par ses teintes rosées apaisantes. Particulièrement recommandé et bénéfique pour les chambres d'enfants, cette pierre précieuse délivre une énergie infiniment douce, protectrice et maternelle qui enveloppe l'espace d'une aura réconfortante. Intime trouvera naturellement sa place privilégiée dans une chambre à coucher ou un salon familial, créant une atmosphère de sécurité émotionnelle et d'harmonie relationnelle propice aux échanges sincères et à la détente profonde.</p>
+                        <p class="luminaire-description">Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde. Visuellement, il inspire immédiatement la douceur, la tendresse et la bienveillance par ses teintes rosées apaisantes. Intime trouvera naturellement sa place privilégiée dans une chambre à coucher ou un salon familial.</p>
                     </div>
                 </article>
                 
@@ -718,7 +994,7 @@
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Céleste</h3>
                         <p class="luminaire-materials">Améthyste indienne, Peau de Gesso, bois de sipo gougé à la main | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. L'améthyste est utilisée depuis des millénaires à travers les civilisations comme symbole puissant de la sagesse, de l'intelligence pure et de la spiritualité élevée. Cette "pierre de l'âme" diffuse son aura lumineuse violette dans une atmosphère chaleureuse et apaisante, créant un espace sacré favorable à la concentration et à l'introspection. Le cadre en Peau de Gesso et bois de sipo finement travaillé ajoute une dimension tactile et visuelle qui enrichit l'expérience contemplative.</p>
+                        <p class="luminaire-description">Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. Le cadre en Peau de Gesso et bois de sipo finement travaillé ajoute une dimension tactile et visuelle qui enrichit l'expérience contemplative.</p>
                     </div>
                 </article>
                 
@@ -741,7 +1017,7 @@
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Chartres</h3>
                         <p class="luminaire-materials">Mosaïque d'agates du Brésil, Peau de Gesso, bois de sipo gougé | 42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées, pierre qui selon les traditions ancestrales aurait le pouvoir de dynamiser les performances mentales et d'harmoniser les énergies. Cette création ornementera de sa lumière chaude, envoûtante et mystique les pièces dédiées au travail intellectuel, à l'étude ou à la méditation, demandant concentration et clarté d'esprit.</p>
+                        <p class="luminaire-description">Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées.</p>
                     </div>
                 </article>
                 
@@ -764,7 +1040,7 @@
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Emanation</h3>
                         <p class="luminaire-materials">Améthyste indienne sculptée à la main | 52 × 24 × 16 cm</p>
-                        <p class="luminaire-description">Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée, parfaite pour les espaces dédiés à la contemplation et à la créativité. La texture brute de l'améthyste contraste magnifiquement avec la finesse de la sculpture, créant un dialogue fascinant entre nature et artisanat.</p>
+                        <p class="luminaire-description">Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée.</p>
                     </div>
                 </article>
                 
@@ -810,15 +1086,41 @@
         
     </div>
     
+    <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 Thomas Pruvot - Artisan d'Art</p>
         <p class="copyright-notice">Toutes les créations et photographies présentées sur ce site sont protégées par le droit d'auteur. Toute reproduction, même partielle, est strictement interdite sans autorisation écrite préalable.</p>
     </footer>
     
+    <!-- JAVASCRIPT COMPLET -->
     <script>
-        document.addEventListener('contextmenu', e => e.target.tagName === 'IMG' && e.preventDefault());
-        document.addEventListener('dragstart', e => e.target.tagName === 'IMG' && e.preventDefault());
+        // ========================================
+        // PROTECTION COPYRIGHT
+        // ========================================
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' && !e.target.classList.contains('lightbox-content')) {
+                e.preventDefault();
+                return false;
+            }
+        });
         
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // ========================================
+        // LIGHTBOX PLEIN ECRAN AVEC FOND FLOU
+        // ========================================
         let currentLightboxGallery = [];
         let currentLightboxIndex = 0;
         
@@ -837,6 +1139,7 @@
             if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
                 document.getElementById('lightbox').classList.remove('active');
                 document.body.style.overflow = '';
+                e.stopPropagation();
             }
         }
         
@@ -851,26 +1154,49 @@
             document.getElementById('lightbox-counter').textContent = `${currentLightboxIndex + 1} / ${currentLightboxGallery.length}`;
         }
         
-        document.addEventListener('keydown', e => {
+        // Navigation clavier dans le lightbox
+        document.addEventListener('keydown', function(e) {
             const lb = document.getElementById('lightbox');
             if (lb.classList.contains('active')) {
-                if (e.key === 'Escape') closeLightbox({target: lb});
-                else if (e.key === 'ArrowLeft') changeLightboxImage(-1, e);
-                else if (e.key === 'ArrowRight') changeLightboxImage(1, e);
+                if (e.key === 'Escape') {
+                    closeLightbox({target: lb});
+                } else if (e.key === 'ArrowLeft') {
+                    changeLightboxImage(-1, e);
+                } else if (e.key === 'ArrowRight') {
+                    changeLightboxImage(1, e);
+                }
             }
         });
         
-        document.addEventListener('DOMContentLoaded', () => {
+        // ========================================
+        // CLICK SUR IMAGES GALERIES + ECHANTILLONS
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Images des galeries collections et luminaires
             document.querySelectorAll('.collection-gallery, .luminaire-gallery').forEach(gallery => {
                 gallery.querySelectorAll('.collection-image, .luminaire-image').forEach(img => {
-                    img.addEventListener('click', e => {
+                    img.addEventListener('click', function(e) {
                         e.stopPropagation();
-                        openLightbox(img, gallery);
+                        openLightbox(this, gallery);
                     });
+                });
+            });
+            
+            // ECHANTILLONS CLIQUABLES
+            document.querySelectorAll('.material-sample img').forEach(img => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Créer une galerie temporaire pour l'échantillon
+                    const tempGallery = document.createElement('div');
+                    tempGallery.appendChild(this.cloneNode(true));
+                    openLightbox(this, this.closest('.materials-samples'));
                 });
             });
         });
         
+        // ========================================
+        // NAVIGATION GALERIE MINIATURES
+        // ========================================
         let galleryIndexes = {};
         
         function changeGalleryImage(btn, dir) {
@@ -878,22 +1204,136 @@
             const gallery = card.querySelector('.collection-images, .luminaire-images');
             const dots = card.querySelectorAll('.gallery-dot');
             const images = card.querySelectorAll('.collection-image, .luminaire-image');
-            const id = Array.from(card.parentElement.children).indexOf(card) + '-' + card.parentElement.className;
-            if (!galleryIndexes[id]) galleryIndexes[id] = 0;
-            galleryIndexes[id] = (galleryIndexes[id] + dir + images.length) % images.length;
-            gallery.style.transform = `translateX(-${galleryIndexes[id] * 100}%)`;
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === galleryIndexes[id]));
+            const totalImages = images.length;
+            
+            const cardId = Array.from(card.parentElement.children).indexOf(card);
+            const parentId = card.parentElement.className;
+            const uniqueId = parentId + '-' + cardId;
+            
+            if (!galleryIndexes[uniqueId]) galleryIndexes[uniqueId] = 0;
+            
+            galleryIndexes[uniqueId] = (galleryIndexes[uniqueId] + dir + totalImages) % totalImages;
+            
+            gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === galleryIndexes[uniqueId]);
+            });
         }
         
-        function showGalleryImage(dot, idx) {
+        function showGalleryImage(dot, index) {
             const card = dot.closest('.collection-card, .luminaire');
             const gallery = card.querySelector('.collection-images, .luminaire-images');
             const dots = card.querySelectorAll('.gallery-dot');
-            const id = Array.from(card.parentElement.children).indexOf(card) + '-' + card.parentElement.className;
-            galleryIndexes[id] = idx;
-            gallery.style.transform = `translateX(-${idx * 100}%)`;
-            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            
+            const cardId = Array.from(card.parentElement.children).indexOf(card);
+            const parentId = card.parentElement.className;
+            const uniqueId = parentId + '-' + cardId;
+            
+            galleryIndexes[uniqueId] = index;
+            
+            gallery.style.transform = `translateX(-${index * 100}%)`;
+            
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
         }
+        
+        // Navigation clavier dans les galeries
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    const activeArrow = document.querySelector('.collection-card:hover .gallery-arrow.prev, .luminaire:hover .gallery-arrow.prev');
+                    if (activeArrow) activeArrow.click();
+                } else if (e.key === 'ArrowRight') {
+                    const activeArrow = document.querySelector('.collection-card:hover .gallery-arrow.next, .luminaire:hover .gallery-arrow.next');
+                    if (activeArrow) activeArrow.click();
+                }
+            }
+        });
+        
+        // ========================================
+        // OPTIMISATION MOBILE : PREVENTION SCROLL LATERAL
+        // ========================================
+        function preventHorizontalScroll() {
+            const body = document.body;
+            const container = document.querySelector('.container');
+            
+            if (window.innerWidth <= 768) {
+                body.style.overflowX = 'hidden';
+                body.style.maxWidth = '100vw';
+                if (container) {
+                    container.style.maxWidth = '100vw';
+                    container.style.overflowX = 'hidden';
+                }
+                
+                // Forcer la largeur des images
+                document.querySelectorAll('img').forEach(img => {
+                    if (!img.classList.contains('lightbox-content')) {
+                        img.style.maxWidth = '100%';
+                        img.style.width = '100%';
+                    }
+                });
+            }
+        }
+        
+        // Exécuter au chargement et au redimensionnement
+        window.addEventListener('load', preventHorizontalScroll);
+        window.addEventListener('resize', preventHorizontalScroll);
+        
+        // ========================================
+        // LAZY LOADING OPTIMISE
+        // ========================================
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+        
+        // ========================================
+        // SMOOTH SCROLL POUR NAVIGATION
+        // ========================================
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // ========================================
+        // DETECTION MOBILE POUR TEXTES RACCOURCIS
+        // ========================================
+        function adjustMobileContent() {
+            if (window.innerWidth <= 768) {
+                // Les textes sont déjà raccourcis via CSS
+                // Cette fonction peut être étendue si besoin
+                console.log('Mode mobile activé - textes raccourcis');
+            }
+        }
+        
+        window.addEventListener('load', adjustMobileContent);
+        window.addEventListener('resize', adjustMobileContent);
+        
     </script>
     
 </body>
