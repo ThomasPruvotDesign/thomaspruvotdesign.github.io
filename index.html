@@ -87,6 +87,7 @@
 
 html {
     scroll-behavior: smooth;
+	overflow-y: scroll;
 }
 
 body {
@@ -96,14 +97,16 @@ body {
     margin: 0;
     padding: 0;
     width: 100vw;
-    min-height: 100vh;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+   
 }
 
 body::-webkit-scrollbar {
     display: none;
+}
+
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 #custom-scrollbar {
@@ -119,7 +122,6 @@ body::-webkit-scrollbar {
 #custom-scrollbar-thumb {
     position: absolute;
     width: 10px;
-	height: 50px;
     background: url('Images/Curseur-defilement.webp') no-repeat center;
     background-size: contain;
     pointer-events: auto;
@@ -1777,49 +1779,7 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseup', () => {
     isDragging = false;
 });
-</script>
-<div id="custom-scrollbar">
-    <div id="custom-scrollbar-thumb"></div>
-</div>
 
-<script>
-const thumb = document.getElementById('custom-scrollbar-thumb');
-const body = document.body;
-const docElement = document.documentElement;
-
-function updateScrollbar() {
-    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const scrollTop = window.pageYOffset || docElement.scrollTop;
-    const scrollPercent = scrollTop / scrollHeight;
-    
-    const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
-    thumb.style.height = thumbHeight + 'px';
-    thumb.style.top = (scrollPercent * (docElement.clientHeight - thumbHeight)) + 50'px';
-}
-
-window.addEventListener('scroll', updateScrollbar);
-window.addEventListener('resize', updateScrollbar);
-updateScrollbar();
-
-let isDragging = false;
-thumb.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    e.preventDefault();
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
-    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const mouseY = e.clientY;
-    const scrollPercent = mouseY / (scrollbarHeight - thumbHeight);
-    window.scrollTo(0, scrollPercent * scrollHeight);
-});
-
-document.addEventListener('mouseup', () => {
-    isDragging = false;
-});
 </script>
 
 </body>
