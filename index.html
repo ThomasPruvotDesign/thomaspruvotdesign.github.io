@@ -97,14 +97,21 @@
             background: url('Images/Bois-brule.webp') fixed center/cover no-repeat;
             overflow-x: hidden !important;
             max-width: 100vw !important;
+			margin: 0;
+			padding: 0;
         }
         
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 10px;
         }
         
         ::-webkit-scrollbar-track {
-            background: url('Images/Bois-brule.webp') fixed center/cover no-repeat;
+            background: linear-gradient(to bottom, 
+                            transparent 0px, 
+                            transparent 300px),
+                         url('Images/Logo-2.webp') 40% top/cover no-repeat,
+                         url('Images/Bois-brule.webp') fixed center/cover no-repeat;
+
         }
         
         ::-webkit-scrollbar-thumb {
@@ -118,6 +125,16 @@
             opacity: 0.8;
         }
         
+		/* Mobile */
+        @media (max-width: 768px) {
+            ::-webkit-scrollbar-track {
+                background: linear-gradient(to bottom, 
+                               transparent 0px, 
+                               transparent 160px),
+                            url('Images/Logo-2.webp') 40% top/cover no-repeat,
+                            url('Images/Bois-brule.webp') fixed center/cover no-repeat;
+            }
+        }
         img {
             max-width: 100%;
             height: auto;
