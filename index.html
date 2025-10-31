@@ -100,16 +100,18 @@
         }
         
         ::-webkit-scrollbar {
-            width: 20px;
+            width: 12px;
         }
         
         ::-webkit-scrollbar-track {
-            background: #000;
+            background: transparent;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: url('Images/Curseur-defilement.webp') no-repeat center;
-            background-size: contain;
+        background: url('Images/Curseur-defilement.webp') no-repeat center;
+        background-size: 100% 100%;
+        border: none;
+        border-radius: 0; 
         }
         
         ::-webkit-scrollbar-thumb:hover {
@@ -1096,11 +1098,11 @@
 <body>
 
     <!-- Language Switcher -->
-	<div style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(40, 40, 40, 0.9); padding: 12px 18px; border-radius: 0; box-shadow: 0 2px 12px rgba(0,0,0,0.3); border: 1px solid rgba(90, 138, 138, 0.4);">
-	    <a href="https://designthomaspruvot.github.io" style="text-decoration: none; font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Texture-garamond.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">
-	        EN
-        </a>
-	</div>
+	<div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+    <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">FR</span>
+    <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; color: rgba(90, 138, 138, 0.6);"> / </span>
+    <a href="https://designthomaspruvot.github.io" style="text-decoration: none; font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; cursor: pointer;">EN</a>
+    </div>
 	
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
