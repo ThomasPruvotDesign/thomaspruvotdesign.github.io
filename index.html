@@ -90,6 +90,7 @@ html {
      scroll-behavior: smooth;
 	 overflow-y: scroll;
 	 scrollbar-width: none;
+	 -ms-overflow-style: none;
 }
 
 body {
@@ -104,11 +105,7 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
      width: 0;
      display: none;
-}
 
-html {
-     scrollbar-width: none;
-     -ms-overflow-style: none;
 }
 
 #custom-scrollbar {
@@ -129,7 +126,13 @@ html {
      pointer-events: auto;
      cursor: pointer;
 }
-  
+
+  /* MASQUER le curseur custom sur mobile/tablette */
+@media (max-width: 768px) {
+    #custom-scrollbar {
+        display: none;
+    }
+}
 
 /* Firefox (utilise scrollbar-width pour cacher la track) */
 * {
@@ -1044,7 +1047,7 @@ body::-webkit-scrollbar {
                 width: 13px;
                 height: 13px;
                 border: 1px solid rgba(90, 138, 138, 0.6);
-                background: transparent;
+                background: transparent !important;
             }
             
             .gallery-dot.active {
@@ -1053,18 +1056,18 @@ body::-webkit-scrollbar {
             }
             
             .gallery-arrow {
-                width: 45px;
-                height: 45px;
-                background: url('Images/Texture-garamond.webp') center/cover;
-                font-size: 22px;
+                width: 45px !important;
+                height: 45px !important;
+                background: url('Images/Texture-garamond.webp') center/cover !important;
+                font-size: 22px !important;
             }
             
             .gallery-arrow::before {
-                font-size: 22px;
-                background: url('Images/Curseur-defilement.webp') center/cover;
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
+                font-size: 22px !important;
+                background: url('Images/Curseur-defilement.webp') center/cover!important;
+                -webkit-background-clip: text !important;
+                background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
             }
             
             .contact a {
@@ -1755,7 +1758,8 @@ function updateScrollbar() {
 
     const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
     thumb.style.height = thumbHeight + 'px';
-    thumb.style.top = (scrollPercent * (docElement.clientHeight - thumbHeight)) + 'px';
+    thumb.style.top = (scrollPercent * (docElement.clientHeight - thumbHeight + 5)) + 'px';
+
 }
 
 window.addEventListener('scroll', updateScrollbar);
