@@ -1044,22 +1044,23 @@ body::-webkit-scrollbar {
             }
             
             .gallery-dot {
-                width: 13px;
-                height: 13px;
-                border: 1px solid rgba(90, 138, 138, 0.6);
-                background: transparent !important;
+                width: 13px important;
+                height: 13px important;
+                border: 3px solid rgba(90, 138, 138, 0.6) !important;
+                background: none !important;
             }
             
             .gallery-dot.active {
-                background: url('Images/Texture-garamond.webp') center/cover;
-                border: none;
+                background: url('Images/Texture-garamond.webp') center/cover !important;
+                border: none !important;
             }
             
             .gallery-arrow {
                 width: 45px !important;
                 height: 45px !important;
-                background: url('Images/Texture-garamond.webp') center/cover !important;
+                background: none !important;
                 font-size: 22px !important;
+			
             }
             
             .gallery-arrow::before {
@@ -1068,6 +1069,7 @@ body::-webkit-scrollbar {
                 -webkit-background-clip: text !important;
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
+}
             }
             
             .contact a {
@@ -1758,7 +1760,7 @@ function updateScrollbar() {
 
     const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
     thumb.style.height = thumbHeight + 'px';
-    thumb.style.top = (scrollPercent * (docElement.clientHeight - thumbHeight + 5)) + 'px';
+    thumb.style.top = (scrollPercent * (docElement.clientHeight - thumbHeight)) + 'px';
 
 }
 
