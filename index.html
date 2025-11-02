@@ -148,7 +148,7 @@ body {
 		/* Mobile */
         @media (max-width: 768px) {
 		      div[style*="position: fixed"][style*="top: 20px"] {
-                  position: fixed !important;
+                  position: absolute !important;
                  top: 20px !important;
                  right: 20px !important;
                  z-index: 10001 !important;
@@ -636,15 +636,17 @@ body {
             width: 13px;
             height: 13px;
             border-radius: 0;
-            background: transparent;
+            background: url('Images/Bois-brule.webp') center/cover;
             cursor: pointer;
             pointer-events: auto;
-            border: 1px solid rgba(90, 138, 138, 0.6);
+            border: 2px transparent
+			border-image: url('Images/Texture-garamond.webp') 1;
         }
         
         .gallery-dot.active {
             background: url('Images/Texture-garamond.webp') center/cover;
-            border: 1px solid rgba(90, 138, 138, 0.8) !important;
+            border: 2px solid transparent !important;
+			border-image: url('Images/Texture-garamond.webp') 1
         }
         
         .gallery-arrow {
@@ -1022,13 +1024,18 @@ body::-webkit-scrollbar {
             .gallery-dot {
                 width: 13px !important;
                 height: 13px !important;
-                border: 1px solid rgba(90, 138, 138, 0.6) !important;
-                background: transparent !important;
+				border-radius: 0;
+				background: url('Images/Bois-brule.webp') center/cover !important;
+				cursor: pointer;
+                pointer-events: auto;
+                border: 2px solid transparent!important;
+                border-image: url('Images/Texture-garamond.webp') 1 !important;
             }
             
             .gallery-dot.active {
-                background: url('Images/Texture-garamond.webp') center/cover !important;
-                border: 1px solid rgba(90, 138, 138, 0.8) !important;
+                background: url('Images/Texture-garamond.webp') center/covert !important;
+                border: 2px transparent !important;
+				border-image: url('Images/Texture-garamond.webp') 1 !important;
             }
             
             .gallery-arrow {
@@ -1721,59 +1728,19 @@ body::-webkit-scrollbar {
         
     </script>
     
-
-<div id="custom-scrollbar">
-    <div id="custom-scrollbar-thumb"></div>
-</div>
-
-<script>
-const thumb = document.getElementById('custom-scrollbar-thumb');
-const docElement = document.documentElement;
-
-let ticking = false;
-
-        function updateScrollbar() {
-            const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-            const scrollTop = window.pageYOffset || docElement.scrollTop;
-            const scrollRatio = scrollTop / scrollHeight;
-            const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
-            thumb.style.height = thumbHeight + 'px';
-            thumb.style.top = (scrollRatio * (docElement.clientHeight - thumbHeight + 40)) + 'px';
-            ticking = false;
-        }
-
-        function requestTick() {
-            if (!ticking) {
-                window.requestAnimationFrame(updateScrollbar);
-                ticking = true;
-            }
-        }
-
-window.addEventListener('scroll', requestTick);
-window.addEventListener('resize', updateScrollbar);
-updateScrollbar();
-
-let isDragging = false;
-thumb.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    e.preventDefault();
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
+function updateScrollbar() {
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const mouseY = e.clientY;
-    const scrollPercent = mouseY / (scrollbarHeight - thumbHeight);
-    window.scrollTo(0, scrollPercent * scrollHeight);
-});
-
-document.addEventListener('mouseup', () => {
-    isDragging = false;
-});
-
-</script>
-
+    const scrollTop = window.pageYOffset || docElement.scrollTop;
+    const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
+    
+    const maxThumbHeight = docElement.clientHeight;
+    const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * maxThumbHeight);
+    const maxThumbPosition = docElement.clientHeight - thumbHeight;
+    const thumbTop = Math.min(scrollRatio * maxThumbPosition, maxThumbPosition);
+    
+    thumb.style.height = thumbHeight + 'px';
+    thumb.style.top = thumbTop + 'px';
+    ticking = false;
+}
 </body>
 </html>
