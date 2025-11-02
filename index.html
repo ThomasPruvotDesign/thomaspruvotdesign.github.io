@@ -147,12 +147,13 @@ body {
         
 		/* Mobile */
         @media (max-width: 768px) {
-		      div[style*="position: fixed"][style*="top: 20px"] {
-                  position: absolute !important;
+		     div[style*="position: fixed"][style*="top: 20px"] {
+                 position: absolute !important;
                  top: 20px !important;
                  right: 20px !important;
                  z-index: 10001 !important;
-    }
+             }
+			 
             ::-webkit-scrollbar-track {
                 background: linear-gradient(to bottom, 
                                transparent 0px, 
@@ -320,9 +321,6 @@ body {
             position: relative;
             border: 1px solid transparent;
             background-clip: padding-box;
-			box-sizing: border-box;
-            width: 100%;
-            overflow-x: hidden;
         }
         
         section::before {
@@ -633,20 +631,18 @@ body {
         }
         
         .gallery-dot {
-            width: 13px;
-            height: 13px;
+            width: 13px !important;
+            height: 13px !important;
             border-radius: 0;
-            background: url('Images/Bois-brule.webp') center/cover;
+            background: transparent !important;
             cursor: pointer;
             pointer-events: auto;
-            border: 2px transparent
-			border-image: url('Images/Texture-garamond.webp') 1;
+            border: 1px solid rgba(90, 138, 138, 0.6) !important;
         }
         
         .gallery-dot.active {
-            background: url('Images/Texture-garamond.webp') center/cover;
-            border: 2px solid transparent !important;
-			border-image: url('Images/Texture-garamond.webp') 1
+            background: url('Images/Texture-garamond.webp') center/cover !important;
+            border: 1px solid rgba(90, 138, 138, 0.8) !important;
         }
         
         .gallery-arrow {
@@ -1024,18 +1020,13 @@ body::-webkit-scrollbar {
             .gallery-dot {
                 width: 13px !important;
                 height: 13px !important;
-				border-radius: 0;
-				background: url('Images/Bois-brule.webp') center/cover !important;
-				cursor: pointer;
-                pointer-events: auto;
-                border: 2px solid transparent!important;
-                border-image: url('Images/Texture-garamond.webp') 1 !important;
+                border: 1px solid rgba(90, 138, 138, 0.6) !important;
+                background: transparent !important;
             }
             
             .gallery-dot.active {
-                background: url('Images/Texture-garamond.webp') center/covert !important;
-                border: 2px transparent !important;
-				border-image: url('Images/Texture-garamond.webp') 1 !important;
+                background: url('Images/Texture-garamond.webp') center/cover !important;
+                border: 1px solid rgba(90, 138, 138, 0.8) !important;
             }
             
             .gallery-arrow {
@@ -1728,19 +1719,68 @@ body::-webkit-scrollbar {
         
     </script>
     
-function updateScrollbar() {
+
+<div id="custom-scrollbar">
+    <div id="custom-scrollbar-thumb"></div>
+</div>
+
+<script>
+const thumb = document.getElementById('custom-scrollbar-thumb');
+const docElement = document.documentElement;
+
+let ticking = false;
+
+        function updateScrollbar() {
+            const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
+            const scrollTop = window.pageYOffset || docElement.scrollTop;
+            const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
+            
+			const maxThumbHeight = docElement.clientHeight;
+			const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
+		    const maxThumbPosition = docElement.clientHeight - thumbHeight;
+			const thumbTop = Math.min(scrollRatio * maxThumbPosition, maxThumbPosition);
+			
+			thumb.style.height = thumbHeight + 'px';
+            thumb.style.top = thumbTop + 'px';
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollbar);
+                ticking = true;
+            }
+        }
+
+window.addEventListener('scroll', requestTick);
+window.addEventListener('resize', updateScrollbar);
+updateScrollbar();
+
+let isDragging = false;
+thumb.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    e.preventDefault();
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const scrollbarHeight = docElement.clientHeight;
+    const thumbHeight = thumb.offsetHeight;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const scrollTop = window.pageYOffset || docElement.scrollTop;
-    const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
+    const mouseY = e.clientY;
+    const maxThumbPosition = scrollbarHeight - thumbHeight;
+    const thumbTop = Math.max(0, Math.min(mouseY, maxThumbPosition));
+    const scrollPercent = thumbTop / maxThumbPosition;
     
-    const maxThumbHeight = docElement.clientHeight;
-    const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * maxThumbHeight);
-    const maxThumbPosition = docElement.clientHeight - thumbHeight;
-    const thumbTop = Math.min(scrollRatio * maxThumbPosition, maxThumbPosition);
-    
-    thumb.style.height = thumbHeight + 'px';
     thumb.style.top = thumbTop + 'px';
-    ticking = false;
-}
+    window.scrollTo(0, scrollPercent * scrollHeight);
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+</script>
+
 </body>
 </html>
