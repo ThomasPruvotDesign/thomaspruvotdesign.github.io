@@ -125,6 +125,10 @@ body::-webkit-scrollbar {
      background-size: contain;
      pointer-events: auto;
      cursor: pointer;
+	 opacity: 1 !important;
+     visibility: visible !important;
+     display: block !important;
+     z-index: 9999 !important;
 }
 
   /* MASQUER le curseur custom sur mobile/tablette */
@@ -874,10 +878,10 @@ body {
             body {
                 background-image: url('Images/Bois-brule.webp') !important;
                 background-position: center !important;
-                background-size: cover !important;
-                background-repeat: repeat !important;
+                background-size: 100% 100% !important;
+                background-repeat: no-repeat !important;
                 background-attachment: fixed !important;
-                -webkit-background-size: cover !important;
+                -webkit-background-size: 100% 100% !important;
                 position: relative;
                 width: 100vw !important;
                 overflow-x: hidden !important;
@@ -939,10 +943,11 @@ body::-webkit-scrollbar {
             }
             
             section {
-                width: calc(100vw - 1rem) !important;
-                max-width: calc(100vw - 1rem) !important;
+                width: 100% !important;
+                max-width: 100% !important;
                 padding: 1.5rem 0.5rem !important;
                 margin-bottom: 3rem;
+				box-sizing: border-box !important;
             }
             
             h2 {
