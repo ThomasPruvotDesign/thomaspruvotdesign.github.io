@@ -147,6 +147,12 @@ body {
         
 		/* Mobile */
         @media (max-width: 768px) {
+		      div[style*="position: fixed"][style*="top: 20px"] {
+                  position: fixed !important;
+                 top: 20px !important;
+                 right: 20px !important;
+                 z-index: 10001 !important;
+    }
             ::-webkit-scrollbar-track {
                 background: linear-gradient(to bottom, 
                                transparent 0px, 
@@ -314,6 +320,9 @@ body {
             position: relative;
             border: 1px solid transparent;
             background-clip: padding-box;
+			box-sizing: border-box;
+            width: 100%;
+            overflow-x: hidden;
         }
         
         section::before {
@@ -635,7 +644,7 @@ body {
         
         .gallery-dot.active {
             background: url('Images/Texture-garamond.webp') center/cover;
-            border: none;
+            border: 1px solid rgba(90, 138, 138, 0.8) !important;
         }
         
         .gallery-arrow {
@@ -1019,7 +1028,7 @@ body::-webkit-scrollbar {
             
             .gallery-dot.active {
                 background: url('Images/Texture-garamond.webp') center/cover !important;
-                border: none !important;
+                border: 1px solid rgba(90, 138, 138, 0.8) !important;
             }
             
             .gallery-arrow {
