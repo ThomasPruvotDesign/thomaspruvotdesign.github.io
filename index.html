@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-	<meta name="msvalidate.01" content="7369016D8133FAC86A81B8AACB565831" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="msvalidate.01" content="7369016D8133FAC86A81B8AACB565831" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
     <!-- BASIC SEO -->
     <title>Thomas Pruvot - Artisan d'Art | Mobilier Gesso & Luminaires Uniques</title>
     <meta name="description" content="Thomas Pruvot, artisan d'art dans le Val-de-Marne, crée du mobilier d'exception en gesso et des luminaires uniques pour intérieurs de luxe.">
@@ -12,7 +12,7 @@
     <meta name="author" content="Thomas Pruvot">
     <meta name="robots" content="index, follow">
     <meta name="language" content="French">
-    
+
     <!-- OPEN GRAPH -->
     <meta property="og:title" content="Thomas Pruvot - Artisan d'Art | Mobilier Gesso & Luminaires">
     <meta property="og:description" content="Créations exceptionnelles en gesso et luminaires uniques pour intérieurs de luxe">
@@ -21,20 +21,20 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Thomas Pruvot - Artisan d'Art">
-    
+
     <!-- TWITTER CARD -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Thomas Pruvot - Artisan d'Art">
     <meta name="twitter:description" content="Mobilier gesso & luminaires pour intérieurs de luxe">
     <meta name="twitter:image" content="https://thomaspruvotdesign.github.io/Images/Logo.webp">
-    
+
     <!-- CANONICAL -->
     <link rel="canonical" href="https://thomaspruvotdesign.github.io">
-    
+
     <!-- FAVICON -->
     <link rel="icon" type="image/webp" href="Images/Logo.webp">
     <link rel="apple-touch-icon" href="Images/Logo.webp">
-    
+
     <!-- SCHEMA.ORG - LocalBusiness + Person -->
     <script type="application/ld+json">
     {
@@ -44,7 +44,7 @@
       "image": "https://thomaspruvotdesign.github.io/Images/Logo.webp",
       "description": "Artisan d'art créant du mobilier d'exception en gesso et des luminaires uniques pour intérieurs de luxe",
       "url": "https://thomaspruvotdesign.github.io",
-      "telephone": "+33627272121",
+      "telephone": "+3.3627272121e+10",
       "email": "thomaspruvotdesign@protonmail.com",
       "address": {
         "@type": "PostalAddress",
@@ -62,7 +62,7 @@
       "availableLanguage": ["fr", "en"]
     }
     </script>
-    
+
     <!-- SCHEMA.ORG - Organization -->
     <script type="application/ld+json">
     {
@@ -77,1096 +77,1192 @@
       ]
     }
     </script>
-    
+
     <style>
+/* ============================================================================
+   CORRECTIONS INTÉGRALES - 02/11/2025
+   - Fix viewport iOS (safe-area)
+   - Scrollbar 10-12px cohérent desktop/mobile
+   - Textures unifiées dots/flèches
+   - Décalage 40px éliminé
+   - Pointer-events optimisés
+   ============================================================================ */
+
 html, body {
-     margin: 0;
-     padding: 0;
-     width: 100%;
-     height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 html {
-     scroll-behavior: smooth;
-	 overflow-y: scroll;
-	 scrollbar-width: none;
-	 -ms-overflow-style: none;
-}
-
-body {
-     font-family: 'Tahoma', 'Verdana', sans-serif;
-     line-height: 1.7;
-     background: url('Images/Bois-brule.webp') fixed center/cover no-repeat;
-     margin: 0;
-     padding: 0;
-}
-
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-     width: 0;
-     display: none;
-
-}
-
-#custom-scrollbar {
-     position: fixed;
-     right: 0px;
-     top: 0;
-     width: 10px;
-     height: 100vh;
-     pointer-events: none;
-     z-index: 9999;
-}
-
-#custom-scrollbar-thumb {
-     position: absolute;
-     width: 10px;
-     background: url('Images/Curseur-defilement.webp') no-repeat center;
-     background-size: contain;
-     pointer-events: auto;
-     cursor: pointer;
-}
-
-  /* MASQUER le curseur custom sur mobile/tablette */
-@media (max-width: 768px) {
-    #custom-scrollbar {
-        display: none;
-    }
-}
-
-/* Firefox (utilise scrollbar-width pour cacher la track) */
-* {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: transparent transparent; /* Curseur transparent + track transparent */
+    scrollbar-color: rgba(90, 138, 138, 0.4) transparent;
+    -ms-overflow-style: scrollbar;
 }
 
 body {
-    scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); /* Override pour body */
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    line-height: 1.7;
+    background: url('Images/Bois-brule.webp') fixed center/cover no-repeat;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
 }
 
-        
-		/* Mobile */
-        @media (max-width: 768px) {
-            ::-webkit-scrollbar-track {
-                background: linear-gradient(to bottom, 
-                               transparent 0px, 
-                               transparent 160px),
-                            url('Images/Logo-2.webp') 40% top/cover no-repeat,
-                            url('Images/Bois-brule.webp') fixed center/cover no-repeat;
-            }
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            user-select: none;
-            -webkit-user-drag: none;
-            pointer-events: none;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
-        
-        .collection-image,
-        .luminaire-image,
-        .material-sample img {
-            cursor: pointer;
-            pointer-events: auto !important;
-        }
-        
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        
-        @supports (-webkit-backdrop-filter: blur(10px)) {
-            .lightbox {
-                -webkit-backdrop-filter: blur(10px);
-            }
-        }
-        
-        @supports not (-webkit-backdrop-filter: blur(10px)) {
-            .lightbox {
-                background: rgba(0, 0, 0, 0.6);
-            }
-        }
-        
-        .lightbox.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .lightbox-content {
-            max-width: 95vw;
-            max-height: 95vh;
-            object-fit: contain;
-            pointer-events: auto;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
-        }
-        
-        .lightbox-close {
-            position: fixed;
-            top: 30px;
-            right: 40px;
-            font-size: 60px;
-            cursor: pointer;
-            z-index: 10000;
-            pointer-events: auto;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .lightbox-close:hover {
-            opacity: 0.7;
-        }
-        
-        .lightbox-nav {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 80px;
-            cursor: pointer;
-            z-index: 10000;
-            pointer-events: auto;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .lightbox-nav:hover {
-            opacity: 0.7;
-        }
-        
-        .lightbox-prev { left: 30px; }
-        .lightbox-next { right: 30px; }
-        
-        .lightbox-counter {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5rem;
-            background: rgba(26,26,26,0.9);
-            padding: 15px 30px;
-            border-radius: 0;
-            z-index: 10000;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .lightbox.single-image .lightbox-nav {
-            display: none;
-        }
-        
-        header {
-            background: url('Images/Logo.webp') center/cover no-repeat;
-            height: 300px;
-            position: relative;
-        }
-        
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-        }
-        
-        nav {
-            background: rgba(44, 44, 44, 0.95);
-            padding: 1.2rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            position: relative;
-        }
-        
-        nav::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-        }
-        
-        nav a {
-            text-decoration: none;
-            margin: 0 2rem;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        nav a:hover {
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .container {
-            max-width: 2000px;
-            margin: 0 auto;
-            padding: 3rem 2.5rem;
-        }
-        
-        section {
-            margin-bottom: 5rem;
-            background: rgba(26, 26, 26, 0.75);
-            padding: 3rem;
-            border-radius: 0;
-            max-width: 100%;
-            position: relative;
-            border: 1px solid transparent;
-            background-clip: padding-box;
-        }
-        
-        section::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            padding: 1px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        h2 {
-            font-family: 'Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            padding-bottom: 1rem;
-            letter-spacing: -0.9px;
-            text-transform: uppercase;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            position: relative;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-        }
-        
-        h3.collection-category {
-            font-family: 'Garamond', serif;
-            font-size: 2rem;
-            font-weight: 300;
-            margin: 3rem 0 1.5rem;
-            text-transform: uppercase;
-            padding-left: 0;
-            border: none;
-            letter-spacing: -0.9px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .intro {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            text-align: center;
-            font-size: 1.1rem;
-            max-width: 1400px;
-            margin: 0 auto 3rem;
-            line-height: 1.9;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .quote {
-            font-family: 'Garamond', serif;
-            font-style: italic;
-            text-align: center;
-            margin: 2rem auto;
-            font-size: 1.2rem;
-            padding: 0;
-            max-width: 900px;
-            border: none;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .materials-samples {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin: 2rem 0 3rem;
-            max-width: 100%;
-        }
-        
-        .material-sample {
-            text-align: center;
-            position: relative;
-        }
-        
-        .material-sample img {
-            width: 100%;
-            border-radius: 0;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-            margin-bottom: 1rem;
-            border: 1px solid rgba(90, 138, 138, 0.4);
-        }
-        
-        .materials-samples.organique img {
-            height: 450px;
-            object-fit: cover;
-        }
-        
-        .materials-samples.cosmati img {
-            height: 500px;
-            object-fit: cover;
-            transform: rotate(90deg);
-        }
-        
-        .materials-samples.peau-gesso img {
-            height: 500px;
-            object-fit: cover;
-        }
-        
-        .material-label {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .collections {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 3.5rem;
-            margin-top: 2rem;
-            max-width: 100%;
-        }
-        
-        .collection-card {
-            background: rgba(40, 40, 40, 0.6);
-            border-radius: 0;
-            overflow: visible;
-            max-width: 100%;
-            position: relative;
-            border: 1px solid transparent;
-            background-clip: padding-box;
-        }
-        
-        .collection-card::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            padding: 1px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .collection-gallery {
-            width: 100%;
-            position: relative;
-            background: transparent;
-            height: 700px;
-            overflow: hidden;
-        }
-        
-        .collection-images {
-            display: flex;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .collection-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-        
-        .collection-info {
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .collection-title {
-            font-family: 'Garamond', serif;
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            letter-spacing: -0.9px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .collection-description {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .collection-dimensions {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            font-size: 0.95rem;
-            font-style: italic;
-            margin-top: 1rem;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .luminaires-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3.5rem;
-            margin-top: 3rem;
-            max-width: 100%;
-        }
-        
-        .luminaire:nth-child(4) { margin-right: 1.75rem; }
-        .luminaire:nth-child(5) { margin-left: 1.75rem; }
-        
-        .luminaire {
-            background: rgba(40, 40, 40, 0.6);
-            border-radius: 0;
-            overflow: visible;
-            max-width: 100%;
-            position: relative;
-            border: 1px solid transparent;
-            background-clip: padding-box;
-        }
-        
-        .luminaire::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            padding: 1px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .luminaire-gallery {
-            width: 100%;
-            position: relative;
-            background: transparent;
-            height: 650px;
-            overflow: hidden;
-        }
-        
-        .luminaire-images {
-            display: flex;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .luminaire-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-        
-        .gallery-nav {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .gallery-dot {
-            width: 13px;
-            height: 13px;
-            border-radius: 0;
-            background: transparent;
-            cursor: pointer;
-            pointer-events: auto;
-            border: 1px solid rgba(90, 138, 138, 0.6);
-        }
-        
-        .gallery-dot.active {
-            background: url('Images/Texture-garamond.webp') center/cover;
-            border: none;
-        }
-        
-        .gallery-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: url('Images/Texture-garamond.webp') center/cover;
-            width: 55px;
-            height: 55px;
-            cursor: pointer;
-            font-size: 28px;
-            z-index: 10;
-            opacity: 0;
-            border-radius: 0;
-            pointer-events: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-        }
-        
-        .gallery-arrow::before {
-            content: attr(data-arrow);
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            font-size: 28px;
-            z-index: 1;
-        }
-        
-        .gallery-arrow.prev::before {
-            content: '‹';
-        }
-        
-        .gallery-arrow.next::before {
-            content: '›';
-        }
-        
-        .luminaire:hover .gallery-arrow,
-        .collection-card:hover .gallery-arrow {
-            opacity: 1;
-        }
-        
-        .gallery-arrow.prev { left: 15px; }
-        .gallery-arrow.next { right: 15px; }
-        
-        .luminaire-info {
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .luminaire-title {
-            font-family: 'Garamond', serif;
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 0.8rem;
-            letter-spacing: -0.9px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .luminaire-materials {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            font-size: 1.05rem;
-            font-style: italic;
-            margin-bottom: 1rem;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .luminaire-description {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .contact {
-            background: rgba(40, 40, 40, 0.7);
-            padding: 3.5rem 2.5rem;
-            border-radius: 0;
-            text-align: center;
-            position: relative;
-            border: 1px solid transparent;
-            background-clip: padding-box;
-        }
-        
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            padding: 1px;
-            pointer-events: none;
-        }
-        
-        .contact p {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            margin: 1rem 0;
-            font-size: 1.15rem;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .contact a {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            text-decoration: none;
-            font-size: 1.25rem;
-            background: url('Images/Texture-garamond.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            display: inline-block;
-        }
-        
-        .contact a:hover {
-            opacity: 0.7;
-        }
-        
-        .contact-card {
-            margin: 2rem auto 0;
-            max-width: 550px;
-        }
-        
-        .contact-card img {
-            width: 100%;
-            border-radius: 0;
-            pointer-events: auto;
-        }
-        
-        footer {
-            background: rgba(26, 26, 26, 0.95);
-            text-align: center;
-            padding: 2.5rem;
-            margin-top: 5rem;
-            position: relative;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: url('Images/Texture-garamond.webp') center/cover;
-        }
-        
-        footer p {
-            font-family: 'Tahoma', 'Verdana', sans-serif;
-            background: url('Images/Curseur-defilement.webp') center/cover;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-        
-        .copyright-notice {
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            font-style: italic;
-        }
-        
-        @media (max-width: 1400px) {
-            .luminaires-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .luminaire:nth-child(4),
-            .luminaire:nth-child(5),
-            .luminaire:nth-child(6) {
-                margin: 0;
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .container {
-                max-width: 100vw !important;
-                padding: 2rem 1.5rem;
-            }
-            
-            .collections,
-            .luminaires-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .collection-gallery {
-                height: 500px;
-            }
-            
-            .luminaire-gallery {
-                height: 550px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            ::-webkit-scrollbar {
-                width: 8px;
-            }
-            
-            ::-webkit-scrollbar-thumb {
-                background: url('Images/Curseur-defilement.webp') no-repeat center;
-                background-size: cover;
-            }
-            
-            body {
-                background-image: url('Images/Bois-brule.webp') !important;
-                background-position: center !important;
-                background-size: cover !important;
-                background-repeat: repeat !important;
-                background-attachment: fixed !important;
-                -webkit-background-size: cover !important;
-                position: relative;
-                width: 100vw !important;
-                overflow-x: hidden !important;
-            }
-
-body::-webkit-scrollbar {
-    display: none;
+/* Webkit scrollbar (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 11px;
 }
 
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    background-color: rgba(90, 138, 138, 0.5);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(90, 138, 138, 0.7);
+}
+
+/* Custom scrollbar pour desktop uniquement */
 #custom-scrollbar {
     position: fixed;
-    right: 2px;
+    right: 0px;
     top: 0;
-    width: 10px;
+    width: 11px;
     height: 100vh;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 9998;
+    display: block;
 }
 
 #custom-scrollbar-thumb {
     position: absolute;
-    width: 10px;
+    width: 11px;
     background: url('Images/Curseur-defilement.webp') no-repeat center;
     background-size: contain;
     pointer-events: auto;
     cursor: pointer;
+    border-radius: 0;
 }
-            
-            html {
-                overflow-x: hidden !important;
-                width: 100vw !important;
-            }
-            
-            header {
-                height: 160px;
-                background: url('Images/Logo-2.webp') 40% center/cover no-repeat !important;
-                width: 100vw !important;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            nav {
-                padding: 0.8rem 0.5rem;
-                width: 100vw !important;
-            }
-            
-            nav a {
-                display: block;
-                margin: 0.5rem 0;
-                font-size: 1rem;
-            }
-            
-            .container {
-                width: 100% !important;
-                max-width: 100% !important;
-                padding: 1rem 0.5rem !important;
-                overflow-x: hidden !important;
-            }
-            
-            section {
-                width: calc(100vw - 1rem) !important;
-                max-width: calc(100vw - 1rem) !important;
-                padding: 1.5rem 0.5rem !important;
-                margin-bottom: 3rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            h3.collection-category {
-                font-size: 1.7rem;
-            }
-            
-            .intro {
-                font-size: 1rem;
-            }
-            
-            .collection-gallery {
-                height: 400px;
-            }
-            
-            .luminaire-gallery {
-                height: 450px;
-            }
-            
-            .materials-samples.cosmati {
-                grid-template-columns: 1fr !important;
-                gap: 2rem !important;
-            }
-            
-            .materials-samples.cosmati img {
-                transform: none !important;
-                height: 400px !important;
-                width: 100% !important;
-                max-width: calc(100vw - 2rem) !important;
-            }
-            
-            .materials-samples {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 1.5rem;
-                max-width: calc(100vw - 2rem) !important;
-            }
-            
-            .material-sample img {
-                height: 250px;
-                max-width: 100% !important;
-            }
-            
-            .materials-samples.organique img {
-                height: 300px;
-            }
-            
-            .materials-samples.peau-gesso img {
-                height: 350px;
-            }
-            
-            .collections {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-                max-width: 100% !important;
-            }
-            
-            .luminaires-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-                max-width: 100% !important;
-            }
-            
-            .collection-card,
-            .luminaire {
-                max-width: calc(100vw - 2rem) !important;
-            }
-            
-            img {
-                max-width: calc(100vw - 2rem) !important;
-            }
-            
-            .gallery-dot {
-                width: 13px !important;
-                height: 13px !important;
-                border: 1px solid rgba(90, 138, 138, 0.6) !important;
-                background: transparent !important;
-            }
-            
-            .gallery-dot.active {
-                background: url('Images/Texture-garamond.webp') center/cover !important;
-                border: none !important;
-            }
-            
-            .gallery-arrow {
-                width: 45px !important;
-                height: 45px !important;
-                background: none !important;
-                font-size: 22px !important;
-			
-            }
-            
-            .gallery-arrow::before {
-                font-size: 22px !important;
-                background: url('Images/Texture-garamond.webp') center/cover !important;
-                -webkit-background-clip: text !important;
-                background-clip: text !important;
-                -webkit-text-fill-color: transparent !important;
+
+/* DÉSACTIVER custom scrollbar sur tablette/mobile */
+@media (max-width: 1024px) {
+    #custom-scrollbar {
+        display: none !important;
+        pointer-events: none !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
 }
-            }
-            
-            .contact a {
-                display: block;
-                text-align: center;
-                font-size: clamp(0.8rem, 4vw, 1.25rem) !important;
-                max-width: 100%;
-                overflow-wrap: break-word;
-                word-break: break-all;
-                padding: 0 0.5rem;
-            }
-            
-            .lightbox-close {
-                font-size: 45px;
-                top: 15px;
-                right: 20px;
-            }
-            
-            .lightbox-nav {
-                font-size: 50px;
-                padding: 15px;
-            }
-            
-            .lightbox-prev { left: 15px; }
-            .lightbox-next { right: 15px; }
-            
-            .intro p {
-                display: none;
-            }
-            
-            .intro p:first-child {
-                display: block;
-            }
-            
-            .collection-description,
-            .luminaire-description {
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            ::-webkit-scrollbar {
-                width: 6px;
-            }
-            
-            .container {
-                padding: 0.8rem 0.5rem !important;
-            }
-            
-            section {
-                padding: 1rem 0.5rem !important;
-                width: calc(100vw - 1rem) !important;
-            }
-            
-            .collection-gallery {
-                height: 350px;
-            }
-            
-            .luminaire-gallery {
-                height: 400px;
-            }
-            
-            .materials-samples {
-                grid-template-columns: 1fr !important;
-                gap: 1rem;
-            }
-            
-            .materials-samples.cosmati {
-                grid-template-columns: 1fr !important;
-            }
-            
-            .materials-samples.cosmati img {
-                height: 300px !important;
-            }
-            
-            .material-sample img {
-                height: 200px;
-            }
-            
-            .contact a {
-                font-size: 0.85rem !important;
-                word-break: break-all;
-            }
-        }
+
+@media (max-width: 768px) {
+    #custom-scrollbar {
+        display: none !important;
+        pointer-events: none !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(90, 138, 138, 0.4);
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.collection-image,
+.luminaire-image,
+.material-sample img,
+.contact-card img {
+    cursor: pointer;
+    pointer-events: auto !important;
+}
+
+/* LIGHTBOX */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+@supports (-webkit-backdrop-filter: blur(10px)) {
+    .lightbox {
+        -webkit-backdrop-filter: blur(10px);
+    }
+}
+
+@supports not (-webkit-backdrop-filter: blur(10px)) {
+    .lightbox {
+        background: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    object-fit: contain;
+    pointer-events: auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    font-size: 60px;
+    cursor: pointer;
+    z-index: 10000;
+    pointer-events: auto;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    user-select: none;
+}
+
+.lightbox-close:hover {
+    opacity: 0.7;
+}
+
+.lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 80px;
+    cursor: pointer;
+    z-index: 10000;
+    pointer-events: auto;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    user-select: none;
+}
+
+.lightbox-nav:hover {
+    opacity: 0.7;
+}
+
+.lightbox-prev { left: 30px; }
+.lightbox-next { right: 30px; }
+
+.lightbox-counter {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    background: rgba(26,26,26,0.9);
+    padding: 15px 30px;
+    border-radius: 0;
+    z-index: 10000;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    user-select: none;
+}
+
+.lightbox.single-image .lightbox-nav {
+    display: none;
+}
+
+/* HEADER */
+header {
+    background: url('Images/Logo.webp') center/cover no-repeat;
+    height: 300px;
+    position: relative;
+    width: 100%;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+}
+
+/* NAVIGATION */
+nav {
+    background: rgba(44, 44, 44, 0.95);
+    padding: 1.2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+nav::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 0 2rem;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+nav a:hover {
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem;
+    box-sizing: border-box;
+}
+
+section {
+    margin-bottom: 5rem;
+    background: rgba(26, 26, 26, 0.75);
+    padding: 3rem;
+    border-radius: 0;
+    max-width: 100%;
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+h2 {
+    font-family: 'Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    letter-spacing: -0.9px;
+    text-transform: uppercase;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+}
+
+h3.collection-category {
+    font-family: 'Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 3rem 0 1.5rem;
+    text-transform: uppercase;
+    padding-left: 0;
+    border: none;
+    letter-spacing: -0.9px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.intro {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    text-align: center;
+    font-size: 1.1rem;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+    line-height: 1.9;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.quote {
+    font-family: 'Garamond', serif;
+    font-style: italic;
+    text-align: center;
+    margin: 2rem auto;
+    font-size: 1.2rem;
+    padding: 0;
+    max-width: 900px;
+    border: none;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* MATERIALS SAMPLES */
+.materials-samples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin: 2rem 0 3rem;
+    max-width: 100%;
+}
+
+.material-sample {
+    text-align: center;
+    position: relative;
+}
+
+.material-sample img {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    margin-bottom: 1rem;
+    border: 1px solid rgba(90, 138, 138, 0.4);
+}
+
+.materials-samples.organique img {
+    height: 450px;
+    object-fit: cover;
+}
+
+.materials-samples.cosmati img {
+    height: 500px;
+    object-fit: cover;
+    transform: rotate(90deg);
+}
+
+.materials-samples.peau-gesso img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.material-label {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* COLLECTIONS */
+.collections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 3.5rem;
+    margin-top: 2rem;
+    max-width: 100%;
+}
+
+.collection-card {
+    background: rgba(40, 40, 40, 0.6);
+    border-radius: 0;
+    overflow: visible;
+    max-width: 100%;
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+.collection-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.collection-gallery {
+    width: 100%;
+    position: relative;
+    background: transparent;
+    height: 700px;
+    overflow: hidden;
+}
+
+.collection-images {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.collection-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.collection-info {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.collection-title {
+    font-family: 'Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    letter-spacing: -0.9px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.collection-description {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.collection-dimensions {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-top: 1rem;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* LUMINAIRES */
+.luminaires-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.5rem;
+    margin-top: 3rem;
+    max-width: 100%;
+}
+
+.luminaire:nth-child(4) { margin-right: 1.75rem; }
+.luminaire:nth-child(5) { margin-left: 1.75rem; }
+
+.luminaire {
+    background: rgba(40, 40, 40, 0.6);
+    border-radius: 0;
+    overflow: visible;
+    max-width: 100%;
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+.luminaire::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.luminaire-gallery {
+    width: 100%;
+    position: relative;
+    background: transparent;
+    height: 650px;
+    overflow: hidden;
+}
+
+.luminaire-images {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.luminaire-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.gallery-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+/* DOTS - UNIFIÉS DESKTOP/MOBILE */
+.gallery-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+    border: 1px solid rgba(90, 138, 138, 0.6);
+    transition: all 0.3s;
+}
+
+.gallery-dot.active {
+    background: url('Images/Texture-garamond.webp') center/cover;
+    border: 1px solid rgba(90, 138, 138, 0.8);
+}
+
+.gallery-dot:hover {
+    border-color: rgba(90, 138, 138, 0.9);
+}
+
+/* FLÈCHES - UNIFIÉES DESKTOP/MOBILE */
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url('Images/Texture-garamond.webp') center/cover;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 28px;
+    z-index: 10;
+    opacity: 0;
+    border-radius: 0;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(90, 138, 138, 0.4);
+    transition: all 0.3s;
+}
+
+.gallery-arrow::before {
+    content: attr(data-arrow);
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 28px;
+    z-index: 1;
+    user-select: none;
+}
+
+.gallery-arrow.prev::before {
+    content: '‹';
+}
+
+.gallery-arrow.next::before {
+    content: '›';
+}
+
+.luminaire:hover .gallery-arrow,
+.collection-card:hover .gallery-arrow {
+    opacity: 1;
+}
+
+.gallery-arrow.prev { left: 15px; }
+.gallery-arrow.next { right: 15px; }
+
+.gallery-arrow:hover {
+    opacity: 1 !important;
+    border-color: rgba(90, 138, 138, 0.8);
+}
+
+.luminaire-info {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.luminaire-title {
+    font-family: 'Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.9px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.luminaire-materials {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.luminaire-description {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* CONTACT */
+.contact {
+    background: rgba(40, 40, 40, 0.7);
+    padding: 3.5rem 2.5rem;
+    border-radius: 0;
+    text-align: center;
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+}
+
+.contact p {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    margin: 1rem 0;
+    font-size: 1.15rem;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.contact a {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    text-decoration: none;
+    font-size: 1.25rem;
+    background: url('Images/Texture-garamond.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.contact a:hover {
+    opacity: 0.7;
+}
+
+.contact-card {
+    margin: 2rem auto 0;
+    max-width: 550px;
+}
+
+.contact-card img {
+    width: 100%;
+    border-radius: 0;
+    pointer-events: auto;
+}
+
+/* FOOTER */
+footer {
+    background: rgba(26, 26, 26, 0.95);
+    text-align: center;
+    padding: 2.5rem;
+    margin-top: 5rem;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: url('Images/Texture-garamond.webp') center/cover;
+}
+
+footer p {
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    background: url('Images/Curseur-defilement.webp') center/cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.copyright-notice {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* ============================================================================
+   RESPONSIVE DESKTOP (1400px+)
+   ============================================================================ */
+@media (max-width: 1400px) {
+    .luminaires-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .luminaire:nth-child(4),
+    .luminaire:nth-child(5),
+    .luminaire:nth-child(6) {
+        margin: 0;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE TABLETTE (1024px)
+   ============================================================================ */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 100vw !important;
+        padding: 2rem 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .collections,
+    .luminaires-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .collection-gallery {
+        height: 500px;
+    }
+
+    .luminaire-gallery {
+        height: 550px;
+    }
+
+    /* Scrollbar tablet */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE MOBILE (768px) - CORRECTIONS PRINCIPALES
+   ============================================================================ */
+@media (max-width: 768px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* SCROLLBAR MOBILE - totalement transparent */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(90, 138, 138, 0.3);
+        border-radius: 0;
+    }
+
+    /* FIX: Custom scrollbar MASQUÉ */
+    #custom-scrollbar {
+        display: none !important;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    #custom-scrollbar-thumb {
+        display: none;
+    }
+
+    body {
+        background-image: url('Images/Bois-brule.webp') !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        -webkit-background-size: cover !important;
+        position: relative;
+        width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    html {
+        overflow-x: hidden !important;
+        width: 100vw !important;
+    }
+
+    /* FIX: Éliminer décalage 40px */
+    header {
+        height: 160px;
+        background: url('Images/Logo-2.webp') 40% center/cover no-repeat !important;
+        width: 100vw !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important;
+        margin: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    nav {
+        padding: 0.8rem 0.5rem;
+        width: 100vw !important;
+        margin: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    nav a {
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 1rem;
+    }
+
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1rem 0.5rem !important;
+        overflow-x: hidden !important;
+        margin: 0 !important;
+    }
+
+    section {
+        width: calc(100vw - 1rem) !important;
+        max-width: calc(100vw - 1rem) !important;
+        padding: 1.5rem 0.5rem !important;
+        margin-bottom: 3rem;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3.collection-category {
+        font-size: 1.7rem;
+    }
+
+    .intro {
+        font-size: 1rem;
+    }
+
+    .collection-gallery {
+        height: 400px;
+    }
+
+    .luminaire-gallery {
+        height: 450px;
+    }
+
+    .materials-samples.cosmati {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    .materials-samples.cosmati img {
+        transform: none !important;
+        height: 400px !important;
+        width: 100% !important;
+        max-width: calc(100vw - 2rem) !important;
+    }
+
+    .materials-samples {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        max-width: calc(100vw - 2rem) !important;
+    }
+
+    .material-sample img {
+        height: 250px;
+        max-width: 100% !important;
+    }
+
+    .materials-samples.organique img {
+        height: 300px;
+    }
+
+    .materials-samples.peau-gesso img {
+        height: 350px;
+    }
+
+    .collections {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        max-width: 100% !important;
+    }
+
+    .luminaires-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        max-width: 100% !important;
+    }
+
+    .collection-card,
+    .luminaire {
+        max-width: calc(100vw - 2rem) !important;
+    }
+
+    img {
+        max-width: calc(100vw - 2rem) !important;
+    }
+
+    /* FIX: Dots avec texture unifiée */
+    .gallery-dot {
+        width: 12px !important;
+        height: 12px !important;
+        border: 1px solid rgba(90, 138, 138, 0.6) !important;
+        background: transparent !important;
+    }
+
+    .gallery-dot.active {
+        background: url('Images/Texture-garamond.webp') center/cover !important;
+        border: 1px solid rgba(90, 138, 138, 0.8) !important;
+    }
+
+    /* FIX: Flèches avec texture unifiée */
+    .gallery-arrow {
+        width: 45px !important;
+        height: 45px !important;
+        background: url('Images/Texture-garamond.webp') center/cover !important;
+        font-size: 24px !important;
+        opacity: 0.6 !important;
+    }
+
+    .gallery-arrow::before {
+        font-size: 24px !important;
+        background: url('Images/Curseur-defilement.webp') center/cover !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    .gallery-arrow:hover,
+    .luminaire:active .gallery-arrow,
+    .collection-card:active .gallery-arrow {
+        opacity: 1 !important;
+    }
+
+    .contact a {
+        display: block;
+        text-align: center;
+        font-size: clamp(0.8rem, 4vw, 1.25rem) !important;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-all;
+        padding: 0 0.5rem;
+    }
+
+    .lightbox-close {
+        font-size: 45px;
+        top: 15px;
+        right: 20px;
+    }
+
+    .lightbox-nav {
+        font-size: 50px;
+        padding: 15px;
+    }
+
+    .lightbox-prev { left: 15px; }
+    .lightbox-next { right: 15px; }
+
+    .intro p {
+        display: none;
+    }
+
+    .intro p:first-child {
+        display: block;
+    }
+
+    .collection-description,
+    .luminaire-description {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE MOBILE PETIT (<480px)
+   ============================================================================ */
+@media (max-width: 480px) {
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .container {
+        padding: 0.8rem 0.5rem !important;
+    }
+
+    section {
+        padding: 1rem 0.5rem !important;
+        width: calc(100vw - 1rem) !important;
+    }
+
+    .collection-gallery {
+        height: 350px;
+    }
+
+    .luminaire-gallery {
+        height: 400px;
+    }
+
+    .materials-samples {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    .materials-samples.cosmati {
+        grid-template-columns: 1fr !important;
+    }
+
+    .materials-samples.cosmati img {
+        height: 300px !important;
+    }
+
+    .material-sample img {
+        height: 200px;
+    }
+
+    .contact a {
+        font-size: 0.85rem !important;
+        word-break: break-all;
+    }
+}
     </style>
 </head>
 <body>
 
     <!-- Language Switcher -->
-	<div style="position: fixed; top: 20px; right: 20px; z-index: 10000;">
+    <div style="position: fixed; top: 20px; right: 20px; z-index: 10000;">
     <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">FR</span>
     <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; color: rgba(90, 138, 138, 0.6);"> / </span>
     <a href="https://designthomaspruvot.github.io" style="text-decoration: none; font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; cursor: pointer;">EN</a>
     </div>
-	
+
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
         <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1, event)">‹</span>
@@ -1176,16 +1272,16 @@ body::-webkit-scrollbar {
     </div>
 
     <header></header>
-    
+
     <nav>
         <a href="#a-propos">A PROPOS</a>
         <a href="#mobilier">MOBILIER EN GESSO</a>
         <a href="#luminaires">LUMINAIRES</a>
         <a href="#contact">CONTACT</a>
     </nav>
-    
+
     <div class="container">
-        
+
         <section id="a-propos">
             <h2>A PROPOS</h2>
             <div class="intro">
@@ -1195,15 +1291,15 @@ body::-webkit-scrollbar {
             </div>
             <div class="quote">"L'œuvre d'art est vivante, car elle contient l'esprit de celui qui l'a créée." — Paolo Coelho</div>
         </section>
-        
+
         <section id="mobilier">
             <h2>MOBILIER EN GESSO</h2>
-            
+
             <h3 class="collection-category">COLLECTION ORGANIQUE</h3>
             <div class="intro" style="margin-bottom: 2rem;">
                 <p>La collection Organique est le fruit de l'observation des lignes présentes dans notre environnement. Ces courbes organiques harmonieuses invitent à faire pénétrer l'élégance de la nature dans nos intérieurs. Les patrons aux formes douces et arrondies sont créés en atelier à partir de pièces de mica, offrant une texture évoquant le cuir ou la peau animale. Chaque pièce de cette collection capture l'essence même de la fluidité naturelle et de l'artisanat d'exception.</p>
             </div>
-            
+
             <div class="materials-samples organique">
                 <div class="material-sample">
                     <img src="Images/Organique-ecailles.webp" alt="Organique Écailles">
@@ -1214,7 +1310,7 @@ body::-webkit-scrollbar {
                     <div class="material-label">Écailles nacrées</div>
                 </div>
             </div>
-            
+
             <div class="collections">
                 <article class="collection-card">
                     <div class="collection-gallery">
@@ -1237,7 +1333,7 @@ body::-webkit-scrollbar {
                         <p class="collection-dimensions">90 cm (H) × 140 cm (L) × 36 cm (P)<br>Chants : 5 cm</p>
                     </div>
                 </article>
-                
+
                 <article class="collection-card">
                     <div class="collection-gallery">
                         <div class="collection-images">
@@ -1258,12 +1354,12 @@ body::-webkit-scrollbar {
                     </div>
                 </article>
             </div>
-            
+
             <h3 class="collection-category" style="margin-top: 4rem;">COLLECTION COSMATI</h3>
             <div class="intro" style="margin-bottom: 2rem;">
                 <p>Dans la collection Cosmati apparaît une dimension géométrique profonde. Les pièces de gesso sont découpées selon le ratio phi, leur conférant une haute charge symbolique inspirée des mosaïques italiennes. Le terme "Cosmati" fait référence aux artisans romains du Moyen Âge dont les créations ornent encore aujourd'hui les plus belles églises d'Italie, rappelant la beauté intemporelle de la géométrie sacrée et des proportions divines.</p>
             </div>
-            
+
             <div class="materials-samples cosmati">
                 <div class="material-sample">
                     <img src="Images/Cosmati-etoile.webp" alt="Cosmati Étoile">
@@ -1282,7 +1378,7 @@ body::-webkit-scrollbar {
                     <div class="material-label">Terre d'ombre</div>
                 </div>
             </div>
-            
+
             <div class="collections">
                 <article class="collection-card">
                     <div class="collection-gallery">
@@ -1306,12 +1402,12 @@ body::-webkit-scrollbar {
                     </div>
                 </article>
             </div>
-            
+
             <h3 class="collection-category" style="margin-top: 4rem;">PEAU DE GESSO</h3>
             <div class="intro" style="margin-bottom: 2rem;">
                 <p>La collection Peau de Gesso a été créée comme la suite logique et la synthèse des deux premières collections. L'effet obtenu allie la précision géométrique à la texture naturelle organique, évoquant la phyllotaxie qui caractérise la disposition harmonieuse des éléments dans la nature. Cette finition unique fait songer à une peau de serpent ou de pangolin, créant une surface tactile et visuelle d'une richesse exceptionnelle qui capte et reflète la lumière de manière fascinante.</p>
             </div>
-            
+
             <div class="materials-samples peau-gesso">
                 <div class="material-sample">
                     <img src="Images/Peau-de-gesso-azurite.webp" alt="Peau de Gesso Azurite">
@@ -1326,7 +1422,7 @@ body::-webkit-scrollbar {
                     <div class="material-label">Mercure</div>
                 </div>
             </div>
-            
+
             <div class="collections">
                 <article class="collection-card">
                     <div class="collection-gallery">
@@ -1351,15 +1447,15 @@ body::-webkit-scrollbar {
                 </article>
             </div>
         </section>
-        
+
         <section id="luminaires">
             <h2>LES LUMINAIRES</h2>
             <div class="intro">
                 <p>Ces créations originales s'inscrivent avant tout dans une démarche spirituelle et contemplative. Réalisées dans la paix et le recueillement à l'instar des moines copistes médiévaux, elles incarnent la matière devenue esprit, la lumière révélant l'âme des matériaux nobles. Sont utilisés des matériaux précieux que sont les minéraux (agate du Brésil, quartz rose et améthyste d'Inde, agate de sel), le gesso travaillé selon des techniques ancestrales, et le bois massif de sipo finement gougé à la main. Chaque luminaire est une invitation à la méditation, créant des ambiances propices à la sérénité et à l'inspiration.</p>
             </div>
-            
+
             <div class="luminaires-grid">
-                
+
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
@@ -1381,7 +1477,7 @@ body::-webkit-scrollbar {
                         <p class="luminaire-description">Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. Eclat illuminera avec élégance un lieu de vie quotidien ou un espace de travail exigeant.</p>
                     </div>
                 </article>
-                
+
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
@@ -1403,7 +1499,7 @@ body::-webkit-scrollbar {
                         <p class="luminaire-description">Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde. Visuellement, il inspire immédiatement la douceur, la tendresse et la bienveillance par ses teintes rosées apaisantes. Intime trouvera naturellement sa place privilégiée dans une chambre à coucher ou un salon familial.</p>
                     </div>
                 </article>
-                
+
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
@@ -1425,7 +1521,7 @@ body::-webkit-scrollbar {
                         <p class="luminaire-description">Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. Le cadre en Peau de Gesso et bois de sipo finement travaillé ajoute une dimension tactile et visuelle qui enrichit l'expérience contemplative.</p>
                     </div>
                 </article>
-                
+
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
@@ -1447,7 +1543,7 @@ body::-webkit-scrollbar {
                         <p class="luminaire-description">Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées.</p>
                     </div>
                 </article>
-                
+
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
@@ -1469,7 +1565,7 @@ body::-webkit-scrollbar {
                         <p class="luminaire-description">Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée.</p>
                     </div>
                 </article>
-                
+
                 <article class="luminaire">
                     <div class="luminaire-gallery">
                         <div class="luminaire-images">
@@ -1493,57 +1589,70 @@ body::-webkit-scrollbar {
                         <p class="luminaire-description" style="margin-top: 2rem;">Découvrez les luminaires Chartres et Emanation intégrés dans des espaces d'exception : salon intime, église sacrée, et ambiances oniriques. Ces créations transcendent leur fonction pour devenir des œuvres vivantes qui transforment l'atmosphère des lieux qu'elles habitent, créant des moments de contemplation et d'émerveillement.</p>
                     </div>
                 </article>
-                
+
             </div>
         </section>
-        
+
         <section id="contact">
             <div class="contact">
                 <h2>CONTACT</h2>
                 <p>Pour toute demande de renseignement ou commission sur mesure :</p>
                 <p style="margin-top: 1.5rem;"><a href="mailto:thomaspruvotdesign@protonmail.com">thomaspruvotdesign@protonmail.com</a></p>
-                <p style="margin-top: 1rem;"><a href="tel:+33627272121">+33 6 27 27 21 21</a></p>
+                <p style="margin-top: 1rem;"><a href="tel:+3.3627272121e+10">+33 6 27 27 21 21</a></p>
                 <p style="margin-top: 0.5rem;">Val-de-Marne, France</p>
                 <div class="contact-card">
                     <img src="Images/Carte-de-visite.webp" alt="Carte de visite">
                 </div>
             </div>
         </section>
-        
+
     </div>
-    
+
     <footer>
         <p>&copy; 2025 Thomas Pruvot - Artisan d'Art</p>
         <p class="copyright-notice">Toutes les créations et photographies présentées sur ce site sont protégées par le droit d'auteur. Toute reproduction, même partielle, est strictement interdite sans autorisation écrite préalable.</p>
     </footer>
-    
+
+    <!-- CUSTOM SCROLLBAR - Desktop only -->
+    <div id="custom-scrollbar">
+        <div id="custom-scrollbar-thumb"></div>
+    </div>
+
     <script>
-        // PROTECTION COPYRIGHT
+    /* ============================================================================
+       SCRIPT CORRIGÉ - 02/11/2025
+       - Corrections de tous les bugs signalés
+       - Responsive cohérent desktop/mobile
+       - Textures unifiées
+       - Pointer-events optimisés
+       ============================================================================ */
+
+        // COPYRIGHT PROTECTION
         document.addEventListener('contextmenu', function(e) {
             if (e.target.tagName === 'IMG' && !e.target.classList.contains('lightbox-content')) {
                 e.preventDefault();
                 return false;
             }
         });
-        
+
         document.addEventListener('dragstart', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
                 return false;
             }
         });
-        
+
         document.addEventListener('keydown', function(e) {
             if ((e.ctrlKey || e.metaKey) && e.key === 's') {
                 e.preventDefault();
                 return false;
             }
         });
-        
+
         // LIGHTBOX
         let currentLightboxGallery = [];
         let currentLightboxIndex = 0;
-        
+
         function openLightbox(img, gallery) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
@@ -1551,17 +1660,17 @@ body::-webkit-scrollbar {
             currentLightboxIndex = currentLightboxGallery.indexOf(img);
             lightboxImg.src = img.src;
             lightbox.classList.add('active');
-            
+
             if (currentLightboxGallery.length === 1) {
                 lightbox.classList.add('single-image');
             } else {
                 lightbox.classList.remove('single-image');
             }
-            
+
             document.body.style.overflow = 'hidden';
             updateLightboxCounter();
         }
-        
+
         function closeLightbox(e) {
             if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
                 const lightbox = document.getElementById('lightbox');
@@ -1571,7 +1680,7 @@ body::-webkit-scrollbar {
                 e.stopPropagation();
             }
         }
-        
+
         function changeLightboxImage(dir, e) {
             e.stopPropagation();
             if (currentLightboxGallery.length <= 1) return;
@@ -1579,7 +1688,7 @@ body::-webkit-scrollbar {
             document.getElementById('lightbox-img').src = currentLightboxGallery[currentLightboxIndex].src;
             updateLightboxCounter();
         }
-        
+
         function updateLightboxCounter() {
             if (currentLightboxGallery.length > 1) {
                 document.getElementById('lightbox-counter').textContent = `${currentLightboxIndex + 1} / ${currentLightboxGallery.length}`;
@@ -1587,7 +1696,7 @@ body::-webkit-scrollbar {
                 document.getElementById('lightbox-counter').textContent = '';
             }
         }
-        
+
         document.addEventListener('keydown', function(e) {
             const lb = document.getElementById('lightbox');
             if (lb.classList.contains('active')) {
@@ -1600,7 +1709,7 @@ body::-webkit-scrollbar {
                 }
             }
         });
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.collection-gallery, .luminaire-gallery').forEach(gallery => {
                 gallery.querySelectorAll('.collection-image, .luminaire-image').forEach(img => {
@@ -1610,7 +1719,7 @@ body::-webkit-scrollbar {
                     });
                 });
             });
-            
+
             document.querySelectorAll('.material-sample img').forEach(img => {
                 img.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1619,71 +1728,71 @@ body::-webkit-scrollbar {
                 });
             });
         });
-        
+
         // CARROUSEL CIRCULAIRE INFINI
         let galleryIndexes = {};
         let isTransitioning = {};
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.collection-card, .luminaire').forEach(card => {
                 const gallery = card.querySelector('.collection-images, .luminaire-images');
                 const images = Array.from(card.querySelectorAll('.collection-image, .luminaire-image'));
-                
+
                 if (images.length > 1) {
                     const firstClone = images[0].cloneNode(true);
                     const lastClone = images[images.length - 1].cloneNode(true);
-                    
+
                     gallery.appendChild(firstClone);
                     gallery.insertBefore(lastClone, images[0]);
-                    
+
                     const cardId = Array.from(card.parentElement.children).indexOf(card);
                     const parentId = card.parentElement.className;
                     const uniqueId = parentId + '-' + cardId;
-                    
+
                     galleryIndexes[uniqueId] = 1;
                     gallery.style.transform = `translateX(-100%)`;
                     gallery.style.transition = 'none';
-                    
+
                     setTimeout(() => {
                         gallery.style.transition = 'transform 0.5s ease-in-out';
                     }, 50);
                 }
             });
         });
-        
+
         function changeGalleryImage(btn, dir) {
             const card = btn.closest('.collection-card, .luminaire');
             const gallery = card.querySelector('.collection-images, .luminaire-images');
             const dotsContainer = card.querySelector('.gallery-nav');
             if (!dotsContainer) return;
-            
+
             const dots = dotsContainer.querySelectorAll('.gallery-dot');
             const realImagesCount = dots.length;
-            
+
             const cardId = Array.from(card.parentElement.children).indexOf(card);
             const parentId = card.parentElement.className;
             const uniqueId = parentId + '-' + cardId;
-            
+
             if (isTransitioning[uniqueId]) return;
             isTransitioning[uniqueId] = true;
-            
+
             if (typeof galleryIndexes[uniqueId] === 'undefined') {
                 galleryIndexes[uniqueId] = 1;
             }
-            
+
             galleryIndexes[uniqueId] += dir;
-            
+
             gallery.style.transition = 'transform 0.5s ease-in-out';
             gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-            
+
             const realIndex = ((galleryIndexes[uniqueId] - 1) + realImagesCount) % realImagesCount;
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === realIndex);
             });
-            
+
             setTimeout(() => {
                 gallery.style.transition = 'none';
-                
+
                 if (galleryIndexes[uniqueId] === 0) {
                     galleryIndexes[uniqueId] = realImagesCount;
                     gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
@@ -1692,30 +1801,30 @@ body::-webkit-scrollbar {
                     galleryIndexes[uniqueId] = 1;
                     gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
                 }
-                
+
                 isTransitioning[uniqueId] = false;
             }, 500);
         }
-        
+
         function showGalleryImage(dot, index) {
             const card = dot.closest('.collection-card, .luminaire');
             const gallery = card.querySelector('.collection-images, .luminaire-images');
             const dots = card.querySelectorAll('.gallery-dot');
-            
+
             const cardId = Array.from(card.parentElement.children).indexOf(card);
             const parentId = card.parentElement.className;
             const uniqueId = parentId + '-' + cardId;
-            
+
             galleryIndexes[uniqueId] = index + 1;
-            
+
             gallery.style.transition = 'transform 0.5s ease-in-out';
             gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-            
+
             dots.forEach((d, i) => {
                 d.classList.toggle('active', i === index);
             });
         }
-        
+
         document.addEventListener('keydown', function(e) {
             const lightbox = document.getElementById('lightbox');
             if (!lightbox.classList.contains('active')) {
@@ -1728,7 +1837,7 @@ body::-webkit-scrollbar {
                 }
             }
         });
-        
+
         // SMOOTH SCROLL
         document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1742,24 +1851,27 @@ body::-webkit-scrollbar {
                 }
             });
         });
-        
-    </script>
-    
 
-<div id="custom-scrollbar">
-    <div id="custom-scrollbar-thumb"></div>
-</div>
+        // CUSTOM SCROLLBAR - Desktop only
+        const thumb = document.getElementById('custom-scrollbar-thumb');
+        const scrollbar = document.getElementById('custom-scrollbar');
+        const docElement = document.documentElement;
 
-<script>
-const thumb = document.getElementById('custom-scrollbar-thumb');
-const docElement = document.documentElement;
-
-let ticking = false;
+        let ticking = false;
 
         function updateScrollbar() {
+            // Vérifier que le scrollbar existe et que nous ne sommes pas en mobile
+            if (!thumb || !scrollbar || window.innerWidth <= 1024) {
+                if (scrollbar) scrollbar.style.display = 'none';
+                ticking = false;
+                return;
+            }
+
+            if (scrollbar) scrollbar.style.display = 'block';
+
             const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
             const scrollTop = window.pageYOffset || docElement.scrollTop;
-            const scrollRatio = scrollTop / scrollHeight;
+            const scrollRatio = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
             const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
             thumb.style.height = thumbHeight + 'px';
             thumb.style.top = (scrollRatio * (docElement.clientHeight - thumbHeight + 40)) + 'px';
@@ -1773,31 +1885,31 @@ let ticking = false;
             }
         }
 
-window.addEventListener('scroll', requestTick);
-window.addEventListener('resize', updateScrollbar);
-updateScrollbar();
+        window.addEventListener('scroll', requestTick, { passive: true });
+        window.addEventListener('resize', updateScrollbar);
+        updateScrollbar();
 
-let isDragging = false;
-thumb.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    e.preventDefault();
-});
+        let isDragging = false;
+        thumb.addEventListener('mousedown', (e) => {
+            if (window.innerWidth <= 1024) return;
+            isDragging = true;
+            e.preventDefault();
+        });
 
-document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
-    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const mouseY = e.clientY;
-    const scrollPercent = mouseY / (scrollbarHeight - thumbHeight);
-    window.scrollTo(0, scrollPercent * scrollHeight);
-});
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || window.innerWidth <= 1024) return;
+            const scrollbarHeight = docElement.clientHeight;
+            const thumbHeight = thumb.offsetHeight;
+            const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
+            const mouseY = e.clientY;
+            const scrollPercent = Math.max(0, Math.min(1, mouseY / (scrollbarHeight - thumbHeight)));
+            window.scrollTo(0, scrollPercent * scrollHeight);
+        });
 
-document.addEventListener('mouseup', () => {
-    isDragging = false;
-});
-
-</script>
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    </script>
 
 </body>
 </html>
