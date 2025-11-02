@@ -1760,8 +1760,7 @@ function updateScrollbar() {
 
     const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
     thumb.style.height = thumbHeight + 'px';
-    thumb.style.top = (scrollPercent * (docElement.clientHeight - thumbHeight)) + 'px';
-
+    thumb.style.top = Math.min(scrollPercent * docElement.clientHeight, docElement.clientHeight - thumbHeight) + 'px';
 }
 
 window.addEventListener('scroll', updateScrollbar);
