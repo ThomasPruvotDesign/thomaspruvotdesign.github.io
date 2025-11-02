@@ -90,9 +90,13 @@ html, body {
 html {
      scroll-behavior: smooth;
 	 overflow-y: scroll;
-	 scrollbar-width: thin;
-	 scrollbar-color: rgba(90, 138, 138, 0.4) transparent;
-	 -ms-overflow-style: scrollbar;
+	 scrollbar-width: none;
+	 -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
 }
 
 body {
@@ -106,22 +110,11 @@ body {
      overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
-    width: 11px;
-}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+     width: 0;
+     display: none;
 
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: url('Images/Curseur-defilement.webp') center/cover;
-    background-color: rgba(90, 138, 138, 0.5);
-    border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(90, 138, 138, 0.7);
 }
 
 #custom-scrollbar {
@@ -133,6 +126,7 @@ body {
      pointer-events: none;
      z-index: 9998;
      display: block;
+     background: url('Images/Bois-brule.webp') fixed center/cover;
 }
 
 #custom-scrollbar-thumb {
@@ -143,6 +137,7 @@ body {
      pointer-events: auto;
      cursor: pointer;
      border-radius: 0;
+     right: 0;
 }
 
   /* MASQUER le curseur custom sur mobile/tablette */
@@ -355,6 +350,7 @@ body {
             max-width: 2000px;
             margin: 0 auto;
             padding: 3rem 2.5rem;
+            overflow-x: hidden;
         }
         
         section {
@@ -1089,6 +1085,21 @@ body::-webkit-scrollbar {
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
 }
+            }
+
+            .gallery-dot {
+                width: 13px !important;
+                height: 13px !important;
+                border-radius: 0;
+                background: transparent !important;
+                cursor: pointer;
+                pointer-events: auto;
+                border: 1px solid rgba(90, 138, 138, 0.6) !important;
+            }
+
+            .gallery-dot.active {
+                background: url('Images/Texture-garamond.webp') center/cover !important;
+                border: 1px solid rgba(90, 138, 138, 0.8) !important;
             }
             
             .contact a {
