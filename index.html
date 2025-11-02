@@ -878,10 +878,10 @@ body {
             body {
                 background-image: url('Images/Bois-brule.webp') !important;
                 background-position: center !important;
-                background-size: 100% 100% !important;
+                background-size: cover !important;
                 background-repeat: no-repeat !important;
                 background-attachment: fixed !important;
-                -webkit-background-size: 100% 100% !important;
+                -webkit-background-size: cover !important;
                 position: relative;
                 width: 100vw !important;
                 overflow-x: hidden !important;
@@ -938,16 +938,20 @@ body::-webkit-scrollbar {
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 1rem 0.5rem !important;
+                padding: 0.5rem !important;
                 overflow-x: hidden !important;
+				box-sizing: border-box !important;
             }
             
             section {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 1.5rem 0.5rem !important;
+                padding: 1rem !important;
                 margin-bottom: 3rem;
 				box-sizing: border-box !important;
+				margin-left: 0 !important;
+                margin-right: 0 !important;
+				overflow: hidden !important;
             }
             
             h2 {
@@ -1743,10 +1747,10 @@ let ticking = false;
 			const maxThumbHeight = docElement.clientHeight;
 			const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
 		    const maxThumbPosition = docElement.clientHeight - thumbHeight;
-			const thumbTop = Math.min(scrollRatio * maxThumbPosition, maxThumbPosition);
+			const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
 			
 			thumb.style.height = thumbHeight + 'px';
-            thumb.style.top = thumbTop + 'px';
+            thumb.style.top = Math.max(0, thumbTop) + 'px';
             ticking = false;
         }
 
@@ -1775,7 +1779,7 @@ document.addEventListener('mousemove', (e) => {
     const mouseY = e.clientY;
     const maxThumbPosition = scrollbarHeight - thumbHeight;
     const thumbTop = Math.max(0, Math.min(mouseY, maxThumbPosition));
-    const scrollPercent = thumbTop / maxThumbPosition;
+    const scrollPercent = maxThumbPosition === 0 ? 0 : thumbTop / maxThumbPosition;
     
     thumb.style.top = thumbTop + 'px';
     window.scrollTo(0, scrollPercent * scrollHeight);
