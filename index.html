@@ -959,9 +959,10 @@ body::-webkit-scrollbar {
             }
             
             .container {
-                width: 100vw !important;
-                max-width: 100vw !important;
+                width: 100% !important;
+                max-width: 100% !important;
                 padding: 1rem 0.5rem !important;
+                overflow-x: hidden !important;
             }
             
             section {
@@ -1044,10 +1045,10 @@ body::-webkit-scrollbar {
             }
             
             .gallery-dot {
-                width: 13px important;
-                height: 13px important;
-                border: 3px solid rgba(90, 138, 138, 0.6) !important;
-                background: none !important;
+                width: 13px !important;
+                height: 13px !important;
+                border: 1px solid rgba(90, 138, 138, 0.6) !important;
+                background: transparent !important;
             }
             
             .gallery-dot.active {
@@ -1065,7 +1066,7 @@ body::-webkit-scrollbar {
             
             .gallery-arrow::before {
                 font-size: 22px !important;
-                background: url('Images/Curseur-defilement.webp') center/cover!important;
+                background: url('Images/Texture-garamond.webp') center/cover !important;
                 -webkit-background-clip: text !important;
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
@@ -1160,7 +1161,7 @@ body::-webkit-scrollbar {
 <body>
 
     <!-- Language Switcher -->
-	<div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+	<div style="position: fixed; top: 20px; right: 20px; z-index: 10000;">
     <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">FR</span>
     <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; color: rgba(90, 138, 138, 0.6);"> / </span>
     <a href="https://designthomaspruvot.github.io" style="text-decoration: none; font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; cursor: pointer;">EN</a>
@@ -1753,17 +1754,26 @@ body::-webkit-scrollbar {
 const thumb = document.getElementById('custom-scrollbar-thumb');
 const docElement = document.documentElement;
 
-function updateScrollbar() {
-    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const scrollTop = window.pageYOffset || docElement.scrollTop;
-    const scrollPercent = scrollTop / scrollHeight;
+let ticking = false;
 
-    const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
-    thumb.style.height = thumbHeight + 'px';
-    thumb.style.top = Math.min(scrollPercent * docElement.clientHeight, docElement.clientHeight - thumbHeight) + 'px';
-}
+        function updateScrollbar() {
+            const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
+            const scrollTop = window.pageYOffset || docElement.scrollTop;
+            const scrollRatio = scrollTop / scrollHeight;
+            const thumbHeight = Math.max(50, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
+            thumb.style.height = thumbHeight + 'px';
+            thumb.style.top = (scrollRatio * (docElement.clientHeight - thumbHeight + 40)) + 'px';
+            ticking = false;
+        }
 
-window.addEventListener('scroll', updateScrollbar);
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollbar);
+                ticking = true;
+            }
+        }
+
+window.addEventListener('scroll', requestTick);
 window.addEventListener('resize', updateScrollbar);
 updateScrollbar();
 
@@ -1791,4 +1801,3 @@ document.addEventListener('mouseup', () => {
 
 </body>
 </html>
-
