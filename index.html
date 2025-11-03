@@ -155,7 +155,7 @@ body {
                  position: absolute !important;
                  top: 20px !important;
                  right: 20px !important;
-                 z-index: 10001 !important;
+                 z-index: 999;
              }
 			 
             ::-webkit-scrollbar-track {
@@ -880,7 +880,7 @@ body {
                 background-position: center !important;
                 background-size: cover !important;
                 background-repeat: no-repeat !important;
-                background-attachment: fixed !important;
+                background-attachment: scroll !important;
                 -webkit-background-size: cover !important;
                 position: relative;
                 width: 100vw !important;
@@ -1139,6 +1139,98 @@ body::-webkit-scrollbar {
                 word-break: break-all;
             }
         }
+
+/* ========================================================================
+   CORRECTIONS MOBILE AJOUTÉES
+   ======================================================================== */
+
+@media (max-width: 768px) {
+    body {
+        max-width: 100vw;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    .gallery-container,
+    [style*="max-width: 2000px"],
+    [style*="max-width: 1400px"] {
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+
+    .gallery-wrapper,
+    [style*="max-width: 900px"] {
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+
+    .gallery-dot,
+    .nav-dot,
+    .pagination-dot {
+        background-image: url('Images/Texture-garamond.webp') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .gallery-dot.active,
+    .nav-dot.active,
+    .pagination-dot.active {
+        background-image: url('Images/Texture-garamond.webp') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        filter: brightness(1.2);
+    }
+}
+
+/* Navigation sémantique */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+}
+
+nav li {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Améliorations */
+html {
+    scroll-behavior: smooth;
+}
+
+#custom-scrollbar-thumb {
+    will-change: transform, top;
+}
+
+.gallery-dot,
+.nav-dot {
+    will-change: transform, opacity;
+}
+
+a:focus,
+button:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    input,
+    textarea,
+    select {
+        font-size: 16px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -1161,10 +1253,12 @@ body::-webkit-scrollbar {
     <header></header>
     
     <nav>
-        <a href="#a-propos">A PROPOS</a>
-        <a href="#mobilier">MOBILIER EN GESSO</a>
-        <a href="#luminaires">LUMINAIRES</a>
-        <a href="#contact">CONTACT</a>
+        <ul>
+            <li><a href="#a-propos">A PROPOS</a></li>
+            <li><a href="#mobilier">MOBILIER EN GESSO</a></li>
+            <li><a href="#luminaires">LUMINAIRES</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
     </nav>
     
     <div class="container">
@@ -1771,19 +1865,50 @@ thumb.addEventListener('mousedown', (e) => {
     e.preventDefault();
 });
 
+// Variables pour l'animation fluide du curseur
+let mouseY = 0;
+let targetY = 0;
+let animationId = null;
+
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
+    
+    // Calcul de la position relative à la scrollbar
+    const rect = thumb.parentElement.getBoundingClientRect();
+    mouseY = e.clientY - rect.top;
+    
+    // Annuler l'animation précédente
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+    }
+    
+    // Demander une nouvelle frame d'animation
+    animationId = requestAnimationFrame(updateThumbPosition);
+});
+
+// Fonction d'animation fluide du curseur
+function updateThumbPosition() {
     const scrollbarHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const mouseY = e.clientY;
     const maxThumbPosition = scrollbarHeight - thumbHeight;
-    const thumbTop = Math.max(0, Math.min(mouseY, maxThumbPosition));
-    const scrollPercent = maxThumbPosition === 0 ? 0 : thumbTop / maxThumbPosition;
     
-    thumb.style.top = thumbTop + 'px';
+    // Interpolation douce (lerp) pour un mouvement fluide
+    targetY = Math.max(0, Math.min(mouseY, maxThumbPosition));
+    const currentY = parseFloat(thumb.style.top) || 0;
+    const newY = currentY + (targetY - currentY) * 0.25;
+    
+    thumb.style.top = newY + 'px';
+    
+    // Mise à jour du scroll de la page
+    const scrollPercent = maxThumbPosition === 0 ? 0 : newY / maxThumbPosition;
     window.scrollTo(0, scrollPercent * scrollHeight);
-});
+    
+    // Continuer l'animation si on n'a pas atteint la cible
+    if (Math.abs(targetY - newY) > 0.5) {
+        animationId = requestAnimationFrame(updateThumbPosition);
+    }
+}
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
