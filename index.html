@@ -1028,7 +1028,7 @@ body::-webkit-scrollbar {
                 width: 13px !important;
                 height: 13px !important;
                 border: 1px solid rgba(90, 138, 138, 0.6) !important;
-                background: transparent !important;
+                background: none !important;
             }
             
             .gallery-dot.active {
@@ -1050,8 +1050,7 @@ body::-webkit-scrollbar {
                 -webkit-background-clip: text !important;
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
-            }		
-} 
+            }		 
             
             .contact a {
                 display: block;
@@ -1068,6 +1067,23 @@ body::-webkit-scrollbar {
                 padding: 15px;
             }
             
+			/* REPOSITIONNER LES FLÈCHES DORÉES SOUS LA PHOTO EN MOBILE */
+            .lightbox-prev,
+            .lightbox-next {
+                  position: absolute !important;
+                  bottom: -60px !important;
+                  top: auto !important;
+                  transform: none !important;
+            }
+
+            .lightbox-prev {
+                 left: 20px !important;
+            }
+
+            .lightbox-next {
+                 right: 20px !important;
+            }
+
             .collection-description,
             .luminaire-description {
                 font-size: 1rem;
@@ -1218,6 +1234,13 @@ body::-webkit-scrollbar {
 
 #custom-scrollbar-thumb:active {
     cursor: grabbing !important;
+}
+
+/* MASQUER LES FLÈCHES HTML NOIRES DE LA LIGHTBOX */
+.lightbox-nav.lightbox-prev,
+.lightbox-nav.lightbox-next,
+.lightbox-close {
+    display: none !important;
 }
 
 </style>
@@ -1866,7 +1889,6 @@ document.addEventListener('mousemove', (e) => {
     if (animationId) {
         cancelAnimationFrame(animationId);
     }
-    
     animationId = requestAnimationFrame(updateThumbPosition);
 });
 
