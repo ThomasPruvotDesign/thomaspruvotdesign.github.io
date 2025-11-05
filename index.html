@@ -653,7 +653,7 @@ body {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: url('Images/Texture-garamond.webp') center/cover;
+            background: none;
             width: 55px;
             height: 55px;
             cursor: pointer;
@@ -1048,7 +1048,7 @@ body::-webkit-scrollbar {
             
             .gallery-arrow::before {
                 font-size: 22px !important;
-                background: url('Images/Texture-garamond.webp') center/cover !important;
+                background: none !important;
                 -webkit-background-clip: text !important;
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
@@ -1064,28 +1064,10 @@ body::-webkit-scrollbar {
                 word-break: break-all;
                 padding: 0 0.5rem;
             }
-            
-            .lightbox-close {1052-
-                font-size: 45px;
-                top: 15px;
-                right: 20px;
-            }
-            
+             
             .lightbox-nav {
                 font-size: 50px;
                 padding: 15px;
-            }
-            
-			
-            .lightbox-prev { left: 15px; }
-            .lightbox-next { right: 15px; }
-            
-            .intro p {
-                display: none;
-            }
-            
-            .intro p:first-child {
-                display: block;
             }
             
             .collection-description,
@@ -1839,34 +1821,37 @@ const thumb = document.getElementById('custom-scrollbar-thumb');
 const docElement = document.documentElement;
 
 let ticking = false;
+let isDragging = false;
+let mouseY = 0;
+let targetY = 0;
+let animationId = null;
 
-        function updateScrollbar() {
-            const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-            const scrollTop = window.pageYOffset || docElement.scrollTop;
-            const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
-            
-			const maxThumbHeight = docElement.clientHeight;
-			const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
-		    const maxThumbPosition = docElement.clientHeight - thumbHeight;
-			const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
-			
-			thumb.style.height = thumbHeight + 'px';
-            thumb.style.top = Math.max(0, thumbTop) + 'px';
-            ticking = false;
-        }
+function updateScrollbar() {
+    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
+    const scrollTop = window.pageYOffset || docElement.scrollTop;
+    const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
+    
+    const maxThumbHeight = docElement.clientHeight;
+    const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
+    const maxThumbPosition = docElement.clientHeight - thumbHeight;
+    const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
+    
+    thumb.style.height = thumbHeight + 'px';
+    thumb.style.top = Math.max(0, thumbTop) + 'px';
+    ticking = false;
+}
 
-        function requestTick() {
-            if (!ticking) {
-                window.requestAnimationFrame(updateScrollbar);
-                ticking = true;
-            }
-        }
+function requestTick() {
+    if (!ticking) {
+        window.requestAnimationFrame(updateScrollbar);
+        ticking = true;
+    }
+}
 
 window.addEventListener('scroll', requestTick);
 window.addEventListener('resize', updateScrollbar);
 updateScrollbar();
 
-let isDragging = false;
 thumb.addEventListener('mousedown', (e) => {
     isDragging = true;
     e.preventDefault();
@@ -1874,23 +1859,46 @@ thumb.addEventListener('mousedown', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
+    
+    const rect = thumb.parentElement.getBoundingClientRect();
+    const scrollbarHeight = docElement.clientHeight;
+    const thumbHeight = thumb.offsetHeight;
+    const maxPosition = scrollbarHeight - thumbHeight;
+    mouseY = Math.max(0, Math.min(e.clientY - rect.top, maxPosition));
+    
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+    }
+
+    animationId = requestAnimationFrame(updateThumbPosition);
+});
+
+function updateThumbPosition() {
     const scrollbarHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const mouseY = e.clientY;
     const maxThumbPosition = scrollbarHeight - thumbHeight;
-    const thumbTop = Math.max(0, Math.min(mouseY, maxThumbPosition));
-    const scrollPercent = maxThumbPosition === 0 ? 0 : thumbTop / maxThumbPosition;
     
-    thumb.style.top = thumbTop + 'px';
+    targetY = mouseY;
+    const currentY = parseFloat(thumb.style.top) || 0;
+    const newY = currentY + (targetY - currentY) * 0.95;
+    
+    thumb.style.top = newY + 'px';
+    
+    const scrollPercent = maxThumbPosition === 0 ? 0 : newY / maxThumbPosition;
     window.scrollTo(0, scrollPercent * scrollHeight);
-});
+    
+    if (Math.abs(targetY - newY) > 0.1) {
+        animationId = requestAnimationFrame(updateThumbPosition);
+    }
+}
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
 });
 
 </script>
+
 
 </body>
 </html>
