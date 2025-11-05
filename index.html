@@ -229,42 +229,8 @@ body {
             opacity: 0.7;
         }
         
-        .lightbox-prev,
-        .lightbox-next {
-         position: fixed;
-         top: 50%;
-         transform: translateY(-50%);
-         width: 50px;
-         height: 50px;
-         font-size: 3rem;
-         font-weight: 100;
-         cursor: pointer;
-         z-index: 10002;
-         border: none !important;
-         outline: none !important;
-         background-image: url('Images/Curseur-defilement.webp') !important;
-         -webkit-background-clip: text;
-         background-clip: text;
-         -webkit-text-fill-color: transparent;
-         color: transparent;
-        }
-
-       .lightbox-prev::before {
-          content: '<';
-        }
-
-        .lightbox-next::before {
-          content: '>';
-        }
-
-       .lightbox-prev {
-         left: 50px;
-        }
-
-       .lightbox-next {
-         right: 50px;
-        }
-
+        .lightbox-prev { left: 30px; }
+        .lightbox-next { right: 30px; }
         
         .lightbox-counter {
             position: fixed;
@@ -1111,44 +1077,9 @@ body::-webkit-scrollbar {
             }
             
 			
-        @media (max-width: 768px) {
-             .lightbox-prev,
-             .lightbox-next {
-             position: fixed;
-             bottom: 80px;
-             top: auto;
-             width: 50px;
-             height: 50px;
-             font-size: 3rem;
-             font-weight: 100;
-             cursor: pointer;
-             z-index: 10002;
-             border: none !important;
-             outline: none !important;
-             background-image: url('Images/Curseur-defilement.webp') !important;
-             -webkit-background-clip: text;
-             background-clip: text;
-             -webkit-text-fill-color: transparent;
-             color: transparent;
-            }
-    
-            .lightbox-prev::before {
-                 content: '<';
-            }
-    
-            .lightbox-next::before {
-                 content: '>';
-            }
-    
-            .lightbox-prev {
-                 left: 30%;
-            }
-    
-            .lightbox-next {
-                 right: 30%;
-            }
-        }
-
+            .lightbox-prev { left: 15px; }
+            .lightbox-next { right: 15px; }
+            
             .intro p {
                 display: none;
             }
@@ -1703,53 +1634,35 @@ body::-webkit-scrollbar {
             });
         });
         
-     function changeGalleryImage(button, dir) {
-    const card = button.closest('.collection-card');
-    const gallery = card.querySelector('.collection-images');
-    const dotsContainer = card.querySelector('.gallery-nav');
-    const dots = dotsContainer.querySelectorAll('.gallery-dot');
-    const realImagesCount = dots.length;
-    
-    const cardId = Array.from(card.parentElement.children).indexOf(card);
-    const parentId = card.parentElement.className;
-    const uniqueId = parentId + '-' + cardId;
-    
-    if (isTransitioning[uniqueId]) return;
-    isTransitioning[uniqueId] = true;
-    
-    if (typeof galleryIndexes[uniqueId] === 'undefined') {
-        galleryIndexes[uniqueId] = 1;
-    }
-    
-    galleryIndexes[uniqueId] += dir;
-    
-    gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-    
-    const realIndex = ((galleryIndexes[uniqueId] - 1) + realImagesCount) % realImagesCount;
-    
-    updateGalleryDots(realIndex, card);
-    updateGalleryCounter(realIndex + 1, realImagesCount, card);  // ← AFFICHE LE COMPTEUR
-    
-    if (galleryIndexes[uniqueId] === 0) {
-        galleryIndexes[uniqueId] = realImagesCount;
-        gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-    }
-    else if (galleryIndexes[uniqueId] === realImagesCount + 1) {
-        galleryIndexes[uniqueId] = 1;
-        gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-    }
-    
-    setTimeout(() => { isTransitioning[uniqueId] = false; }, 500);
-}
-
-// NOUVELLE FONCTION : Afficher compteur par collection
-function updateGalleryCounter(currentIndex, totalImages, card) {
-    const counter = card.querySelector('.gallery-counter');
-    if (counter) {
-        counter.textContent = `${currentIndex} / ${totalImages}`;
-    }
-}
-  
+        function changeGalleryImage(btn, dir) {
+            const card = btn.closest('.collection-card, .luminaire');
+            const gallery = card.querySelector('.collection-images, .luminaire-images');
+            const dotsContainer = card.querySelector('.gallery-nav');
+            if (!dotsContainer) return;
+            
+            const dots = dotsContainer.querySelectorAll('.gallery-dot');
+            const realImagesCount = dots.length;
+            
+            const cardId = Array.from(card.parentElement.children).indexOf(card);
+            const parentId = card.parentElement.className;
+            const uniqueId = parentId + '-' + cardId;
+            
+            if (isTransitioning[uniqueId]) return;
+            isTransitioning[uniqueId] = true;
+            
+            if (typeof galleryIndexes[uniqueId] === 'undefined') {
+                galleryIndexes[uniqueId] = 1;
+            }
+            
+            galleryIndexes[uniqueId] += dir;
+            
+            gallery.style.transition = 'transform 0.5s ease-in-out';
+            gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
+            
+            const realIndex = ((galleryIndexes[uniqueId] - 1) + realImagesCount) % realImagesCount;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === realIndex);
+            });
             
             setTimeout(() => {
                 gallery.style.transition = 'none';
@@ -1825,18 +1738,18 @@ const thumb = document.getElementById('custom-scrollbar-thumb');
 const docElement = document.documentElement;
 
 let ticking = false;
-let isDragging = false;  // ← DÉPLACÉ ICI
+let isDragging = false;
 
 function updateScrollbar() {
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
     const scrollTop = window.pageYOffset || docElement.scrollTop;
     const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
-    
+
     const maxThumbHeight = docElement.clientHeight;
     const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
     const maxThumbPosition = docElement.clientHeight - thumbHeight;
     const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
-    
+
     thumb.style.height = thumbHeight + 'px';
     thumb.style.top = Math.max(0, thumbTop) + 'px';
     ticking = false;
@@ -1867,42 +1780,35 @@ if (thumb) {
 
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    
-    // Calcul de la position relative à la scrollbar
+
     const rect = thumb.parentElement.getBoundingClientRect();
     const scrollbarHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
     const maxPosition = scrollbarHeight - thumbHeight;
     mouseY = Math.max(0, Math.min(e.clientY - rect.top, maxPosition));
-    
-    // Annuler l'animation précédente
+
     if (animationId) {
         cancelAnimationFrame(animationId);
     }
-    
-    // Demander une nouvelle frame d'animation
+
     animationId = requestAnimationFrame(updateThumbPosition);
 });
 
-// Fonction d'animation fluide du curseur
 function updateThumbPosition() {
     const scrollbarHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
     const maxThumbPosition = scrollbarHeight - thumbHeight;
-    
-    // Interpolation douce (lerp) pour un mouvement fluide
+
     targetY = mouseY;
     const currentY = parseFloat(thumb.style.top) || 0;
     const newY = currentY + (targetY - currentY) * 0.6;
-    
+
     thumb.style.top = newY + 'px';
-    
-    // Mise à jour du scroll de la page
+
     const scrollPercent = maxThumbPosition === 0 ? 0 : newY / maxThumbPosition;
     window.scrollTo(0, scrollPercent * scrollHeight);
-    
-    // Continuer l'animation si on n'a pas atteint la cible
+
     if (Math.abs(targetY - newY) > 0.3) {
         animationId = requestAnimationFrame(updateThumbPosition);
     }
@@ -1911,9 +1817,7 @@ function updateThumbPosition() {
 document.addEventListener('mouseup', () => {
     isDragging = false;
 });
-
 </script>
-
 
 </body>
 </html>
