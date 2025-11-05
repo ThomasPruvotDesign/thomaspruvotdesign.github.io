@@ -1035,6 +1035,7 @@ body::-webkit-scrollbar {
             
             .gallery-dot.active {
                 background: url('Images/Texture-garamond.webp') center/cover !important;
+				background-repeat: repeat !important;
                 border: 1px solid rgba(90, 138, 138, 0.8) !important;
             }
             
@@ -1168,11 +1169,6 @@ body::-webkit-scrollbar {
     padding: 0 !important;
 }
 
-/* MASQUER LE SPAN BLANC/NOIR DANS LA CROIX */
-.lightbox-close span {
-    display: none !important;
-}
-
 .lightbox-close::before {
     content: '✕' !important;
     background-image: url('Images/Curseur-defilement.webp') !important;
@@ -1201,12 +1197,6 @@ body::-webkit-scrollbar {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-}
-
-/* MASQUER LES SPANS BLANCS/NOIRS DANS LES FLÈCHES */
-.lightbox-prev span,
-.lightbox-next span {
-    display: none !important;
 }
 
 .lightbox-prev::before {
@@ -1261,11 +1251,12 @@ body::-webkit-scrollbar {
     </div>
 	
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
-        <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1, event)">‹</span>
-        <img src="" alt="" class="lightbox-content" id="lightbox-img">
-        <span class="lightbox-nav lightbox-next" onclick="changeLightboxImage(1, event)">›</span>
-        <div class="lightbox-counter" id="lightbox-counter"></div>
+	     <img src="" alt="" class="lightbox-content" id="lightbox-img">
+         <span class="lightbox-close" onclick="closeLightbox(event)"></span>
+         <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1, event)"></span>
+         <span class="lightbox-nav lightbox-next" onclick="changeLightboxImage(1, event)"></span>
+         <div class="lightbox-counter" id="lightbox-counter"></div>      
+
     </div>
 
     <header></header>
@@ -1845,38 +1836,36 @@ body::-webkit-scrollbar {
 
 <script>
 const thumb = document.getElementById('custom-scrollbar-thumb');
+const scrollbar = document.getElementById('custom-scrollbar');
 const docElement = document.documentElement;
 
-let ticking = false;
 let isDragging = false;
-let mouseY = 0;
-let targetY = 0;
-let animationId = null;
 
-function updateScrollbar() {
+// Calcul de la hauteur du thumb et mise à jour
+function updateThumbHeight() {
+    const scrollHeight = docElement.scrollHeight;
+    const clientHeight = docElement.clientHeight;
+    const thumbHeight = Math.max(20, (clientHeight / scrollHeight) * clientHeight);
+    thumb.style.height = thumbHeight + 'px';
+    return thumbHeight;
+}
+
+// Synchronisation du thumb avec le scroll naturel
+function syncThumbWithScroll() {
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
     const scrollTop = window.pageYOffset || docElement.scrollTop;
     const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
     
-    const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
+    const thumbHeight = thumb.offsetHeight;
     const maxThumbPosition = docElement.clientHeight - thumbHeight;
-    const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
+    const thumbTop = scrollRatio * maxThumbPosition;
     
-    thumb.style.height = thumbHeight + 'px';
-    thumb.style.top = Math.max(0, thumbTop) + 'px';
-    ticking = false;
+    thumb.style.top = thumbTop + 'px';
 }
 
-function requestTick() {
-    if (!ticking) {
-        window.requestAnimationFrame(updateScrollbar);
-        ticking = true;
-    }
-}
-
-window.addEventListener('scroll', requestTick);
-window.addEventListener('resize', updateScrollbar);
-updateScrollbar();
+// Événements
+window.addEventListener('scroll', syncThumbWithScroll, { passive: true });
+window.addEventListener('resize', updateThumbHeight);
 
 thumb.addEventListener('mousedown', (e) => {
     isDragging = true;
@@ -1886,40 +1875,32 @@ thumb.addEventListener('mousedown', (e) => {
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     
-    const rect = thumb.parentElement.getBoundingClientRect();
-    const scrollbarHeight = docElement.clientHeight;
+    const scrollbarRect = scrollbar.getBoundingClientRect();
+    const clientHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
-    const maxPosition = scrollbarHeight - thumbHeight;
-    mouseY = Math.max(0, Math.min(e.clientY - rect.top, maxPosition));
+    const maxThumbPosition = clientHeight - thumbHeight;
     
-    if (animationId) {
-        cancelAnimationFrame(animationId);
-    }
-    animationId = requestAnimationFrame(updateThumbPosition);
-});
-
-function updateThumbPosition() {
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
+    // Position du thumb relative à la scrollbar
+    const thumbPosition = e.clientY - scrollbarRect.top;
+    const clampedPosition = Math.max(0, Math.min(thumbPosition, maxThumbPosition));
+    
+    thumb.style.top = clampedPosition + 'px';
+    
+    // Calcul du ratio de scroll
+    const scrollRatio = maxThumbPosition === 0 ? 0 : clampedPosition / maxThumbPosition;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const maxThumbPosition = scrollbarHeight - thumbHeight;
     
-    targetY = mouseY;
-    const currentY = parseFloat(thumb.style.top) || 0;
-    const newY = currentY + (targetY - currentY) * 1;  // ← 0.6 (Martin)
-    
-    thumb.style.top = newY + 'px';
-    
-    const scrollPercent = maxThumbPosition === 0 ? 0 : newY / maxThumbPosition;
-    window.scrollTo(0, scrollPercent * scrollHeight);
-    
-    if (Math.abs(targetY - newY) > 0.3) {  // ← 0.3 (Martin)
-        animationId = requestAnimationFrame(updateThumbPosition);
-    }
-}
+    window.scrollTo(0, scrollRatio * scrollHeight);
+}, { passive: true });
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
+}, { passive: true });
+
+// Initialisation
+updateThumbHeight();
+syncThumbWithScroll();
+
 });
 
 </script>
