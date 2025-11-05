@@ -1825,28 +1825,29 @@ const thumb = document.getElementById('custom-scrollbar-thumb');
 const docElement = document.documentElement;
 
 let ticking = false;
+let isDragging = false;  // ← DÉPLACÉ ICI
 
-        function updateScrollbar() {
-            const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-            const scrollTop = window.pageYOffset || docElement.scrollTop;
-            const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
-            
-			const maxThumbHeight = docElement.clientHeight;
-			const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
-		    const maxThumbPosition = docElement.clientHeight - thumbHeight;
-			const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
-			
-			thumb.style.height = thumbHeight + 'px';
-            thumb.style.top = Math.max(0, thumbTop) + 'px';
-            ticking = false;
-        }
+function updateScrollbar() {
+    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
+    const scrollTop = window.pageYOffset || docElement.scrollTop;
+    const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
+    
+    const maxThumbHeight = docElement.clientHeight;
+    const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
+    const maxThumbPosition = docElement.clientHeight - thumbHeight;
+    const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
+    
+    thumb.style.height = thumbHeight + 'px';
+    thumb.style.top = Math.max(0, thumbTop) + 'px';
+    ticking = false;
+}
 
-        function requestTick() {
-            if (!ticking) {
-                window.requestAnimationFrame(updateScrollbar);
-                ticking = true;
-            }
-        }
+function requestTick() {
+    if (!ticking) {
+        window.requestAnimationFrame(updateScrollbar);
+        ticking = true;
+    }
+}
 
 window.addEventListener('scroll', requestTick);
 window.addEventListener('resize', updateScrollbar);
@@ -1856,6 +1857,13 @@ updateScrollbar();
 let mouseY = 0;
 let targetY = 0;
 let animationId = null;
+
+// Listener pour détecter le drag
+if (thumb) {
+    thumb.addEventListener('mousedown', () => {
+        isDragging = true;
+    });
+}
 
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
@@ -1886,7 +1894,7 @@ function updateThumbPosition() {
     // Interpolation douce (lerp) pour un mouvement fluide
     targetY = mouseY;
     const currentY = parseFloat(thumb.style.top) || 0;
-    const newY = currentY + (targetY - currentY) * 0.6;  // ← CHANGÉ de 0.25 à 0.6
+    const newY = currentY + (targetY - currentY) * 0.6;
     
     thumb.style.top = newY + 'px';
     
@@ -1895,7 +1903,7 @@ function updateThumbPosition() {
     window.scrollTo(0, scrollPercent * scrollHeight);
     
     // Continuer l'animation si on n'a pas atteint la cible
-    if (Math.abs(targetY - newY) > 0.3) {  // ← CHANGÉ de 0.5 à 0.3 pour plus de précision
+    if (Math.abs(targetY - newY) > 0.3) {
         animationId = requestAnimationFrame(updateThumbPosition);
     }
 }
@@ -1904,8 +1912,8 @@ document.addEventListener('mouseup', () => {
     isDragging = false;
 });
 
-
 </script>
+
 
 </body>
 </html>
