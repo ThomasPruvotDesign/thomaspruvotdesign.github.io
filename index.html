@@ -155,7 +155,7 @@ body {
                  position: absolute !important;
                  top: 20px !important;
                  right: 20px !important;
-                 z-index: 999;
+                 z-index: 10001 !important;
              }
 			 
             ::-webkit-scrollbar-track {
@@ -229,32 +229,8 @@ body {
             opacity: 0.7;
         }
         
-        .lightbox-prev,
-        .lightbox-next { 
-		  position: fixed;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 50px;
-          height: 50px;
-          font-size: 3rem;
-          font-weight: 100;
-          cursor: pointer;
-          z-index: 10002;
-          border: none !important;
-          outline: none !important;
-          background-image: url('Images/Curseur-defilement.webp') !important;
-         -webkit-background-clip: text !important;
-         background-clip: text !important;
-         -webkit-text-fill-color: transparent !important;
-         color: transparent !important;
-}
-
-.lightbox-prev::before {
-    content: '<';
-}
-
-.lightbox-next::before {
-    content: '>';
+        .lightbox-prev { left: 30px; }
+        .lightbox-next { right: 30px; }
         
         .lightbox-counter {
             position: fixed;
@@ -658,108 +634,66 @@ body {
             z-index: 1;
         }
         
-        /* DOTS MOBILE - INACTIF */
-       .gallery-dot {
-          width: 13px !important;
-          height: 13px !important;
-          border-radius: 50% !important;
-          background: none !important;
-          border: 2px solid transparent !important;
-          border-image: url('Images/Texture-garamond.webp') 1 !important;
-          cursor: pointer !important;
-          pointer-events: auto !important;
+        .gallery-dot {
+            width: 13px !important;
+            height: 13px !important;
+            border-radius: 0;
+            background: transparent !important;
+            cursor: pointer;
+            pointer-events: auto;
+            border: 1px solid rgba(90, 138, 138, 0.6) !important;
         }
-
-        /* DOTS MOBILE - ACTIF */
-       .gallery-dot.active {
-         background-image: url('Images/Texture-garamond.webp') !important;
-         background-size: cover !important;
-         background-position: center !important;
-         border: none !important;
-        }
-
         
- .gallery-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none !important;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    font-size: 28px;
-    z-index: 10;
-    opacity: 0;
-    border-radius: 0;
-    pointer-events: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none !important;
-    outline: none !important;
-}
-
-.gallery-arrow::before {
-    content: attr(data-arrow);
-    background-image: url('Images/Curseur-defilement.webp') !important;
-    background-size: cover !important;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    font-size: 28px;
-    z-index: 1;
-}
-
-.gallery-arrow.prev::before {
-    content: '<';
-}
-
-.gallery-arrow.next::before {
-    content: '>';
-}
-
-.collection-card:hover .gallery-arrow {
-    opacity: 1;
-}
-
-.gallery-arrow.prev { left: 15px; }
-.gallery-arrow.next { right: 15px; }
-
-/* Pas de bordure à la sélection */
-.gallery-arrow:focus,
-.gallery-arrow:active {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-@media (max-width: 768px) {
-    .gallery-arrow {
-        width: 40px !important;
-        height: 40px !important;
-        background: none !important;
-        font-size: 22px !important;
-        border: none !important;
-        outline: none !important;
-    }
-    
-    .gallery-arrow::before {
-        font-size: 22px !important;
-        background-image: url('Images/Curseur-defilement.webp') !important;
-        background-size: cover !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        color: transparent !important;
-    }
-    
-    .gallery-arrow:focus,
-    .gallery-arrow:active {
-        border: none !important;
-        outline: none !important;
-    }
-}      
+        .gallery-dot.active {
+            background: url('Images/Texture-garamond.webp') center/cover !important;
+            border: 1px solid rgba(90, 138, 138, 0.8) !important;
+        }
+        
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: url('Images/Texture-garamond.webp') center/cover;
+            width: 55px;
+            height: 55px;
+            cursor: pointer;
+            font-size: 28px;
+            z-index: 10;
+            opacity: 0;
+            border-radius: 0;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+        }
+        
+        .gallery-arrow::before {
+            content: attr(data-arrow);
+            background: url('Images/Curseur-defilement.webp') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-size: 28px;
+            z-index: 1;
+        }
+        
+        .gallery-arrow.prev::before {
+            content: '‹';
+        }
+        
+        .gallery-arrow.next::before {
+            content: '›';
+        }
+        
+        .luminaire:hover .gallery-arrow,
+        .collection-card:hover .gallery-arrow {
+            opacity: 1;
+        }
+        
+        .gallery-arrow.prev { left: 15px; }
+        .gallery-arrow.next { right: 15px; }
         
         .luminaire-info {
             padding: 2rem;
@@ -946,7 +880,7 @@ body {
                 background-position: center !important;
                 background-size: cover !important;
                 background-repeat: no-repeat !important;
-                background-attachment: scroll !important;
+                background-attachment: fixed !important;
                 -webkit-background-size: cover !important;
                 position: relative;
                 width: 100vw !important;
@@ -1092,42 +1026,34 @@ body::-webkit-scrollbar {
                 max-width: calc(100vw - 2rem) !important;
             }
             
-           .gallery-arrow {
-             width: 40px !important;
-             height: 40px !important;
-             background: none !important;
-             font-size: 22px !important;
-             border: none !important;
-             outline: none !important;
-			 top: auto !important;
-             bottom: 15px !important;
-             transform: none !important;
+            .gallery-dot {
+                width: 13px !important;
+                height: 13px !important;
+                border: 1px solid rgba(90, 138, 138, 0.6) !important;
+                background: transparent !important;
             }
+            
+            .gallery-dot.active {
+                background: url('Images/Texture-garamond.webp') center/cover !important;
+                border: 1px solid rgba(90, 138, 138, 0.8) !important;
+            }
+            
+            .gallery-arrow {
+                width: 45px !important;
+                height: 45px !important;
+                background: none !important;
+                font-size: 22px !important;
 			
-		   .gallery-arrow.prev {
-             left: 30% !important;
             }
-    
-           .gallery-arrow.next {
-             right: 30% !important;
+            
+            .gallery-arrow::before {
+                font-size: 22px !important;
+                background: url('Images/Texture-garamond.webp') center/cover !important;
+                -webkit-background-clip: text !important;
+                background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
+}
             }
-    
-           .gallery-arrow::before {
-             font-size: 22px !important;
-             background-image: url('Images/Curseur-defilement.webp') !important;
-             background-size: cover !important;
-             -webkit-background-clip: text !important;
-             background-clip: text !important;
-             -webkit-text-fill-color: transparent !important;
-             color: transparent !important;
-            }
-    
-           .gallery-arrow:focus,
-           .gallery-arrow:active {
-             border: none !important;
-             outline: none !important;
-            }
-        }          
             
             .contact a {
                 display: block;
@@ -1213,122 +1139,7 @@ body::-webkit-scrollbar {
                 word-break: break-all;
             }
         }
-
-/* ========================================================================
-   CORRECTIONS MOBILE AJOUTÉES
-   ======================================================================== */
-
-@media (max-width: 768px) {
-    body {
-        max-width: 100vw;
-        overflow-x: hidden;
-        min-height: 100vh;
-    }
-
-    .gallery-container,
-    [style*="max-width: 2000px"],
-    [style*="max-width: 1400px"] {
-        max-width: 100vw !important;
-        width: 100% !important;
-    }
-
-    .gallery-wrapper,
-    [style*="max-width: 900px"] {
-        max-width: 100vw !important;
-        width: 100% !important;
-    }
-
-}
-
-/* Navigation sémantique */
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 2rem;
-}
-
-nav li {
-    display: inline-block;
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-
-/* Améliorations */
-html {
-    scroll-behavior: smooth;
-}
-
-#custom-scrollbar-thumb {
-    will-change: transform, top;
-}
-
-.gallery-dot,
-.nav-dot {
-    will-change: transform, opacity;
-}
-
-a:focus,
-button:focus {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-}
-
-@media (max-width: 768px) {
-    input,
-    textarea,
-    select {
-        font-size: 16px;
-    }
-}
-
-    
-.lightbox-close {
-    position: fixed !important;
-    top: 30px !important;
-    right: 30px !important;
-    width: 40px !important;
-    height: 40px !important;
-    cursor: pointer !important;
-    z-index: 10003 !important;
-    font-size: 2rem !important;
-    font-weight: 100 !important;
-    line-height: 40px !important;
-    text-align: center !important;
-    background-image: url('Images/Curseur-defilement.webp') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    opacity: 0.75 !important;
-    transition: opacity 0.2s !important;
-}
-
-.lightbox-close::before {
-    content: '×' !important;
-    display: block !important;
-}
-
-.lightbox-close:hover {
-    opacity: 1 !important;
-}
-
-@media (max-width: 768px) {
-    .lightbox-close {
-        top: 20px !important;
-        right: 20px !important;
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 1.8rem !important;
-    }
-
-}
-
-</style>
+    </style>
 </head>
 <body>
 
@@ -1340,8 +1151,7 @@ button:focus {
     </div>
 	
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-        <div class="lightbox-close" onclick="closeLightbox()"></div>
-        span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
         <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1, event)">‹</span>
         <img src="" alt="" class="lightbox-content" id="lightbox-img">
         <span class="lightbox-nav lightbox-next" onclick="changeLightboxImage(1, event)">›</span>
@@ -1351,12 +1161,10 @@ button:focus {
     <header></header>
     
     <nav>
-        <ul>
-            <li><a href="#a-propos">A PROPOS</a></li>
-            <li><a href="#mobilier">MOBILIER EN GESSO</a></li>
-            <li><a href="#luminaires">LUMINAIRES</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
+        <a href="#a-propos">A PROPOS</a>
+        <a href="#mobilier">MOBILIER EN GESSO</a>
+        <a href="#luminaires">LUMINAIRES</a>
+        <a href="#contact">CONTACT</a>
     </nav>
     
     <div class="container">
@@ -1718,77 +1526,83 @@ button:focus {
         // LIGHTBOX
         let currentLightboxGallery = [];
         let currentLightboxIndex = 0;
-
-       function openLightbox(img, gallery) {
-         const lightbox = document.getElementById('lightbox');
-         const lightboxImg = document.getElementById('lightbox-img');
-         currentLightboxGallery = Array.from(gallery.querySelectorAll('.collection-image, .luminaire-image, .material-sample img'));
-         currentLightboxIndex = currentLightboxGallery.indexOf(img);
-         lightboxImg.src = img.src;
-         lightbox.classList.add('active');
-    
-      if (currentLightboxGallery.length === 1) {
-          lightbox.classList.add('single-image');
-      } else {
-          lightbox.classList.remove('single-image');
-      }
-    
-      document.body.style.overflow = 'hidden';
-      updateLightboxCounter();
-     }
-
-      function closeLightbox(event) {
-         const lightbox = document.getElementById('lightbox');
-         if (!event || event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
-             lightbox.classList.remove('active');
-             lightbox.classList.remove('single-image');
-             document.body.style.overflow = '';
-             if (event) event.stopPropagation();
-         }
-     }
-
-      function changeLightboxImage(dir, e) {
-          e.stopPropagation();
-          if (currentLightboxGallery.length <= 1) return;
-          currentLightboxIndex = (currentLightboxIndex + dir + currentLightboxGallery.length) % currentLightboxGallery.length;
-          document.getElementById('lightbox-img').src = currentLightboxGallery[currentLightboxIndex].src;
-          updateLightboxCounter();
-     }
-
-     function updateLightboxCounter() {
-          if (currentLightboxGallery.length > 1) {
-          // Compter les images de la collection actuelle
-         const firstImg = currentLightboxGallery[0];
-         const collectionContainer = firstImg.closest('.materials-samples');
         
-         let collectionImages = [];
-         if (collectionContainer) {
-             collectionImages = Array.from(collectionContainer.querySelectorAll('.material-sample img'));
-         }
+        function openLightbox(img, gallery) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            currentLightboxGallery = Array.from(gallery.querySelectorAll('.collection-image, .luminaire-image, .material-sample img'));
+            currentLightboxIndex = currentLightboxGallery.indexOf(img);
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            
+            if (currentLightboxGallery.length === 1) {
+                lightbox.classList.add('single-image');
+            } else {
+                lightbox.classList.remove('single-image');
+            }
+            
+            document.body.style.overflow = 'hidden';
+            updateLightboxCounter();
+        }
         
-        // Trouver l'index relatif à la collection
-         const indexInCollection = collectionImages.indexOf(currentLightboxGallery[currentLightboxIndex]);
-         const totalInCollection = collectionImages.length;
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                lightbox.classList.remove('single-image');
+                document.body.style.overflow = '';
+                e.stopPropagation();
+            }
+        }
         
-         if (totalInCollection > 0) {
-             document.getElementById('lightbox-counter').textContent = 
-                 `${indexInCollection + 1} / ${totalInCollection}`;
-         }
-     } else {
-         document.getElementById('lightbox-counter').textContent = '';
-         }
-     }
-
-
-// Attacher les événements aux flèches lightbox
-     document.querySelectorAll('.lightbox-prev').forEach(btn => {
-         btn.onclick = (e) => changeLightboxImage(-1, e);
-     });
-
-     document.querySelectorAll('.lightbox-next').forEach(btn => {
-         btn.onclick = (e) => changeLightboxImage(1, e);
-     });
-
+        function changeLightboxImage(dir, e) {
+            e.stopPropagation();
+            if (currentLightboxGallery.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex + dir + currentLightboxGallery.length) % currentLightboxGallery.length;
+            document.getElementById('lightbox-img').src = currentLightboxGallery[currentLightboxIndex].src;
+            updateLightboxCounter();
+        }
+        
+        function updateLightboxCounter() {
+            if (currentLightboxGallery.length > 1) {
+                document.getElementById('lightbox-counter').textContent = `${currentLightboxIndex + 1} / ${currentLightboxGallery.length}`;
+            } else {
+                document.getElementById('lightbox-counter').textContent = '';
+            }
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            const lb = document.getElementById('lightbox');
+            if (lb.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox({target: lb});
+                } else if (e.key === 'ArrowLeft' && currentLightboxGallery.length > 1) {
+                    changeLightboxImage(-1, e);
+                } else if (e.key === 'ArrowRight' && currentLightboxGallery.length > 1) {
+                    changeLightboxImage(1, e);
+                }
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.collection-gallery, .luminaire-gallery').forEach(gallery => {
+                gallery.querySelectorAll('.collection-image, .luminaire-image').forEach(img => {
+                    img.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        openLightbox(this, gallery);
+                    });
+                });
+            });
+            
+            document.querySelectorAll('.material-sample img').forEach(img => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const samplesContainer = this.closest('.materials-samples');
+                    openLightbox(this, samplesContainer);
+                });
+            });
+        });
+        
         // CARROUSEL CIRCULAIRE INFINI
         let galleryIndexes = {};
         let isTransitioning = {};
@@ -1957,53 +1771,19 @@ thumb.addEventListener('mousedown', (e) => {
     e.preventDefault();
 });
 
-// Variables pour l'animation fluide du curseur
-let mouseY = 0;
-let targetY = 0;
-let animationId = null;
-
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    
-    // Calcul de la position relative à la scrollbar
-    const rect = thumb.parentElement.getBoundingClientRect();
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
-    const maxPosition = scrollbarHeight - thumbHeight;
-	mouseY = Math.max(0, Math.min(e.clientY - rect.top, maxPosition));
-    
-    // Annuler l'animation précédente
-    if (animationId) {
-        cancelAnimationFrame(animationId);
-    }
-    
-    // Demander une nouvelle frame d'animation
-    animationId = requestAnimationFrame(updateThumbPosition);
-});
-
-// Fonction d'animation fluide du curseur
-function updateThumbPosition() {
     const scrollbarHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
+    const mouseY = e.clientY;
     const maxThumbPosition = scrollbarHeight - thumbHeight;
+    const thumbTop = Math.max(0, Math.min(mouseY, maxThumbPosition));
+    const scrollPercent = maxThumbPosition === 0 ? 0 : thumbTop / maxThumbPosition;
     
-    // Interpolation douce (lerp) pour un mouvement fluide
-    targetY = mouseY;
-    const currentY = parseFloat(thumb.style.top) || 0;
-    const newY = currentY + (targetY - currentY) * 0.7;
-    
-    thumb.style.top = newY + 'px';
-    
-    // Mise à jour du scroll de la page
-    const scrollPercent = maxThumbPosition === 0 ? 0 : newY / maxThumbPosition;
+    thumb.style.top = thumbTop + 'px';
     window.scrollTo(0, scrollPercent * scrollHeight);
-    
-    // Continuer l'animation si on n'a pas atteint la cible
-    if (Math.abs(targetY - newY) > 0.3) {
-        animationId = requestAnimationFrame(updateThumbPosition);
-    }
-}
+});
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
