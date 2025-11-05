@@ -79,18 +79,17 @@
     </script>
     
     <style>
+html {
+     scroll-behavior: smooth;
+	 scrollbar-width: none;
+	 -ms-overflow-style: none;
+}
+
 html, body {
      margin: 0;
      padding: 0;
      width: 100%;
      height: 100%;
-}
-
-html {
-     scroll-behavior: smooth;
-	 overflow-y: scroll;
-	 scrollbar-width: none;
-	 -ms-overflow-style: none;
 }
 
 body {
@@ -107,6 +106,8 @@ body::-webkit-scrollbar {
      display: none;
 
 }
+
+
 
 #custom-scrollbar {
      position: fixed;
@@ -1078,8 +1079,8 @@ body::-webkit-scrollbar {
 			/* REPOSITIONNER LES FLÈCHES DORÉES SOUS LA PHOTO EN MOBILE */
             .lightbox-prev,
             .lightbox-next {
-                  position: absolute !important;
-                  bottom: -60px !important;
+                  position: fixed !important;
+                  bottom: 30px !important;
                   top: auto !important;
                   transform: none !important;
             }
@@ -1640,13 +1641,11 @@ body::-webkit-scrollbar {
             currentLightboxIndex = currentLightboxGallery.indexOf(img);
             lightboxImg.src = img.src;
             lightbox.classList.add('active');
-            
-            if (currentLightboxGallery.length === 1) {
-                lightbox.classList.add('single-image');
-            } else {
-                lightbox.classList.remove('single-image');
-            }
-            
+			
+			 // Scroll à la position de la photo
+            const imgRect = img.getBoundingClientRect();
+            window.scrollTo(0, window.pageYOffset + imgRect.top - (window.innerHeight / 2));
+                        
             document.body.style.overflow = 'hidden';
             updateLightboxCounter();
         }
@@ -1850,7 +1849,7 @@ let isDragging = false;
 function updateThumbHeight() {
     const scrollHeight = docElement.scrollHeight;
     const clientHeight = docElement.clientHeight;
-    const thumbHeight = Math.max(20, (clientHeight / scrollHeight) * clientHeight);
+    const thumbHeight = Math.max(15, (clientHeight / scrollHeight) * clientHeight);
     thumb.style.height = thumbHeight + 'px';
     return thumbHeight;
 }
@@ -1900,7 +1899,7 @@ document.addEventListener('mousemove', (e) => {
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
-}, { passive: true });
+});
 
 // Initialisation
 updateThumbHeight();
