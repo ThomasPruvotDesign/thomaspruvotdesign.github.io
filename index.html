@@ -120,15 +120,20 @@ body::-webkit-scrollbar {
 
 #custom-scrollbar-thumb {
      position: absolute;
-     width: 10px;
+     width: 8px;
+	 height: 50px;
      background: url('Images/Curseur-defilement.webp') no-repeat center;
      background-size: contain;
      pointer-events: auto;
-     cursor: pointer;
+     cursor: grab;
 	 opacity: 1 !important;
      visibility: visible !important;
      display: block !important;
      z-index: 9999 !important;
+}
+
+#custom-scrollbar-thumb:active {
+    cursor: grabbing !important;
 }
 
   /* MASQUER le curseur custom sur mobile/tablette */
@@ -1244,7 +1249,7 @@ body::-webkit-scrollbar {
 <body>
 
     <!-- Language Switcher -->
-	<div style="position: fixed; top: 20px; right: 20px; z-index: 10000;">
+	<div style="position: absolute; top: 20px; right: 20px; z-index: 10000;">
     <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">FR</span>
     <span style="font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; color: rgba(90, 138, 138, 0.6);"> / </span>
     <a href="https://designthomaspruvot.github.io" style="text-decoration: none; font-size: 14px; font-weight: 500; font-family: Tahoma, Verdana, sans-serif; letter-spacing: 0.5px; background: url('Images/Curseur-defilement.webp') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; cursor: pointer;">EN</a>
@@ -1900,8 +1905,6 @@ document.addEventListener('mouseup', () => {
 // Initialisation
 updateThumbHeight();
 syncThumbWithScroll();
-
-});
 
 </script>
 
