@@ -229,8 +229,6 @@ body {
             opacity: 0.7;
         }
         
-        .lightbox-prev { left: 30px; }
-        .lightbox-next { right: 30px; }
         
         .lightbox-counter {
             position: fixed;
@@ -1052,8 +1050,8 @@ body::-webkit-scrollbar {
                 -webkit-background-clip: text !important;
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
-}
-            }
+            }		
+} 
             
             .contact a {
                 display: block;
@@ -1831,7 +1829,6 @@ function updateScrollbar() {
     const scrollTop = window.pageYOffset || docElement.scrollTop;
     const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
     
-    const maxThumbHeight = docElement.clientHeight;
     const thumbHeight = Math.max(15, (docElement.clientHeight / docElement.scrollHeight) * docElement.clientHeight);
     const maxThumbPosition = docElement.clientHeight - thumbHeight;
     const thumbTop = Math.max(0, Math.min(scrollRatio * maxThumbPosition, maxThumbPosition));
@@ -1869,7 +1866,7 @@ document.addEventListener('mousemove', (e) => {
     if (animationId) {
         cancelAnimationFrame(animationId);
     }
-
+    
     animationId = requestAnimationFrame(updateThumbPosition);
 });
 
@@ -1881,14 +1878,14 @@ function updateThumbPosition() {
     
     targetY = mouseY;
     const currentY = parseFloat(thumb.style.top) || 0;
-    const newY = currentY + (targetY - currentY) * 0.95;
+    const newY = currentY + (targetY - currentY) * 0.6;  // ← 0.6 (Martin)
     
     thumb.style.top = newY + 'px';
     
     const scrollPercent = maxThumbPosition === 0 ? 0 : newY / maxThumbPosition;
     window.scrollTo(0, scrollPercent * scrollHeight);
     
-    if (Math.abs(targetY - newY) > 0.1) {
+    if (Math.abs(targetY - newY) > 0.3) {  // ← 0.3 (Martin)
         animationId = requestAnimationFrame(updateThumbPosition);
     }
 }
@@ -1898,7 +1895,6 @@ document.addEventListener('mouseup', () => {
 });
 
 </script>
-
 
 </body>
 </html>
