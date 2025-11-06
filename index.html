@@ -125,14 +125,14 @@ body::-webkit-scrollbar {
      background: url('Images/Curseur-defilement.webp') center/cover repeat-y;
      pointer-events: auto;
      cursor: grab;
-	 opacity: 1;
-     visibility: visible;
-     display: block;
-     z-index: 9999;
+	 opacity: 1 !important;
+     visibility: visible !important;
+     display: block !important;
+     z-index: 9999 !important;
 }
 
 #custom-scrollbar-thumb:active {
-    cursor: grabbing;
+    cursor: grabbing !important;
 }
 
   /* MASQUER le curseur custom sur mobile/tablette */
@@ -1820,6 +1820,7 @@ const customScrollbar = {
     track: document.getElementById('custom-scrollbar'),
     isDragging: false,
     startY: 0,
+    scrollTimeout: null,
     
     init() {
         if (window.innerWidth <= 768) {
@@ -1840,39 +1841,39 @@ const customScrollbar = {
     
     syncPosition() {
         if (this.isDragging) return;
+        if (this.scrollTimeout) return;
         
-        const scrollRatio = window.pageYOffset / 
-            (document.documentElement.scrollHeight - window.innerHeight);
-        const maxTop = window.innerHeight - this.thumb.offsetHeight;
-        this.thumb.style.top = (scrollRatio * maxTop) + 'px';
+        this.scrollTimeout = setTimeout(() => {
+            const scrollRatio = window.pageYOffset / 
+                (document.documentElement.scrollHeight - window.innerHeight);
+            const maxTop = window.innerHeight - this.thumb.offsetHeight;
+            this.thumb.style.top = (scrollRatio * maxTop) + 'px';
+            this.scrollTimeout = null;
+        }, 16);
     },
     
     attachEvents() {
-        // Throttle scroll event
-        let scrollTimeout;
+        const self = this;
+        
         window.addEventListener('scroll', () => {
-            if (scrollTimeout) return;
-            scrollTimeout = setTimeout(() => {
-                this.syncPosition();
-                scrollTimeout = null;
-            }, 16); // ~60fps
+            self.syncPosition();
         }, { passive: true });
         
         this.thumb.addEventListener('mousedown', (e) => {
-            this.isDragging = true;
-            this.startY = e.clientY - this.thumb.offsetTop;
+            self.isDragging = true;
+            self.startY = e.clientY - self.thumb.offsetTop;
             document.body.style.userSelect = 'none';
             e.preventDefault();
         });
         
         document.addEventListener('mousemove', (e) => {
-            if (!this.isDragging) return;
+            if (!self.isDragging) return;
             
-            const maxTop = window.innerHeight - this.thumb.offsetHeight;
-            let newTop = e.clientY - this.track.offsetTop - this.startY;
+            const maxTop = window.innerHeight - self.thumb.offsetHeight;
+            let newTop = e.clientY - self.track.offsetTop - self.startY;
             newTop = Math.max(0, Math.min(newTop, maxTop));
             
-            this.thumb.style.top = newTop + 'px';
+            self.thumb.style.top = newTop + 'px';
             
             const scrollRatio = newTop / maxTop;
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -1880,24 +1881,22 @@ const customScrollbar = {
         });
         
         document.addEventListener('mouseup', () => {
-            this.isDragging = false;
+            self.isDragging = false;
             document.body.style.userSelect = '';
         });
         
         window.addEventListener('resize', () => {
-            this.updateThumbSize();
-            this.syncPosition();
+            self.updateThumbSize();
+            self.syncPosition();
         });
     }
 };
 
-// Initialiser au chargement
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => customScrollbar.init());
 } else {
     customScrollbar.init();
 }
-
 </script>
 
 </body>
