@@ -163,6 +163,10 @@ body {
                  z-index: 10001 !important;
              }
 			 
+			.lightbox-content {
+                  max-height: 60vh !important;
+            }
+			
             ::-webkit-scrollbar-track {
                 background: linear-gradient(to bottom, 
                                transparent 0px, 
@@ -222,7 +226,7 @@ body {
         
         .lightbox-content {
             max-width: 95vw;
-            max-height: 95vh;
+            max-height: 80vh;
             object-fit: contain;
             pointer-events: auto;
             box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -966,7 +970,7 @@ body::-webkit-scrollbar {
     top: 0;
     width: 10px;
     height: 100vh;
-    pointer-events: none;
+    pointer-events: auto;
     z-index: 9999;
 }
 
@@ -1212,7 +1216,6 @@ body::-webkit-scrollbar {
 /* CURSEUR THUMB - RENDRE DRAGGABLE */
 #custom-scrollbar-thumb {
     cursor: grab !important;
-    transition: all 0.15s ease-out !important;
 }
 
 #custom-scrollbar-thumb:active {
@@ -1819,14 +1822,12 @@ const docElement = document.documentElement;
 
 let isDragging = false;
 let dragStartY = 0;
-let thumbStartY = 0;
 
 function syncThumbWithScroll() {
     if (isDragging) return;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
     const scrollTop = window.pageYOffset || docElement.scrollTop;
     const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
-    
     const thumbHeight = thumb.offsetHeight;
     const maxThumbPosition = docElement.clientHeight - thumbHeight;
     thumb.style.top = (scrollRatio * maxThumbPosition) + 'px';
@@ -1837,12 +1838,9 @@ function updateScroll(clientY) {
     const scrollbarHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
     const maxThumbPosition = scrollbarHeight - thumbHeight;
-    
     let newThumbTop = clientY - rect.top - dragStartY;
     newThumbTop = Math.max(0, Math.min(newThumbTop, maxThumbPosition));
-    
     thumb.style.top = newThumbTop + 'px';
-    
     const scrollPercent = maxThumbPosition === 0 ? 0 : newThumbTop / maxThumbPosition;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
     window.scrollTo(0, scrollPercent * scrollHeight);
@@ -1878,7 +1876,6 @@ const clientHeight = docElement.clientHeight;
 const thumbHeight = Math.max(10, (clientHeight / scrollHeight) * clientHeight);
 thumb.style.height = thumbHeight + 'px';
 syncThumbWithScroll();
-
 </script>
 
 </body>
