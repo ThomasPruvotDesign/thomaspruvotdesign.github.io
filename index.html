@@ -1853,9 +1853,9 @@ document.addEventListener('mousemove', (e) => {
     const rect = thumb.parentElement.getBoundingClientRect();
     const scrollbarHeight = docElement.clientHeight;
     const thumbHeight = thumb.offsetHeight;
-    const maxPosition = scrollbarHeight - thumbHeight;
+    const maxThumbPosition = scrollbarHeight - thumbHeight;
     
-    mouseY = Math.max(0, Math.min(e.clientY - rect.top, maxPosition));
+    mouseY = Math.max(0, Math.min(e.clientY - rect.top, maxThumbPosition));
     
     if (animationId) {
         cancelAnimationFrame(animationId);
