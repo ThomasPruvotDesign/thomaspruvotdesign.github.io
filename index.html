@@ -125,14 +125,14 @@ body::-webkit-scrollbar {
      background: url('Images/Curseur-defilement.webp') center/cover repeat-y;
      pointer-events: auto;
      cursor: grab;
-	 opacity: 1 !important;
-     visibility: visible !important;
-     display: block !important;
-     z-index: 9999 !important;
+	 opacity: 1;
+     visibility: visible;
+     display: block;
+     z-index: 9999;
 }
 
 #custom-scrollbar-thumb:active {
-    cursor: grabbing !important;
+    cursor: grabbing;
 }
 
   /* MASQUER le curseur custom sur mobile/tablette */
@@ -1815,69 +1815,89 @@ body::-webkit-scrollbar {
 </div>
 
 <script>
-const thumb = document.getElementById('custom-scrollbar-thumb');
-const scrollbar = document.getElementById('custom-scrollbar');
-const docElement = document.documentElement;
+const customScrollbar = {
+    thumb: document.getElementById('custom-scrollbar-thumb'),
+    track: document.getElementById('custom-scrollbar'),
+    isDragging: false,
+    startY: 0,
+    
+    init() {
+        if (window.innerWidth <= 768) {
+            this.track.style.display = 'none';
+            return;
+        }
+        
+        this.updateThumbSize();
+        this.attachEvents();
+        this.syncPosition();
+    },
+    
+    updateThumbSize() {
+        const ratio = window.innerHeight / document.documentElement.scrollHeight;
+        const height = Math.max(30, ratio * window.innerHeight);
+        this.thumb.style.height = height + 'px';
+    },
+    
+    syncPosition() {
+        if (this.isDragging) return;
+        
+        const scrollRatio = window.pageYOffset / 
+            (document.documentElement.scrollHeight - window.innerHeight);
+        const maxTop = window.innerHeight - this.thumb.offsetHeight;
+        this.thumb.style.top = (scrollRatio * maxTop) + 'px';
+    },
+    
+    attachEvents() {
+        // Throttle scroll event
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                this.syncPosition();
+                scrollTimeout = null;
+            }, 16); // ~60fps
+        }, { passive: true });
+        
+        this.thumb.addEventListener('mousedown', (e) => {
+            this.isDragging = true;
+            this.startY = e.clientY - this.thumb.offsetTop;
+            document.body.style.userSelect = 'none';
+            e.preventDefault();
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (!this.isDragging) return;
+            
+            const maxTop = window.innerHeight - this.thumb.offsetHeight;
+            let newTop = e.clientY - this.track.offsetTop - this.startY;
+            newTop = Math.max(0, Math.min(newTop, maxTop));
+            
+            this.thumb.style.top = newTop + 'px';
+            
+            const scrollRatio = newTop / maxTop;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            window.scrollTo(0, scrollRatio * maxScroll);
+        });
+        
+        document.addEventListener('mouseup', () => {
+            this.isDragging = false;
+            document.body.style.userSelect = '';
+        });
+        
+        window.addEventListener('resize', () => {
+            this.updateThumbSize();
+            this.syncPosition();
+        });
+    }
+};
 
-let isDragging = false;
-let dragStartY = 0;
-
-function syncThumbWithScroll() {
-    if (isDragging) return;
-    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const scrollTop = window.pageYOffset || docElement.scrollTop;
-    const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
-    const thumbHeight = thumb.offsetHeight;
-    const maxThumbPosition = docElement.clientHeight - thumbHeight;
-    thumb.style.top = (scrollRatio * maxThumbPosition) + 'px';
+// Initialiser au chargement
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => customScrollbar.init());
+} else {
+    customScrollbar.init();
 }
 
-function updateScroll(clientY) {
-    const rect = scrollbar.getBoundingClientRect();
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
-    const maxThumbPosition = scrollbarHeight - thumbHeight;
-    let newThumbTop = clientY - rect.top - dragStartY;
-    newThumbTop = Math.max(0, Math.min(newThumbTop, maxThumbPosition));
-    thumb.style.top = newThumbTop + 'px';
-    const scrollPercent = maxThumbPosition === 0 ? 0 : newThumbTop / maxThumbPosition;
-    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    window.scrollTo(0, scrollPercent * scrollHeight);
-}
-
-function onMouseMove(e) {
-    updateScroll(e.clientY);
-}
-
-function onMouseUp() {
-    isDragging = false;
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-}
-
-window.addEventListener('scroll', syncThumbWithScroll, { passive: true });
-
-window.addEventListener('resize', () => {
-    const scrollHeight = docElement.scrollHeight;
-    const clientHeight = docElement.clientHeight;
-    const thumbHeight = Math.max(10, (clientHeight / scrollHeight) * clientHeight);
-    thumb.style.height = thumbHeight + 'px';
-    syncThumbWithScroll();
-});
-
-thumb.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    dragStartY = e.clientY - thumb.getBoundingClientRect().top;
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-    e.preventDefault();
-});
-
-const scrollHeight = docElement.scrollHeight;
-const clientHeight = docElement.clientHeight;
-const thumbHeight = Math.max(10, (clientHeight / scrollHeight) * clientHeight);
-thumb.style.height = thumbHeight + 'px';
-syncThumbWithScroll();
 </script>
 
 </body>
