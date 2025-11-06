@@ -1845,6 +1845,16 @@ function updateScroll(clientY) {
     window.scrollTo(0, scrollPercent * scrollHeight);
 }
 
+function onMouseMove(e) {
+    updateScroll(e.clientY);
+}
+
+function onMouseUp() {
+    isDragging = false;
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+}
+
 window.addEventListener('scroll', syncThumbWithScroll, { passive: true });
 
 window.addEventListener('resize', () => {
@@ -1858,16 +1868,9 @@ window.addEventListener('resize', () => {
 thumb.addEventListener('mousedown', (e) => {
     isDragging = true;
     dragStartY = e.clientY - thumb.getBoundingClientRect().top;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
     e.preventDefault();
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    updateScroll(e.clientY);
-});
-
-document.addEventListener('mouseup', () => {
-    isDragging = false;
 });
 
 const scrollHeight = docElement.scrollHeight;
