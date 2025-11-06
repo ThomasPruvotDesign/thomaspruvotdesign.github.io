@@ -166,6 +166,19 @@ body {
                   max-height: 60vh !important;
             }
 			
+			.collection-title,
+            .luminaire-title,
+            h3.collection-category {
+                 text-align: center !important;
+            }
+    
+            .collection-description,
+            .luminaire-description,
+            .collection-dimensions,
+           .luminaire-materials {
+                 text-align: justify !important;
+            }
+			
             ::-webkit-scrollbar-track {
                 background: linear-gradient(to bottom, 
                                transparent 0px, 
@@ -1841,15 +1854,10 @@ const customScrollbar = {
     
     syncPosition() {
         if (this.isDragging) return;
-        if (this.scrollTimeout) return;
-        
-        this.scrollTimeout = setTimeout(() => {
-            const scrollRatio = window.pageYOffset / 
-                (document.documentElement.scrollHeight - window.innerHeight);
-            const maxTop = window.innerHeight - this.thumb.offsetHeight;
+		const scrollRatio = window.pageYOffset / 
+             (document.documentElement.scrollHeight - window.innerHeight);
+        const maxTop = window.innerHeight - this.thumb.offsetHeight;
             this.thumb.style.top = (scrollRatio * maxTop) + 'px';
-            this.scrollTimeout = null;
-        }, 16);
     },
     
     attachEvents() {
