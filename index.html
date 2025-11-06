@@ -166,17 +166,21 @@ body {
                   max-height: 60vh !important;
             }
 			
-			.collection-title,
-            .luminaire-title,
+			h2,
             h3.collection-category {
                  text-align: center !important;
             }
+			
+			.collection-title,
+            .luminaire-title,
+			.collection-dimensions,
+			.luminaire-materials {
+                 text-align: left !important;
+            }
     
             .collection-description,
-            .luminaire-description,
-            .collection-dimensions,
-           .luminaire-materials {
-                 text-align: justify !important;
+            .luminaire-description,{
+                 text-align: center !important;
             }
 			
             ::-webkit-scrollbar-track {
@@ -754,6 +758,21 @@ body {
             color: transparent;
         }
         
+		.collection-category {
+              text-align: center;
+        
+		}
+		.collection-title,
+        .luminaire-title 
+		.collection-dimensions,
+        .luminaire-materials {
+             text-align: left;
+        }
+
+        .collection-description,
+        .luminaire-description,{
+             text-align: center;
+        }
         .contact {
             background: rgba(40, 40, 40, 0.7);
             padding: 3.5rem 2.5rem;
@@ -1120,8 +1139,11 @@ body::-webkit-scrollbar {
             
             .gallery-dot.active {
                 background: url('Images/Texture-garamond.webp') center/cover !important;
-				background-repeat: repeat !important;
+				-webkit-background-clip: unset !important;
+				background-clip: unset !important;
+				-webkit-text-fill-color: unset !important;
                 border: 1px solid rgba(90, 138, 138, 0.8) !important;
+				opacity: 1 !important;
             }
             
             .gallery-arrow {
@@ -1833,7 +1855,7 @@ const customScrollbar = {
     track: document.getElementById('custom-scrollbar'),
     isDragging: false,
     startY: 0,
-    scrollTimeout: null,
+    rafId: null,
     
     init() {
         if (window.innerWidth <= 768) {
@@ -1854,10 +1876,11 @@ const customScrollbar = {
     
     syncPosition() {
         if (this.isDragging) return;
-		const scrollRatio = window.pageYOffset / 
-             (document.documentElement.scrollHeight - window.innerHeight);
+        
+        const scrollRatio = window.pageYOffset / 
+            (document.documentElement.scrollHeight - window.innerHeight);
         const maxTop = window.innerHeight - this.thumb.offsetHeight;
-            this.thumb.style.top = (scrollRatio * maxTop) + 'px';
+        this.thumb.style.top = (scrollRatio * maxTop) + 'px';
     },
     
     attachEvents() {
@@ -1877,20 +1900,24 @@ const customScrollbar = {
         document.addEventListener('mousemove', (e) => {
             if (!self.isDragging) return;
             
-            const maxTop = window.innerHeight - self.thumb.offsetHeight;
-            let newTop = e.clientY - self.track.offsetTop - self.startY;
-            newTop = Math.max(0, Math.min(newTop, maxTop));
-            
-            self.thumb.style.top = newTop + 'px';
-            
-            const scrollRatio = newTop / maxTop;
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            window.scrollTo(0, scrollRatio * maxScroll);
+            if (self.rafId) cancelAnimationFrame(self.rafId);
+            self.rafId = requestAnimationFrame(() => {
+                const maxTop = window.innerHeight - self.thumb.offsetHeight;
+                let newTop = e.clientY - self.track.offsetTop - self.startY;
+                newTop = Math.max(0, Math.min(newTop, maxTop));
+                
+                self.thumb.style.top = newTop + 'px';
+                
+                const scrollRatio = newTop / maxTop;
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                window.scrollTo(0, scrollRatio * maxScroll);
+            });
         });
         
         document.addEventListener('mouseup', () => {
             self.isDragging = false;
             document.body.style.userSelect = '';
+            if (self.rafId) cancelAnimationFrame(self.rafId);
         });
         
         window.addEventListener('resize', () => {
