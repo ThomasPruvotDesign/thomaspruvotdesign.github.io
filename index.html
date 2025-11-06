@@ -234,7 +234,6 @@ body {
             opacity: 0.7;
         }
         
-        
         .lightbox-counter {
             position: fixed;
             bottom: 30px;
@@ -251,7 +250,35 @@ body {
             -webkit-text-fill-color: transparent;
             color: transparent;
         }
-        
+     
+        .lightbox-prev,
+        .lightbox-next {
+             position: fixed !important;
+             bottom: 30px !important;
+             top: auto !important;
+			 left: auto !important;
+		     right: auto !important;
+             transform: none !important;
+			 display: flex !important;
+             align-items: center !important;
+             justify-content: center !important;
+             z-index: 10005 !important;				  
+         }
+
+        .lightbox-prev {
+             left: 20px !important;
+        }
+
+        .lightbox-next {
+             right: 20px !important;
+        }
+			
+		.lightbox-nav {
+            font-size: 50px;
+            padding: 15px;
+        }
+
+    }
         .lightbox.single-image .lightbox-nav {
             display: none;
         }
@@ -1069,37 +1096,7 @@ body::-webkit-scrollbar {
                 word-break: break-all;
                 padding: 0 0.5rem;
             }
-            
-			/* REPOSITIONNER LES FLÈCHES DORÉES SOUS LA PHOTO EN MOBILE */
-            .lightbox-prev,
-            .lightbox-next {
-                  position: fixed !important;
-                  bottom: 30px !important;
-                  top: auto !important;
-				  left: auto !important;
-				  right: auto !important;
-                  transform: none !important;
-				  display: flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                  z-index: 10005 !important;				  
-            }
-
-            .lightbox-prev {
-                 left: 20px !important;
-            }
-
-            .lightbox-next {
-                 right: 20px !important;
-            }
-			
-			.lightbox-nav {
-                 font-size: 50px;
-                 padding: 15px;
-            }
-
-        }
-        
+           
         @media (max-width: 480px) {
             ::-webkit-scrollbar {
                 width: 6px;
@@ -1837,7 +1834,7 @@ window.addEventListener('scroll', syncThumbWithScroll, { passive: true });
 
 window.addEventListener('resize', () => {
     const scrollHeight = docElement.scrollHeight;
-    const clientHeight = docElement.clientHeight;
+    const clientHeight = docElement.clientHeight - 50;
     const thumbHeight = Math.max(10, (clientHeight / scrollHeight) * clientHeight);
     thumb.style.height = thumbHeight + 'px';
 });
