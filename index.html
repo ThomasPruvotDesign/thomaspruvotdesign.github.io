@@ -228,12 +228,10 @@ body {
             box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
         
-       21
-        
         .lightbox-nav:hover {
             opacity: 0.7;
         }
-        
+            
         .lightbox-counter {
             position: fixed;
             bottom: 30px;
@@ -250,35 +248,7 @@ body {
             -webkit-text-fill-color: transparent;
             color: transparent;
         }
-     
-        .lightbox-prev,
-        .lightbox-next {
-             position: fixed !important;
-             bottom: 30px !important;
-             top: auto !important;
-			 left: auto !important;
-		     right: auto !important;
-             transform: none !important;
-			 display: flex !important;
-             align-items: center !important;
-             justify-content: center !important;
-             z-index: 10005 !important;				  
-         }
-
-        .lightbox-prev {
-             left: 20px !important;
-        }
-
-        .lightbox-next {
-             right: 20px !important;
-        }
-			
-		.lightbox-nav {
-            font-size: 50px;
-            padding: 15px;
-        }
-
-    }
+        
         .lightbox.single-image .lightbox-nav {
             display: none;
         }
@@ -676,7 +646,6 @@ body {
         
         .gallery-dot.active {
             background: url('Images/Texture-garamond.webp') center/cover !important;
-			background-size: contain !important;
             border: 1px solid rgba(90, 138, 138, 0.8) !important;
 			opacity: 1 !important;
         }
@@ -896,7 +865,75 @@ body {
                 height: 550px;
             }
         }
-        
+        /* FLÈCHES LIGHTBOX DESKTOP */
+.lightbox-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 30px !important;
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 40px !important;
+    cursor: pointer !important;
+    z-index: 10001 !important;
+    background: none !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.lightbox-close::before {
+    content: '✕' !important;
+    background-image: url('Images/Curseur-defilement.webp') !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 40px !important;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: fixed !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 50px !important;
+    height: 50px !important;
+    cursor: pointer !important;
+    z-index: 10002 !important;
+    background: none !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.lightbox-prev::before {
+    content: '<' !important;
+    background-image: url('Images/Curseur-defilement.webp') !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 3rem !important;
+}
+
+.lightbox-next::before {
+    content: '>' !important;
+    background-image: url('Images/Curseur-defilement.webp') !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 3rem !important;
+}
+
+.lightbox-prev {
+    left: 50px !important;
+}
+
+.lightbox-next {
+    right: 50px !important;
+}
+
+
         @media (max-width: 768px) {
             ::-webkit-scrollbar {
                 width: 8px;
@@ -1096,7 +1133,37 @@ body::-webkit-scrollbar {
                 word-break: break-all;
                 padding: 0 0.5rem;
             }
-           
+            
+			/* REPOSITIONNER LES FLÈCHES DORÉES SOUS LA PHOTO EN MOBILE */
+            .lightbox-prev,
+            .lightbox-next {
+                  position: fixed !important;
+                  bottom: 30px !important;
+                  top: auto !important;
+				  left: auto !important;
+				  right: auto !important;
+                  transform: none !important;
+				  display: flex !important;
+                  align-items: center !important;
+                  justify-content: center !important;
+                  z-index: 10005 !important;				  
+            }
+
+            .lightbox-prev {
+                 left: 20px !important;
+            }
+
+            .lightbox-next {
+                 right: 20px !important;
+            }
+			
+			.lightbox-nav {
+                 font-size: 50px;
+                 padding: 15px;
+            }
+
+        }
+        
         @media (max-width: 480px) {
             ::-webkit-scrollbar {
                 width: 6px;
@@ -1141,51 +1208,7 @@ body::-webkit-scrollbar {
                 word-break: break-all;
             }
         }
-    
-/* FLÈCHES LIGHTBOX - VERSION DESKTOP */
-.lightbox-prev,
-.lightbox-next {
-    position: fixed !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: 50px !important;
-    height: 50px !important;
-    cursor: pointer !important;
-    z-index: 10002 !important;
-    background: none !important;
-    border: none !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.lightbox-prev::before {
-    content: '<' !important;
-    background-image: url('Images/Curseur-defilement.webp') !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 3rem !important;
-}
-
-.lightbox-next::before {
-    content: '>' !important;
-    background-image: url('Images/Curseur-defilement.webp') !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 3rem !important;
-}
-
-.lightbox-prev {
-    left: 50px !important;
-}
-
-.lightbox-next {
-    right: 50px !important;
-}
-
-
+  
 /* CURSEUR THUMB - RENDRE DRAGGABLE */
 #custom-scrollbar-thumb {
     cursor: grab !important;
@@ -1543,7 +1566,7 @@ body::-webkit-scrollbar {
                 <h2>CONTACT</h2>
                 <p>Pour toute demande de renseignement ou commission sur mesure :</p>
                 <p style="margin-top: 1.5rem;"><a href="mailto:thomaspruvotdesign@protonmail.com">thomaspruvotdesign@protonmail.com</a></p>
-                <p style="margin-top: 1rem;"><a href="tel:+33627272121">+33 6 27 27 21 21</a></p>
+                <p style="margin-top: 1rem;"><a href="tel:+3362727212193">+33 6 27 27 21 21 93</a></p>
                 <p style="margin-top: 0.5rem;">Val-de-Marne, France</p>
                 <div class="contact-card">
                     <img src="Images/Carte-de-visite.webp" alt="Carte de visite">
@@ -1795,32 +1818,11 @@ const scrollbar = document.getElementById('custom-scrollbar');
 const docElement = document.documentElement;
 
 let isDragging = false;
-let mouseY = 0;
-let targetY = 0;
-let animationId = null;
-
-// Fonction d'animation fluide du curseur
-function updateThumbPosition() {
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
-    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
-    const maxThumbPosition = scrollbarHeight - thumbHeight;
-    
-    targetY = mouseY;
-    const currentY = parseFloat(thumb.style.top) || 0;
-    const newY = currentY + (targetY - currentY) * 0.6;
-    
-    thumb.style.top = newY + 'px';
-    
-    const scrollPercent = maxThumbPosition === 0 ? 0 : newY / maxThumbPosition;
-    window.scrollTo(0, scrollPercent * scrollHeight);
-    
-    if (Math.abs(targetY - newY) > 0.3) {
-        animationId = requestAnimationFrame(updateThumbPosition);
-    }
-}
+let dragStartY = 0;
+let thumbStartY = 0;
 
 function syncThumbWithScroll() {
+    if (isDragging) return;
     const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
     const scrollTop = window.pageYOffset || docElement.scrollTop;
     const scrollRatio = scrollHeight === 0 ? 0 : scrollTop / scrollHeight;
@@ -1830,42 +1832,47 @@ function syncThumbWithScroll() {
     thumb.style.top = (scrollRatio * maxThumbPosition) + 'px';
 }
 
+function updateScroll(clientY) {
+    const rect = scrollbar.getBoundingClientRect();
+    const scrollbarHeight = docElement.clientHeight;
+    const thumbHeight = thumb.offsetHeight;
+    const maxThumbPosition = scrollbarHeight - thumbHeight;
+    
+    let newThumbTop = clientY - rect.top - dragStartY;
+    newThumbTop = Math.max(0, Math.min(newThumbTop, maxThumbPosition));
+    
+    thumb.style.top = newThumbTop + 'px';
+    
+    const scrollPercent = maxThumbPosition === 0 ? 0 : newThumbTop / maxThumbPosition;
+    const scrollHeight = docElement.scrollHeight - docElement.clientHeight;
+    window.scrollTo(0, scrollPercent * scrollHeight);
+}
+
 window.addEventListener('scroll', syncThumbWithScroll, { passive: true });
 
 window.addEventListener('resize', () => {
     const scrollHeight = docElement.scrollHeight;
-    const clientHeight = docElement.clientHeight - 50;
+    const clientHeight = docElement.clientHeight;
     const thumbHeight = Math.max(10, (clientHeight / scrollHeight) * clientHeight);
     thumb.style.height = thumbHeight + 'px';
+    syncThumbWithScroll();
 });
 
 thumb.addEventListener('mousedown', (e) => {
     isDragging = true;
+    dragStartY = e.clientY - thumb.getBoundingClientRect().top;
     e.preventDefault();
 });
 
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    
-    const rect = thumb.parentElement.getBoundingClientRect();
-    const scrollbarHeight = docElement.clientHeight;
-    const thumbHeight = thumb.offsetHeight;
-    const maxThumbPosition = scrollbarHeight - thumbHeight;
-    
-    mouseY = Math.max(0, Math.min(e.clientY - rect.top, maxThumbPosition));
-    
-    if (animationId) {
-        cancelAnimationFrame(animationId);
-    }
-    
-    animationId = requestAnimationFrame(updateThumbPosition);
+    updateScroll(e.clientY);
 });
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
 });
 
-// Initialisation
 const scrollHeight = docElement.scrollHeight;
 const clientHeight = docElement.clientHeight;
 const thumbHeight = Math.max(10, (clientHeight / scrollHeight) * clientHeight);
