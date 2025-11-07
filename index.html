@@ -639,70 +639,7 @@ body {
             height: 100%;
             transition: transform 0.5s ease-in-out;
         }
-        
-        .luminaire-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-        
-        .gallery-nav {
-            background: transparent !important;
-            width: 100% !important;
-            display: flex !important;  /* ← FIX TYPO */
-            gap: 10px !important;
-            justify-content: center !important;
-            align-items: center !important;
-            padding: 10px 0 !important;
-            position: relative !important;
-            z-index: 1 !important;
-            box-sizing: border-box !important;
-        }
-
-        .gallery-dot {
-            width: 13px !important;
-            height: 13px !important;
-            display: inline-block !important;
-            border: 1px solid rgba(90, 138, 138, 0.6) !important;
-            background: transparent !important;
-            cursor: pointer !important;
-            opacity: 0.7 !important;
-            transition: all 0.3s ease !important;
-            vertical-align: middle !important;
-           -webkit-tap-highlight-color: transparent !important;
-        }
-
-        .gallery-dot.active {
-            background-color: rgba(90, 138, 138, 0.8) !important;
-            background-image: url('Images/Texture-garamond.webp') !important;
-			background-repeat: repeat !important;
-            background-size: auto !important;
-            background-position: center !important;
-            border: 1px solid rgba(90, 138, 138, 0.8) !important;
-            opacity: 1 !important;
-            box-shadow: 0 0 8px rgba(90, 138, 138, 0.4) !important;
-        }
-
-        .gallery-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            width: 55px;
-            height: 55px;
-            cursor: pointer;
-            font-size: 28px;
-            z-index: 10;
-            opacity: 0;
-            border-radius: 0;
-            pointer-events: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-        }
-        
+  
         .gallery-arrow::before {
             content: attr(data-arrow);
             background: url('Images/Curseur-defilement.webp') center/cover;
@@ -1127,37 +1064,6 @@ body {
             
             img {
                 max-width: calc(100vw - 2rem) !important;
-            }
-			.gallery-nav {
-                padding: 10px 0 !important;
-                gap: 8px !important;
-				justify-content: center !important;
-			}
-			
-            .gallery-dot {
-                width: 12px !important; /* Légèrement plus grand pour iOS */
-                height: 12px !important;
-                min-width: 12px !important; /* Force size sur iOS */
-                min-height: 12px !important;
-				background: transparent !important;
-				border: 1px solid rgba(90, 138, 138, 0.6) !important;
-				opacity: 0.7 !important;
-            }
-    
-           /* Force texture sur iOS/Safari */
-            .gallery-dot.active {
-                background-color: #5a8a8a !important;
-                background-image: url('Images/Texture-garamond.webp') !important;
-                background-size: auto !important;
-                background-repeat: repeat !important;
-                background-position: center !important;
-				
-				-webkit-background-size: cover !important;
-                -webkit-background-image: url('Images/Texture-garamond.webp') !important;
-				
-                border: 1px solid rgba(90, 138, 138, 0.8) !important;
-                opacity: 1 !important;
-                box-shadow: 0 0 8px rgba(90,138,138,0.4) !important;
             }
         }
 
