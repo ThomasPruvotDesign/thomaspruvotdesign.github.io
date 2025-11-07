@@ -643,9 +643,10 @@ body {
             object-fit: contain;
             flex-shrink: 0;
         }
+        }
         
         .gallery-nav {
-            background: url('Images/Bois-brule.webp') center/cover no-repeat !important;
+            background: transparent !important;
             display: flex;
             gap: 10px;
             justify-content: center;
@@ -654,12 +655,11 @@ body {
             position: relative;
             z-index: 1;
         }
-
         .gallery-dot {
             width: 13px !important;
             height: 13px !important;
             border: 1px solid rgba(90, 138, 138, 0.6) !important;
-            background: rgba(0, 0, 0, 0) !important;
+            background: transparent!important;
             cursor: pointer;
             opacity: 0.7 !important;
             transition: all 0.3s ease !important;
@@ -1135,14 +1135,22 @@ body::-webkit-scrollbar {
     
            /* Force texture sur iOS/Safari */
             .gallery-dot.active {
-			    background-color: rgba(90, 138, 138, 0.5) !important; /* Fallback color */
+			    background: linear-gradient(135deg, rgba(90, 138, 138, 0.7), rgba(90, 138, 138, 0.5)) !important;
+			    
                 background-image: url('Images/Texture-garamond.webp') !important;
                 background-size: cover !important;
                 background-position: center !important;
                 background-repeat: no-repeat !important;
+				
 				-webkit-background-size: cover !important;
+				-webkit-background-image: url('Images/Texture-garamond.webp') !important;
+				
                 -webkit-transform: translateZ(0); /* Force GPU rendering iOS */
                 transform: translateZ(0);
+				
+				border: 1px solid rgba(90, 138, 138, 0.8) !important;
+                opacity: 1 !important;
+                box-shadow: 0 0 8px rgba(90, 138, 138, 0.4) !important;
             }
         }
 		
