@@ -645,30 +645,33 @@ body {
         }
         
         .gallery-nav {
+            background: url('Images/Bois-brule.webp') center/cover no-repeat !important;
             display: flex;
-            justify-content: center;
             gap: 10px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
             position: relative;
             z-index: 1;
         }
-        
+
         .gallery-dot {
             width: 13px !important;
             height: 13px !important;
-            border-radius: 0;
-            background: transparent !important;
-            cursor: pointer;
-            pointer-events: auto;
             border: 1px solid rgba(90, 138, 138, 0.6) !important;
+            background: rgba(0, 0, 0, 0) !important;
+            cursor: pointer;
+            opacity: 0.7 !important;
+            transition: all 0.3s ease !important;
         }
-        
+
         .gallery-dot.active {
-            background: url('Images/Texture-garamond.webp') center/cover !important;
+            background: url('Images/Texture-garamond.webp') center/cover no-repeat !important;
             border: 1px solid rgba(90, 138, 138, 0.8) !important;
-			opacity: 1 !important;
+            opacity: 1 !important;
+            box-shadow: 0 0 8px rgba(90, 138, 138, 0.4) !important;
         }
+
         
         .gallery-arrow {
             position: absolute;
@@ -1115,32 +1118,25 @@ body::-webkit-scrollbar {
                 max-width: calc(100vw - 2rem) !important;
             }
 			
-            .gallery-nav {
-                 background: url('Images/Bois-brule.webp') fixed center/cover !important;
-                 display: flex;
-                 gap: 10px;
-                 justify-content: center;
-                 padding: 10px 0;
-            }
-
             .gallery-dot {
-                 width: 13px !important;
-                 height: 13px !important;
-                 border: 1px solid rgba(90, 138, 138, 0.6) !important;
-                 background: rgba(0, 0, 0, 0) !important;
-                 cursor: pointer;
-                 opacity: 0.7 !important;
+                width: 10px !important;
+                height: 10px !important;
             }
-
-            .gallery-dot.active {
-                 background: url('Images/Texture-garamond.webp') center/cover !important;
-                 -webkit-background-clip: unset !important;
-                 background-clip: unset !important;
-                 -webkit-text-fill-color: unset !important;
-                 border: 1px solid rgba(90, 138, 138, 0.8) !important;
-                 opacity: 1 !important;
+    
+            .gallery-nav {
+                padding: 8px 0 !important;
+                gap: 8px !important;
             }
-
+    
+          /* Force pour Brave mobile */
+           .gallery-dot.active {
+                background-image: url('Images/Texture-garamond.webp') !important;
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+            }
+        }
+		
             .gallery-arrow {
                 width: 45px !important;
                 height: 45px !important;
