@@ -660,7 +660,7 @@ body {
             box-sizing: border-box !important;
         }
 
-        .span.gallery-dot {
+        .gallery-dot {
             width: 12px !important;
             height: 12px !important;
             min-width: 12px !important;
@@ -671,7 +671,7 @@ body {
             transition: all 0.3s !important;
         }
 
-        .span.gallery-dot.active {
+        .gallery-dot.active {
             background-color: #5a8a8a !important;
             background-image: url('Images/Texture-garamond.webp') !important;
             background-size: auto !important;
@@ -1895,6 +1895,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+</script>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.gallery-dot').forEach(function(dot) {
+        if (!dot.classList.contains('active')) {
+            dot.style.cssText = 'width: 12px !important; height: 12px !important; background: transparent !important; border: 1px solid rgba(90, 138, 138, 0.6) !important; opacity: 0.7 !important;';
+        }
+    });
+
+    document.querySelectorAll('.gallery-dot.active').forEach(function(dot) {
+        dot.style.cssText = 'width: 12px !important; height: 12px !important; background-color: #5a8a8a !important; background-image: url("Images/Texture-garamond.webp") !important; background-size: auto !important; background-repeat: repeat !important; border: 1.5px solid rgba(90, 138, 138, 0.8) !important; opacity: 1 !important;';
+    });
+});
+
 </script>
 
 </body>
