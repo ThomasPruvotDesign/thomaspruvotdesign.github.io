@@ -1783,23 +1783,36 @@ body {
         }
         
         function showGalleryImage(dot, index) {
-            const card = dot.closest('.collection-card, .luminaire');
-            const gallery = card.querySelector('.collection-images, .luminaire-images');
-            const dots = card.querySelectorAll('.gallery-dot');
-            
-            const cardId = Array.from(card.parentElement.children).indexOf(card);
-            const parentId = card.parentElement.className;
-            const uniqueId = parentId + '-' + cardId;
-            
-            galleryIndexes[uniqueId] = index + 1;
-            
-            gallery.style.transition = 'transform 0.5s ease-in-out';
-            gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-            
-            dots.forEach((d, i) => {
-                d.classList.toggle('active', i === index);
-            });
+            // Récupérez tous les dots et images du même conteneur
+            const gallery = dot.closest('.collection-gallery') || dot.closest('.gallery-nav').previousElementSibling;
+            const images = gallery.querySelectorAll('.collection-image');
+            const dots = dot.closest('.gallery-nav').querySelectorAll('.gallery-dot');
+    
+           // Enlevez la classe active de tous les dots
+           dots.forEach(d => d.classList.remove('active'));
+    
+           // Ajoutez la classe active au dot cliqué
+           dot.classList.add('active');
+    
+           // Affichez l'image correspondante
+           images.forEach((img, i) => {
+                img.style.display = i === index ? 'block' : 'none';
+           });
+    
+            // MET À JOUR LES STYLES DES DOTS
+           dots.forEach(function(d) {
+                if (!d.classList.contains('active')) {
+                    d.style.cssText = 'width: 12px !important; height: 12px !important; background: transparent !important; border: 1px solid rgba(90, 138, 138, 0.6) !important; opacity: 0.7 !important;';
+                } else {
+                   d.style.cssText = 'width: 12px !important; height: 12px !important; background-color: #5a8a8a !important; background-image: url("Images/Texture-garamond.webp") !important; background-size: auto !important; background-repeat: repeat !important; border: 1.5px solid rgba(90, 138, 138, 0.8) !important; opacity: 1 !important;';
+                }
+           });
         }
+
+            document.querySelectorAll('.gallery-dot.active').forEach(function(d) {
+                d.style.cssText = 'width: 12px !important; height: 12px !important; background-color: #5a8a8a !important; background-image: url("Images/Texture-garamond.webp") !important; background-size: auto !important; background-repeat: repeat !important; border: 1.5px solid rgba(90, 138, 138, 0.8) !important; opacity: 1 !important;';	
+                });
+            }
         
         document.addEventListener('keydown', function(e) {
             const lightbox = document.getElementById('lightbox');
