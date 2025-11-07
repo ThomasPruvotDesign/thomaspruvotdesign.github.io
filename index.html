@@ -643,43 +643,44 @@ body {
             object-fit: contain;
             flex-shrink: 0;
         }
-        }
         
         .gallery-nav {
             background: transparent !important;
-			width: 100% !important;  
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            position: relative;
-            z-index: 1;
-			box-sizing: border-box;
+            width: 100% !important;
+            display: flex !important;  /* ← FIX TYPO */
+            gap: 10px !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 10px 0 !important;
+            position: relative !important;
+            z-index: 1 !important;
+            box-sizing: border-box !important;
         }
+
         .gallery-dot {
             width: 13px !important;
             height: 13px !important;
-			display: inline-block !important;  /* ← AJOUTER */
+            display: inline-block !important;
             border: 1px solid rgba(90, 138, 138, 0.6) !important;
-            background: transparent!important;
-            cursor: pointer;
+            background: transparent !important;
+            cursor: pointer !important;
             opacity: 0.7 !important;
             transition: all 0.3s ease !important;
-			vertical-align: middle;
-			-webkit-tap-highlight-color: transparent; /* iOS touch feedback */
+            vertical-align: middle !important;
+           -webkit-tap-highlight-color: transparent !important;
         }
 
         .gallery-dot.active {
-            background: url('Images/Texture-garamond.webp') center/cover no-repeat !important;
-			-webkit-background-size: cover !important; /* Safari prefix */
-			background-size: cover !important;
+            background-color: rgba(90, 138, 138, 0.8) !important;
+            background-image: url('Images/Texture-garamond.webp') !important;
+			background-repeat: repeat !important;
+            background-size: auto !important;
+            background-position: center !important;
             border: 1px solid rgba(90, 138, 138, 0.8) !important;
             opacity: 1 !important;
             box-shadow: 0 0 8px rgba(90, 138, 138, 0.4) !important;
         }
 
-        
         .gallery-arrow {
             position: absolute;
             top: 50%;
@@ -1124,17 +1125,17 @@ body::-webkit-scrollbar {
             img {
                 max-width: calc(100vw - 2rem) !important;
             }
+			.gallery-nav {
+                padding: 10px 0 !important;
+                gap: 8px !important;
+				justify-content: center !important;
+			}
 			
             .gallery-dot {
                 width: 12px !important; /* Légèrement plus grand pour iOS */
                 height: 12px !important;
                 min-width: 12px !important; /* Force size sur iOS */
                 min-height: 12px !important;
-            }
-    
-           .gallery-nav {
-                padding: 10px 0 !important;
-                gap: 8px !important;
             }
     
            /* Force texture sur iOS/Safari */
