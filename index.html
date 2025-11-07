@@ -179,7 +179,7 @@ body {
             }
     
             .collection-description,
-            .luminaire-description,{
+            .luminaire-description{
                  text-align: center !important;
             }
 			
@@ -1114,23 +1114,33 @@ body::-webkit-scrollbar {
             img {
                 max-width: calc(100vw - 2rem) !important;
             }
-            
+			
+            .gallery-nav {
+                 background: url('Images/Bois-brule.webp') fixed center/cover !important;
+                 display: flex;
+                 gap: 10px;
+                 justify-content: center;
+                 padding: 10px 0;
+            }
+
             .gallery-dot {
-                width: 13px !important;
-                height: 13px !important;
-                border: 1px solid rgba(90, 138, 138, 0.6) !important;
-                background: none !important;
+                 width: 13px !important;
+                 height: 13px !important;
+                 border: 1px solid rgba(90, 138, 138, 0.6) !important;
+                 background: rgba(0, 0, 0, 0) !important;
+                 cursor: pointer;
+                 opacity: 0.7 !important;
             }
-            
+
             .gallery-dot.active {
-                background: url('Images/Texture-garamond.webp') center/cover !important;
-				-webkit-background-clip: unset !important;
-				background-clip: unset !important;
-				-webkit-text-fill-color: unset !important;
-                border: 1px solid rgba(90, 138, 138, 0.8) !important;
-				opacity: 1 !important;
+                 background: url('Images/Texture-garamond.webp') center/cover !important;
+                 -webkit-background-clip: unset !important;
+                 background-clip: unset !important;
+                 -webkit-text-fill-color: unset !important;
+                 border: 1px solid rgba(90, 138, 138, 0.8) !important;
+                 opacity: 1 !important;
             }
-            
+
             .gallery-arrow {
                 width: 45px !important;
                 height: 45px !important;
@@ -1835,85 +1845,65 @@ body::-webkit-scrollbar {
 </div>
 
 <script>
-const customScrollbar = {
-    thumb: document.getElementById('custom-scrollbar-thumb'),
-    track: document.getElementById('custom-scrollbar'),
-    isDragging: false,
-    startY: 0,
-    rafId: null,
+document.addEventListener('DOMContentLoaded', function() {
+    const thumb = document.getElementById('custom-scrollbar-thumb');
+    const track = document.getElementById('custom-scrollbar');
     
-    init() {
-        if (window.innerWidth <= 768) {
-            this.track.style.display = 'none';
-            return;
-        }
-        
-        this.updateThumbSize();
-        this.attachEvents();
-        this.syncPosition();
-    },
+    if (!thumb || !track) return; // Vérifier que les éléments existent
     
-    updateThumbSize() {
+    let isDragging = false;
+    let startY = 0;
+	let animationId = null;
+
+    function syncThumb() {
+        const ratio = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+        const maxTop = window.innerHeight - thumb.offsetHeight;
+        thumb.style.top = (ratio * maxTop) + 'px';
+    }
+
+    function setThumbHeight() {
         const ratio = window.innerHeight / document.documentElement.scrollHeight;
-        const height = Math.max(30, ratio * window.innerHeight);
-        this.thumb.style.height = height + 'px';
-    },
-    
-    syncPosition() {
-        if (this.isDragging) return;
+        thumb.style.height = Math.max(10, ratio * window.innerHeight) + 'px';
+    }
+
+    if (window.innerWidth > 768) {
+        setThumbHeight();
+        syncThumb();
+		
+        window.addEventListener('scroll', syncThumb, { passive: true });
+		window.addEventListener('resize', setThumbHeight);
         
-        const scrollRatio = window.pageYOffset / 
-            (document.documentElement.scrollHeight - window.innerHeight);
-        const maxTop = window.innerHeight - this.thumb.offsetHeight;
-        this.thumb.style.top = (scrollRatio * maxTop) + 'px';
-    },
-    
-    attachEvents() {
-        const self = this;
-        
-        window.addEventListener('scroll', () => {
-            self.syncPosition();
-        }, { passive: true });
-        
-        this.thumb.addEventListener('mousedown', (e) => {
-            self.isDragging = true;
-            self.startY = e.clientY - self.thumb.offsetTop;
+        thumb.addEventListener('mousedown', (e) => {
+            isDragging = true;
             document.body.style.userSelect = 'none';
-            e.preventDefault();
+			thumb.style.opacity = '1';
+			
+			const maxTop = window.innerHeight - thumb.offsetHeight;
+            let newTop = e.clientY - track.getBoundingClientRect().top - (thumb.offsetHeight / 2);
+            newTop = Math.max(0, Math.min(newTop, maxTop));
+            thumb.style.top = newTop + 'px';
         });
         
         document.addEventListener('mousemove', (e) => {
-            if (!self.isDragging) return;
+            if (!isDragging) return;
             
-            const maxTop = window.innerHeight - self.thumb.offsetHeight;
-            let newTop = e.clientY - self.track.offsetTop - self.startY;
+            const maxTop = window.innerHeight - thumb.offsetHeight;
+            let newTop = e.clientY - track.getBoundingClientRect().top - (thumb.offsetHeight / 2);
             newTop = Math.max(0, Math.min(newTop, maxTop));
-                
-            self.thumb.style.top = newTop + 'px';
-                
+			
+			thumb.style.top = newTop + 'px';
+            
             const scrollRatio = newTop / maxTop;
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            window.scrollTo(0, scrollRatio * maxScroll);
+            window.scrollTo(0, scrollRatio * (document.documentElement.scrollHeight - window.innerHeight));
         });
         
         document.addEventListener('mouseup', () => {
-            self.isDragging = false;
+            isDragging = false;
             document.body.style.userSelect = '';
-            if (self.rafId) cancelAnimationFrame(self.rafId);
-        });
-        
-        window.addEventListener('resize', () => {
-            self.updateThumbSize();
-            self.syncPosition();
+			thumb.style.opacity = '0.7';
         });
     }
-};
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => customScrollbar.init());
-} else {
-    customScrollbar.init();
-}
+});
 </script>
 
 </body>
