@@ -1332,8 +1332,6 @@ body {
                             <img src="Images/Miroir-mica-en-situation.webp" alt="Miroir Mica" class="collection-image">
                             <img src="Images/Vase-mica-en-situation.webp" alt="Vase Mica" class="collection-image">
                         </div>
-                        <button class="gallery-arrow prev" onclick="changeGalleryImage(this, -1)"></button>
-                        <button class="gallery-arrow next" onclick="changeGalleryImage(this, 1)"></button>
                     </div>
                     <div class="gallery-nav">
                         <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
@@ -1722,11 +1720,6 @@ body {
                     gallery.appendChild(firstClone);
                     gallery.insertBefore(lastClone, images[0]);
                     
-                    const cardId = Array.from(card.parentElement.children).indexOf(card);
-                    const parentId = card.parentElement.className;
-                    const uniqueId = parentId + '-' + cardId;
-                    
-                    galleryIndexes[uniqueId] = 1;
                     gallery.style.transform = `translateX(-100%)`;
                     gallery.style.transition = 'none';
                     
@@ -1737,58 +1730,14 @@ body {
             });
         });
         
-        function changeGalleryImage(btn, dir) {
-            const card = btn.closest('.collection-card, .luminaire');
-            const gallery = card.querySelector('.collection-images, .luminaire-images');
-            const dotsContainer = card.querySelector('.gallery-nav');
-            if (!dotsContainer) return;
-            
-            const dots = dotsContainer.querySelectorAll('.gallery-dot');
-            const realImagesCount = dots.length;
-            
-            const cardId = Array.from(card.parentElement.children).indexOf(card);
-            const parentId = card.parentElement.className;
-            const uniqueId = parentId + '-' + cardId;
-            
-            if (isTransitioning[uniqueId]) return;
-            isTransitioning[uniqueId] = true;
-            
-            if (typeof galleryIndexes[uniqueId] === 'undefined') {
-                galleryIndexes[uniqueId] = 1;
-            }
-            
-            galleryIndexes[uniqueId] += dir;
-            
-            gallery.style.transition = 'transform 0.5s ease-in-out';
-            gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-            
-            const realIndex = ((galleryIndexes[uniqueId] - 1) + realImagesCount) % realImagesCount;
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === realIndex);
-            });
-            
-            setTimeout(() => {
-                gallery.style.transition = 'none';
-                
-                if (galleryIndexes[uniqueId] === 0) {
-                    galleryIndexes[uniqueId] = realImagesCount;
-                    gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-                }
-                else if (galleryIndexes[uniqueId] === realImagesCount + 1) {
-                    galleryIndexes[uniqueId] = 1;
-                    gallery.style.transform = `translateX(-${galleryIndexes[uniqueId] * 100}%)`;
-                }
-                
-                isTransitioning[uniqueId] = false;
-            }, 500);
-        }
-        
 		function showGalleryImage(dot, index) {
 			const card = dot.closest('.collection-card, .luminaire');
-			const gallery = card.querySelector('.collection-gallery, .luminaire-gallery');
-			const images = gallery.querySelectorAll('.collection-image, .luminaire-image');
 			const dots = card.querySelectorAll('.gallery-dot');
-	
+			const realImageCount = dots.length;
+			
+			const allImages = card.querySelectorAll('.luminaire-image, .collection-image');
+			const images = Array.from(allImages).slice(0, realImageCount);
+			
 			dots.forEach(d => d.classList.remove('active'));
 			dot.classList.add('active');
 
@@ -1800,9 +1749,9 @@ body {
 
 			dots.forEach(function(d) {
 				if (!d.classList.contains('active')) {
-                    d.style.cssText = 'width: 12px !important; height: 12px !important; background-color: rgba(90, 138, 138, 0.15) !important; border: 1px solid rgba(90, 138, 138, 0.6) !important; opacity: 0.7 !important; border-radius: 50% !important; box-shadow: inset 0 0 3px rgba(0,0,0,0.3) !important;';
+                    d.style.cssText = 'width: 12px !important; height: 12px !important; background-color: rgba(90, 138, 138, 0.15) !important; border: 1px solid rgba(90, 138, 138, 0.6) !important; opacity: 0.7 !important; border-radius: 0 !important; box-shadow: inset 0 0 3px rgba(0,0,0,0.3) !important;';
                 } else {
-                    d.style.cssText = 'width: 12px !important; height: 12px !important; background: linear-gradient(135deg, rgba(90, 138, 138, 1) 0%, rgba(70, 110, 110, 0.9) 100%) !important; border: 1.5px solid rgba(90, 138, 138, 1) !important; opacity: 1 !important; border-radius: 50% !important; box-shadow: 0 0 8px rgba(90,138,138,0.8), inset 0 1px 2px rgba(255,255,255,0.2) !important;';
+                    d.style.cssText = 'width: 12px !important; height: 12px !important; background: linear-gradient(135deg, rgba(90, 138, 138, 1) 0%, rgba(70, 110, 110, 0.9) 100%) !important; border: 1.5px solid rgba(90, 138, 138, 1) !important; opacity: 1 !important; border-radius: 0 !important; box-shadow: 0 0 8px rgba(90,138,138,0.8), inset 0 1px 2px rgba(255,255,255,0.2) !important;';
                 }
             });
 				
@@ -1909,9 +1858,9 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.gallery-dot').forEach(function(dot) {
         if (!dot.classList.contains('active')) {
-            dot.style.cssText = 'width: 12px !important; height: 12px !important; background-color: rgba(90, 138, 138, 0.15) !important; border: 1px solid rgba(90, 138, 138, 0.6) !important; opacity: 0.7 !important; border-radius: 50% !important; box-shadow: inset 0 0 3px rgba(0,0,0,0.3) !important;';
+            dot.style.cssText = 'width: 12px !important; height: 12px !important; background-color: rgba(90, 138, 138, 0.15) !important; border: 1px solid rgba(90, 138, 138, 0.6) !important; opacity: 0.7 !important; border-radius: 0 !important; box-shadow: inset 0 0 3px rgba(0,0,0,0.3) !important;';
         } else {
-            dot.style.cssText = 'width: 12px !important; height: 12px !important; background: linear-gradient(135deg, rgba(90, 138, 138, 1) 0%, rgba(70, 110, 110, 0.9) 100%) !important; border: 1.5px solid rgba(90, 138, 138, 1) !important; opacity: 1 !important; border-radius: 50% !important; box-shadow: 0 0 8px rgba(90,138,138,0.8), inset 0 1px 2px rgba(255,255,255,0.2) !important;';
+            dot.style.cssText = 'width: 12px !important; height: 12px !important; background: linear-gradient(135deg, rgba(90, 138, 138, 1) 0%, rgba(70, 110, 110, 0.9) 100%) !important; border: 1.5px solid rgba(90, 138, 138, 1) !important; opacity: 1 !important; border-radius: 0 !important; box-shadow: 0 0 8px rgba(90,138,138,0.8), inset 0 1px 2px rgba(255,255,255,0.2) !important;';
         }
     });
 });
