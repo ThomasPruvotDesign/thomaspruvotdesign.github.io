@@ -980,16 +980,17 @@ body {
                 background-size: cover;
             }
             
+			html {
+                background: url('Images/Bois-brule.webp') center/cover no-repeat fixed;
+                min-height: 100vh;
+            }
+			
             body {
-                background-image: url('Images/Bois-brule.webp') !important;
-                background-position: center !important;
-                background-size: cover !important;
-                background-repeat: no-repeat !important;
-                background-attachment: local !important;
-                -webkit-background-size: cover !important;
-                position: relative;
-                width: 100vw !important;
-                overflow-x: hidden !important;
+				background: none !important; /* On retire le background du body */
+				position: relative;
+				width: 100vw !important;
+				overflow-x: hidden !important;
+				min-height: 100vh;
             }
 
             body::-webkit-scrollbar {
