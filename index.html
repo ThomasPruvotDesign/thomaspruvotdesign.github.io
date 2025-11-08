@@ -335,7 +335,75 @@ body {
             margin: 0 auto;
             padding: 3rem 2.5rem;
         }
-        
+        /* HERO SECTION */
+		.hero {
+			margin-bottom: 5rem;
+			background: rgba(26, 26, 26, 0.75);
+			padding: 4rem 3rem;
+			border-radius: 0;
+			max-width: 100%;
+			position: relative;
+			border: 1px solid transparent;
+			background-clip: padding-box;
+			text-align: center;
+		}
+
+		.hero::before {
+			content: '';
+			position: absolute;
+			top: -1px;
+			left: -1px;
+			right: -1px;
+			bottom: -1px;
+			background: url('Images/Texture-garamond.webp') center/cover;
+			-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+			mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+			-webkit-mask-composite: xor;
+			mask-composite: exclude;
+			padding: 1px;
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		.hero-title {
+			font-family: 'Garamond', serif;
+			font-size: 3.5rem;
+			font-weight: 300;
+			margin-bottom: 2rem;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			background: url('Images/Texture-garamond.webp') center/cover;
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			color: transparent;
+		}
+
+		.hero-subtitle {
+			font-family: 'Tahoma', 'Verdana', sans-serif;
+			font-size: 1.2rem;
+			line-height: 1.8;
+			max-width: 900px;
+			margin: 0 auto 3rem;
+			background: url('Images/Curseur-defilement.webp') center/cover;
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			color: transparent;
+		}
+
+		.hero-image {
+			max-width: 800px;
+			margin: 0 auto;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+			border: 1px solid rgba(90, 138, 138, 0.3);
+		}
+
+		.hero-image img {
+			width: 100%;
+			pointer-events: auto;
+		}
+		
         section {
             margin-bottom: 5rem;
             background: rgba(26, 26, 26, 0.75);
@@ -439,6 +507,20 @@ body {
             color: transparent;
         }
         
+		/* PHOTO ATELIER */
+			.about-image {
+			max-width: 800px;
+			margin: 3rem auto 0;
+			text-align: center;
+		}
+
+		.about-image img {
+			width: 100%;
+			box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+			border: 1px solid rgba(90, 138, 138, 0.3);
+			pointer-events: auto;
+		}
+		
         .materials-samples {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1268,13 +1350,22 @@ body {
     
     <nav>
         <a href="#a-propos">A PROPOS</a>
-        <a href="#mobilier">MOBILIER EN GESSO</a>
         <a href="#luminaires">LUMINAIRES</a>
+        <a href="#mobilier">MOBILIER EN GESSO</a>
         <a href="#contact">CONTACT</a>
     </nav>
     
     <div class="container">
-        
+	
+         <!-- HERO SECTION -->
+        <div class="hero">
+            <h1 class="hero-title">THOMAS PRUVOT</h1>
+            <p class="hero-subtitle">Objets uniques inspirés des traditions ancestrales et de la géométrie naturelle. Matières rares, fabrication manuelle, pièces de contemplation.</p>
+            <div class="hero-image">
+                <img src="Images/Chartres-en-situation-chez-moi.webp" alt="Thomas Pruvot Creation">
+            </div>
+        </div>
+		
         <section id="a-propos">
             <h2>A PROPOS</h2>
             <div class="intro">
@@ -1285,6 +1376,139 @@ body {
             <div class="quote">"L'œuvre d'art est vivante, car elle contient l'esprit de celui qui l'a créée." — Paolo Coelho</div>
         </section>
         
+		<section id="luminaires">
+            <h2>LES LUMINAIRES</h2>
+            <div class="intro">
+                <p>Ces créations originales s'inscrivent avant tout dans une démarche spirituelle et contemplative. Réalisées dans la paix et le recueillement à l'instar des moines copistes médiévaux, elles incarnent la matière devenue esprit, la lumière révélant l'âme des matériaux nobles. Sont utilisés des matériaux précieux que sont les minéraux (agate du Brésil, quartz rose et améthyste d'Inde, agate de sel), le gesso travaillé selon des techniques ancestrales, et le bois massif de sipo finement gougé à la main. Chaque luminaire est une invitation à la méditation, créant des ambiances propices à la sérénité et à l'inspiration.</p>
+            </div>
+            
+            <div class="luminaires-grid">
+                
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Eclat-eteinte.webp" alt="Eclat éteinte" class="luminaire-image">
+							<img src="Images/Eclat-allumee.webp" alt="Eclat" class="luminaire-image">
+                            <img src="Images/Eclat-detail.webp" alt="Eclat détail" class="luminaire-image">
+                        </div>
+                    </div>
+                    <div class="gallery-nav">
+                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Eclat</h3>
+                        <p class="luminaire-materials">Agate de sel indienne translucide, gesso argenté, bois de sipo gougé<br>42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. "Eclat" illuminera avec élégance un lieu de vie quotidien ou un espace de travail exigeant.</p>
+                    </div>
+                </article>
+                
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images"> 
+                            <img src="Images/Intime-eteinte.webp" alt="Intime éteinte" class="luminaire-image">
+							<img src="Images/Intime-allumee.webp" alt="Intime" class="luminaire-image">
+                            <img src="Images/Intime-detail.webp" alt="Intime détail" class="luminaire-image">
+                        </div>
+                    </div>
+                    <div class="gallery-nav">
+                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Intime</h3>
+                        <p class="luminaire-materials">Quartz rose indien, gesso craquelé rosé aux nuances nacrées, bois de sipo gougé<br>42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde. Visuellement, il inspire immédiatement la douceur, la tendresse et la bienveillance par ses teintes rosées apaisantes. "Intime" trouvera naturellement sa place dans une chambre à coucher ou un salon familial.</p>
+                    </div>
+                </article>
+                
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">                           
+                            <img src="Images/Celeste-eteinte.webp" alt="Céleste éteinte" class="luminaire-image">
+							<img src="Images/Celeste-allumee.webp" alt="Céleste" class="luminaire-image">
+                            <img src="Images/Celeste-detail.webp" alt="Céleste détail" class="luminaire-image">
+                        </div>
+                    </div>
+                    <div class="gallery-nav">
+                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Céleste</h3>
+                        <p class="luminaire-materials">Améthyste indienne, Peau de Gesso, bois de sipo gougé à la main<br>42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. Le cadre en "Peau de Gesso" et bois de sipo finement travaillé ajoute une dimension tactile et visuelle qui enrichit l'expérience contemplative.</p>
+                    </div>
+                </article>
+                
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Chartres-eteinte.webp" alt="Chartres éteinte" class="luminaire-image">
+							<img src="Images/Chartres-allumee.webp" alt="Chartres" class="luminaire-image">
+                            <img src="Images/Chartres-detail.webp" alt="Chartres détail" class="luminaire-image">
+                        </div>
+                    </div>
+                    <div class="gallery-nav">
+                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Chartres</h3>
+                        <p class="luminaire-materials">Mosaïque d'agates du Brésil, Peau de Gesso, bois de sipo gougé<br>42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées.</p>
+                    </div>
+                </article>
+                
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Emanation-face.webp" alt="Emanation" class="luminaire-image">
+                            <img src="Images/Emanation-en-situation.webp" alt="Emanation en situation" class="luminaire-image">
+                            <img src="Images/Emanation-arriere.webp" alt="Emanation arrière" class="luminaire-image">
+                        </div>
+                    </div>
+                    <div class="gallery-nav">
+                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                    </div>
+                    <div class="luminaire-info">
+                        <h3 class="luminaire-title">Emanation</h3>
+                        <p class="luminaire-materials">Améthyste indienne sculptée à la main, cadre bois de wengé gougé à la main, "Peau de Gesso" incrustée de cuivre<br>52 × 24 × 16 cm</p>
+                        <p class="luminaire-description">Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée.</p>
+                    </div>
+                </article>
+                
+                <article class="luminaire">
+                    <div class="luminaire-gallery">
+                        <div class="luminaire-images">
+                            <img src="Images/Chartres-en-situation-salon-baba.webp" alt="Luminaires en situation" class="luminaire-image">
+                            <img src="Images/Chartres-en-situation-salon-baba-2.webp" alt="Chartres salon 2" class="luminaire-image">
+                            <img src="Images/Chartres-en-situation-eglise.webp" alt="Chartres église" class="luminaire-image">
+                            <img src="Images/Emanation-en-situation-contre-plongee.webp" alt="Emanation contre-plongée" class="luminaire-image">
+                            <img src="Images/Emanation-vitrail.webp" alt="Emanation vitrail" class="luminaire-image">
+						</div>
+				  </div>
+                    <div class="gallery-nav">
+                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 3)"></span>
+                        <span class="gallery-dot" onclick="showGalleryImage(this, 4)"></span>
+                    </div>
+                    <div class="luminaire-info">
+                        <p class="luminaire-description" style="margin-top: 2rem;">Découvrez les luminaires Chartres et Emanation intégrés dans des espaces d'exception : salon intime, église sacrée, et ambiances oniriques. Ces créations transcendent leur fonction pour devenir des œuvres vivantes qui transforment l'atmosphère des lieux qu'elles habitent, créant des moments de contemplation et d'émerveillement.</p>
+                    </div>
+                </article>
+                
+            </div>
+        </section>
+		
         <section id="mobilier">
             <h2>MOBILIER EN GESSO</h2>
             
@@ -1308,8 +1532,8 @@ body {
                 <article class="collection-card">
                     <div class="collection-gallery">
                         <div class="collection-images">
-                            <img src="Images/Console-mica.webp" alt="Console Mica" class="collection-image">
-                            <img src="Images/Console-et-miroir-mica-en-situation.webp" alt="Console et miroir Mica" class="collection-image">
+							<img src="Images/Console-et-miroir-mica-en-situation.webp" alt="Console et miroir Mica" class="collection-image">
+                            <img src="Images/Console-mica.webp" alt="Console Mica" class="collection-image">                            
                             <img src="Images/Console-mica-detail.webp" alt="Console Mica détail" class="collection-image">
                         </div>
                     </div>
@@ -1430,139 +1654,6 @@ body {
                         <p class="collection-dimensions">145 × 90 cm<br>À-plats : 18 cm<br>Épaisseur : 3 cm</p>
                     </div>
                 </article>
-            </div>
-        </section>
-        
-        <section id="luminaires">
-            <h2>LES LUMINAIRES</h2>
-            <div class="intro">
-                <p>Ces créations originales s'inscrivent avant tout dans une démarche spirituelle et contemplative. Réalisées dans la paix et le recueillement à l'instar des moines copistes médiévaux, elles incarnent la matière devenue esprit, la lumière révélant l'âme des matériaux nobles. Sont utilisés des matériaux précieux que sont les minéraux (agate du Brésil, quartz rose et améthyste d'Inde, agate de sel), le gesso travaillé selon des techniques ancestrales, et le bois massif de sipo finement gougé à la main. Chaque luminaire est une invitation à la méditation, créant des ambiances propices à la sérénité et à l'inspiration.</p>
-            </div>
-            
-            <div class="luminaires-grid">
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Eclat-allumee.webp" alt="Eclat" class="luminaire-image">
-                            <img src="Images/Eclat-eteinte.webp" alt="Eclat éteinte" class="luminaire-image">
-                            <img src="Images/Eclat-detail.webp" alt="Eclat détail" class="luminaire-image">
-                        </div>
-                    </div>
-                    <div class="gallery-nav">
-                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Eclat</h3>
-                        <p class="luminaire-materials">Agate de sel indienne translucide, gesso argenté, bois de sipo gougé<br>42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Luminaire spécialement conçu pour les ambiances claires et lumineuses nécessitant le maximum de luminosité naturelle. Réalisé avec un assemblage précis de douze carreaux exceptionnels d'agate de sel en provenance d'Inde, pierre translucide aux propriétés uniques. "Eclat" illuminera avec élégance un lieu de vie quotidien ou un espace de travail exigeant.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Intime-allumee.webp" alt="Intime" class="luminaire-image">
-                            <img src="Images/Intime-eteinte.webp" alt="Intime éteinte" class="luminaire-image">
-                            <img src="Images/Intime-detail.webp" alt="Intime détail" class="luminaire-image">
-                        </div>
-                    </div>
-                    <div class="gallery-nav">
-                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Intime</h3>
-                        <p class="luminaire-materials">Quartz rose indien, gesso craquelé rosé aux nuances nacrées, bois de sipo gougé<br>42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Création exprimant un caractère délicat et plus féminin grâce à son assemblage raffiné de douze carreaux soigneusement sélectionnés de quartz rose tendre en provenance d'Inde. Visuellement, il inspire immédiatement la douceur, la tendresse et la bienveillance par ses teintes rosées apaisantes. "Intime" trouvera naturellement sa place dans une chambre à coucher ou un salon familial.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Celeste-allumee.webp" alt="Céleste" class="luminaire-image">
-                            <img src="Images/Celeste-eteinte.webp" alt="Céleste éteinte" class="luminaire-image">
-                            <img src="Images/Celeste-detail.webp" alt="Céleste détail" class="luminaire-image">
-                        </div>
-                    </div>
-                    <div class="gallery-nav">
-                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Céleste</h3>
-                        <p class="luminaire-materials">Améthyste indienne, Peau de Gesso, bois de sipo gougé à la main<br>42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Création propice à la lecture, l'étude et la méditation profonde, dégageant le calme et la sérénité absolue grâce à un assemblage méticuleux de douze carreaux d'améthyste en provenance directe d'Inde. Le cadre en "Peau de Gesso" et bois de sipo finement travaillé ajoute une dimension tactile et visuelle qui enrichit l'expérience contemplative.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Chartres-allumee.webp" alt="Chartres" class="luminaire-image">
-                            <img src="Images/Chartres-eteinte.webp" alt="Chartres éteinte" class="luminaire-image">
-                            <img src="Images/Chartres-detail.webp" alt="Chartres détail" class="luminaire-image">
-                        </div>
-                    </div>
-                    <div class="gallery-nav">
-                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Chartres</h3>
-                        <p class="luminaire-materials">Mosaïque d'agates du Brésil, Peau de Gesso, bois de sipo gougé<br>42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Luminaire sacré créé spécifiquement pour favoriser la paix intérieure et l'harmonie spirituelle. Son inspiration profonde a été puisée dans la cathédrale Notre-Dame de Chartres et la magnificence intemporelle de ses vitraux médiévaux d'origine, chefs-d'œuvre absolus de l'art gothique. Le panneau frontal est composé d'une mosaïque complexe d'agates naturelles du Brésil aux teintes chaleureuses et variées.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Emanation-face.webp" alt="Emanation" class="luminaire-image">
-                            <img src="Images/Emanation-en-situation.webp" alt="Emanation en situation" class="luminaire-image">
-                            <img src="Images/Emanation-arriere.webp" alt="Emanation arrière" class="luminaire-image">
-                        </div>
-                    </div>
-                    <div class="gallery-nav">
-                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                    </div>
-                    <div class="luminaire-info">
-                        <h3 class="luminaire-title">Emanation</h3>
-                        <p class="luminaire-materials">Améthyste indienne sculptée à la main, cadre bois de wengé gougé à la main, "Peau de Gesso" incrustée de cuivre<br>52 × 24 × 16 cm</p>
-                        <p class="luminaire-description">Stèle lumineuse monumentale réalisée à partir d'un bloc d'améthyste indien exceptionnel, sculpté entièrement à la main et percé d'un cœur de lumière centrale. La lumière diffuse par voie indirecte, teintée de reflets violets profonds et orangés chaleureux, crée une atmosphère onirique, réconfortante et profondément intime. Inspirée par l'univers raffiné et mystérieux des parfums de Serge Lutens, cette pièce unique convoque une ambiance de pénombre élégante et sophistiquée.</p>
-                    </div>
-                </article>
-                
-                <article class="luminaire">
-                    <div class="luminaire-gallery">
-                        <div class="luminaire-images">
-                            <img src="Images/Chartres-en-situation-salon-baba.webp" alt="Luminaires en situation" class="luminaire-image">
-                            <img src="Images/Chartres-en-situation-salon-baba-2.webp" alt="Chartres salon 2" class="luminaire-image">
-                            <img src="Images/Chartres-en-situation-eglise.webp" alt="Chartres église" class="luminaire-image">
-                            <img src="Images/Emanation-en-situation-contre-plongee.webp" alt="Emanation contre-plongée" class="luminaire-image">
-                            <img src="Images/Emanation-vitrail.webp" alt="Emanation vitrail" class="luminaire-image">
-						</div>
-				  </div>
-                    <div class="gallery-nav">
-                        <span class="gallery-dot active" onclick="showGalleryImage(this, 0)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 1)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 2)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 3)"></span>
-                        <span class="gallery-dot" onclick="showGalleryImage(this, 4)"></span>
-                    </div>
-                    <div class="luminaire-info">
-                        <p class="luminaire-description" style="margin-top: 2rem;">Découvrez les luminaires Chartres et Emanation intégrés dans des espaces d'exception : salon intime, église sacrée, et ambiances oniriques. Ces créations transcendent leur fonction pour devenir des œuvres vivantes qui transforment l'atmosphère des lieux qu'elles habitent, créant des moments de contemplation et d'émerveillement.</p>
-                    </div>
-                </article>
-                
             </div>
         </section>
         
