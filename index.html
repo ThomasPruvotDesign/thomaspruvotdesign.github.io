@@ -1847,8 +1847,9 @@ footer p {
 				document.body.style.overflow = '';
 				currentCollectionName = '';
 				
-			if (e.stopPropagation) {	
-				e.stopPropagation();
+				if (e.stopPropagation) {	
+					e.stopPropagation();
+				}	
 			}
 		}
 
@@ -1879,7 +1880,7 @@ footer p {
 			const swipeThreshold = 50; // Distance minimale pour détecter un swipe
 			const diff = touchStartX - touchEndX;
     
-			if (Math.abs(diff) > swipeThreshold) && currentLightboxGallery.length > 1 {
+			if (Math.abs(diff) > swipeThreshold && currentLightboxGallery.length > 1 {
 				if (diff > 0) {
             // Swipe vers la gauche = image suivante
 					changeLightboxImage(1, {stopPropagation: () => {}});
