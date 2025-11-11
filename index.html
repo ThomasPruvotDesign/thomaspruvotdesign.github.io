@@ -1260,7 +1260,7 @@ footer p {
     }
 
     .lightbox-content {
-        max-height: 50vh !important;
+        max-height: 60vh !important;
         max-width: 90vw !important;
 		margin-bottom: 12px !important;
 		object-fit: contain !important; /* Assure que l'image garde ses proportions */
@@ -1273,7 +1273,8 @@ footer p {
 		align-items: center !important;
 		gap: 15px !important;
 		position: static !important; /* Retire position relative */
-		margin-top: 0 !important;
+		margin-top: 8 !important;
+		width: 100% !important;                 /* Force la pleine largeur */
     }
 
     .lightbox-prev,
@@ -1368,13 +1369,22 @@ footer p {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
+		padding-top: 0 !important;
         height: 100vh !important;
         height: 100dvh !important;
+		overflow-y: auto !important;
     }
     
+	.lightbox-close {
+        top: 12px !important;
+        right: 12px !important;
+        font-size: 2.2rem !important;
+        padding: 5px !important;
+    }
+	
     .lightbox-content {
-        max-height: 65vh !important;
-        max-width: 75vw !important;
+        max-height: 70vh !important;
+        max-width: 80vw !important;
         object-fit: contain !important;
     }
     
@@ -1384,6 +1394,41 @@ footer p {
     
     .lightbox-counter {
         font-size: 1.1rem !important;
+    }
+}
+
+/* TABLETTE - Portrait (768px à 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+    .lightbox.active {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding-top: 0 !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        overflow-y: auto !important;
+    }
+
+    .lightbox-content {
+        max-height: 75vh !important;    /* Prend plus de place en portrait */
+        max-width: 85vw !important;
+        margin-bottom: 16px !important;
+    }
+
+    .lightbox-controls {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 18px !important;
+        position: static !important;
+        margin-top: 12px !important;
+        width: 100% !important;
+    }
+
+    .lightbox-counter {
+        font-size: 1.1rem !important;
+        padding: 12px 24px !important;
     }
 }
 
@@ -1838,16 +1883,28 @@ footer p {
 			updateLightboxCounter();
 		}
 
+			if (screen.orientation && screen.orientation.lock) {
+				screen.orientation.lock("portrait").catch(err => {
+					console.log('Orientation lock non supporté');
+				});
+			}
+		}
+		
 		function closeLightbox(e) {
 			if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
 				const lightbox = document.getElementById('lightbox');
 				lightbox.classList.remove('active');
 				document.body.style.overflow = '';
 				currentCollectionName = '';
+				
+				 if (screen.orientation && screen.orientation.unlock) {
+					screen.orientation.unlock();
+				}
+				
 				e.stopPropagation();
 			}
 		}
-
+		
 		function changeLightboxImage(dir, e) {
 			e.stopPropagation();
 			if (currentLightboxGallery.length <= 1) return;
