@@ -1241,29 +1241,34 @@ footer p {
     /* LIGHTBOX MOBILE */
 	.lightbox.active {
         align-items: flex-start !important;
-        padding-top: 50px !important;
+        padding-top: 60px !important;
+		height: 100vh !important;
+		height: 100dvh !important; /* Hauteur dynamique mobile */
+		overflow-y: auto !important;
     }
-	
+
     .lightbox-close {
-        top: 15px !important;
-        right: 15px !important;
-        font-size: 2.5rem !important;
+        top: 10px !important;
+        right: 10px !important;
+        font-size: 2rem !important;
         padding: 5px !important;
     }
 
     .lightbox-content {
-        max-height: 65vh !important;
+        max-height: 55vh !important;
         max-width: 90vw !important;
+		margin-bottom: 8px !important;
     }
 
     .lightbox-controls {
+		margin-top: 8px !important; /* Marge réduite avec photo */
         bottom: 15px !important;
-        gap: 15px !important;
+        position: relative !important;
     }
 
     .lightbox-prev,
     .lightbox-next {
-        font-size: 2.5rem !important;
+        font-size: 2rem !important;
         padding: 5px 10px !important;
     }
 
