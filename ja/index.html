@@ -515,19 +515,29 @@ h3.collection-category {
 }
 
 .quote {
-    font-family: 'Garamond', serif;
-    font-style: italic;
+    font-family: 'Tahoma', sans-serif;
     text-align: center;
     margin: 2rem auto;
     font-size: 1.2rem;
     padding: 0;
     max-width: 900px;
     border: none;
-    background: url('../Images/Curseur-defilement.webp') center/cover;
+    background: url('Images/Curseur-defilement.webp') center/cover;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+}
+
+.quote-text {
+    font-style: italic;
+    display: block;
+}
+
+.quote-author {
+    font-style: normal;
+    display: block;
+    margin-top: 0.5em;
 }
 
 .about-image {
@@ -1491,9 +1501,11 @@ footer p {
             <h2>プロフィール</h2>
             <div class="intro">
                 <p>Thomas Pruvot は、木材、伝統的なジェッソ、天然の鉱物を用いて“光を彫刻した”オブジェを制作しており、いずれも Chennevières-sur-Marne のアトリエで一点ずつ手作業で仕上げられています。装飾絵画や古い左官技法を学んだ彼は、ジェッソに半透明の石――ロックソルトアゲート、アメジスト、ローズクォーツ、アゲート――を組み合わせることで、正面から強く照らす光ではなく、柔らかく抑制された光を引き出す独自のアプローチを発展させました。照明、鏡、コンソールといった彼のオブジェは、空間の中に静かな存在感をもたらすものとしてデザインされています。こうした作品は、特別なインテリアや祈り・瞑想の場、ミネラルな光を静かに、そして永くたたえたいホテルやギャラリーなどにふさわしいものです。</p>
-                <p style="margin-top: 1.5rem;">Thomas Pruvot の作品はこれまでに、パリ8区の Salon Baba やパリ5区の書店 L'Œil de Mercure で発表されており、その素材は建築事務所 Studio KO のマテリアルライブラリーにも収められています。</p>
+                <p style="margin-top: 1.5rem;">彼の作品はSalon Baba(パリ8区)と書店L'Œil de Mercure(パリ5区)に展示されており、Studio KOのマテリアルライブラリーにも収蔵されています。</p>
             </div>
-            <div class="quote">「光と同じように、影もまた一つの色である。ただ少しだけ輝きが弱いだけなのだ。光と影とは、結局のところ二つの色調の関係にすぎない。」 ― Paul Cézanne</div>
+            <div class="quote">「光と同じように、影もまた一つの色である。ただ少しだけ輝きが弱いだけなのだ。光と影とは、結局のところ二つの色調の関係にすぎない。」
+			<span class="quote-author"> ― Paul Cézanne</span>
+			</div>
 			
 			<div class="about-image">
 				<img src="../Images/Photo-atelier.webp" 
@@ -1515,7 +1527,7 @@ footer p {
 		<section id="luminaires">
             <h2>照明作品</h2>
             <div class="intro">
-                <p>これらの作品は、鉱物、ジェッソ、彫刻された木材の魅力が光によって少しずつ立ち現れる“鑑賞のためのオブジェ”として構想されています。ブラジル産アゲート、ローズクォーツ、インド産アメシスト、ロックソルトアゲートといった鉱物、古くからの技法で仕上げたジェッソ、そして細やかに手彫りされたシポの無垢材が、静かで穏やかな空間づくり――休息や読書、瞑想にふさわしい雰囲気――のために用いられています。各作品は、強く照らすことよりも、心を落ち着かせ集中力を高める、柔らかく静かな光の存在感をもたらすことを目指しています。</p>
+                <p>これらの作品は、光が鉱物、ジェッソ、彫刻された木の性質を徐々に明らかにする、瞑想のための作品として構想されています。ブラジル産アゲート、ローズクォーツ、インド産アメジスト、ソルトアゲートなどの鉱物、伝統的な技法で仕上げられたジェッソ、そして手作業で細かく彫られた無垢のシポ材が、休息、読書、瞑想に適した静かな雰囲気を創り出すために用いられています。各作品は強い照明を目指すというよりも、穏やかな光の存在感を生み出し、静寂と集中を促すことを目的としています。</p>
             </div>
             
             <div class="luminaires-grid">
@@ -1535,8 +1547,8 @@ footer p {
                     </div>
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Eclat</h3>
-                        <p class="luminaire-materials">インド産の半透明な塩アゲート、シルバーのジェッソ、手彫りによるシポの無垢材。<br></p>
-                        <p class="luminaire-description">半透明の塩アゲートが柔らかく澄んだ光を透かし、目に刺さらない穏やかな明るさをもたらします。シルバーのジェッソは、手彫りされたシポ材と呼応しながら、この作品のミネラルな存在感を際立たせます。「Eclat」は、光が正確でありながらも落ち着きを保っていてほしい、明るいリビングや書斎、レセプションスペースのために構想されています。</p>
+                        <p class="luminaire-materials">インド産ソルトアゲート、銀色のジェッソ、彫刻されたシポ材<br></p>
+                        <p class="luminaire-description">ソルトアゲートは、眩しさのない、柔らかく澄んだ光を透過します。銀色のジェッソは手彫りされたシポ材と響き合い、作品の鉱物としての存在感を強調します。「Eclat」は、明るいリビングルーム、オフィス、またはレセプションスペースなど、光が正確でありながら穏やかであるべき空間のために考案されました。</p>
                     </div>
                 </article>
                 

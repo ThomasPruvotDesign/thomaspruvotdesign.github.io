@@ -515,8 +515,7 @@ h3.collection-category {
 }
 
 .quote {
-    font-family: 'Garamond', serif;
-    font-style: italic;
+    font-family: 'Tahoma', sans-serif;
     text-align: center;
     margin: 2rem auto;
     font-size: 1.2rem;
@@ -528,6 +527,17 @@ h3.collection-category {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+}
+
+.quote-text {
+    font-style: italic;
+    display: block;
+}
+
+.quote-author {
+    font-style: normal;
+    display: block;
+    margin-top: 0.5em;
 }
 
 .about-image {
@@ -1491,9 +1501,11 @@ footer p {
             <h2>A PROPOS</h2>
             <div class="intro">
                 <p>Thomas Pruvot crée des pièces de lumière sculptée en bois, gesso traditionnel et minéraux naturels, réalisées en exemplaires uniques dans son atelier de Chennevières-sur-Marne. Formé aux techniques de peinture décorative et aux enduits anciens, il a développé une approche personnelle du gesso en l'associant à des pierres translucides – agate de sel, améthyste, quartz rose, agate – pour révéler une lumière douce et contenue plutôt que frontale. Ses objets – luminaires, miroirs, consoles – sont conçus comme des présences silencieuses dans l'espace. Ils trouvent leur place dans des intérieurs d'exception, des lieux de contemplation, des hôtels ou des galeries où l'on cherche une lumière minérale, discrète et durable.</p>
-                <p style="margin-top: 1.5rem;">Ses créations ont déjà été présentées au Salon Baba (Paris 8e) et à la librairie L'Œil de Mercure (Paris 5e), et ses matériaux sont intégrés à la matériauthèque de Studio KO.</p>
+                <p style="margin-top: 1.5rem;">Ses créations sont présentes au Salon Baba (Paris 8e) et à la librairie L'Œil de Mercure (Paris 5e), et ont intégré la matériauthèque de Studio KO.</p>
             </div>
-            <div class="quote">"Je crois que le beau n’est pas une substance en soi, mais rien qu’un dessin d’ombres, qu’un jeu de clair-obscur produit par la juxtaposition de substances diverses." Jun’ichirô Tanizaki, Eloge de l’ombre</div>
+            <div class="quote">"Je crois que le beau n’est pas une substance en soi, mais rien qu’un dessin d’ombres, qu’un jeu de clair-obscur produit par la juxtaposition de substances diverses."
+			<span class="quote-author">Jun'ichirô Tanizaki, Eloge de l'ombre</span>
+			</div>
 			
 			<div class="about-image">
 				<img src="Images/Photo-atelier.webp" 
@@ -1515,7 +1527,7 @@ footer p {
 		<section id="luminaires">
             <h2>LES LUMIERES</h2>
             <div class="intro">
-                <p>Ces créations sont conçues comme des pièces de contemplation, où la lumière révèle progressivement les qualités des minéraux, du gesso et du bois sculpté. Minéraux (agate du Brésil, quartz rose, améthyste d'Inde, agate de sel), gesso travaillé selon des techniques ancestrales et bois massif de sipo finement gougé à la main sont mis au service d'ambiances calmes, propices au repos, à la lecture ou à la méditation. Chaque pièce vise moins à éclairer fortement qu'à installer une présence lumineuse douce, favorable à la sérénité et à la concentration.</p>
+                <p>Ces objets sont conçus comme des pièces de contemplation, où la lumière révèle progressivement les qualités des minéraux, du gesso et du bois sculpté. Minéraux (agate du Brésil, quartz rose, améthyste d'Inde, agate de sel), gesso travaillé selon des techniques ancestrales et bois massif de sipo finement gougé à la main sont mis au service d'ambiances calmes, propices au repos, à la lecture ou à la méditation. Chaque pièce vise moins à éclairer fortement qu'à installer une présence lumineuse douce, favorable à la sérénité et à la concentration.</p>
             </div>
             
             <div class="luminaires-grid">
@@ -1535,8 +1547,8 @@ footer p {
                     </div>
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Eclat</h3>
-                        <p class="luminaire-materials">Agate de sel indienne translucide, gesso argenté, bois de sipo gougé<br>42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">L'agate de sel translucide laisse filtrer une lumière douce, claire, sans éblouir. Le gesso argenté répond au bois de sipo sculpté à la main et souligne la présence minérale de la pièce. "Eclat" est pensé pour des salons lumineux, des bureaux ou des espaces de réception où la lumière doit rester à la fois précise et apaisante.</p>
+                        <p class="luminaire-materials">Agate de sel indienne, gesso argenté, bois de sipo gougé<br>42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">L'agate de sel laisse filtrer une lumière douce, claire, sans éblouir. Le gesso argenté répond au bois de sipo sculpté à la main et souligne la présence minérale de la pièce. "Eclat" est pensé pour des salons lumineux, des bureaux ou des espaces de réception où la lumière doit rester à la fois précise et apaisante.</p>
                     </div>
                 </article>
                 
@@ -1555,8 +1567,8 @@ footer p {
                     </div>
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Céleste</h3>
-                        <p class="luminaire-materials">Améthyste indienne, Peau de gesso, bois de sipo gougé à la main<br>42 × 33 × 16 cm</p>
-                        <p class="luminaire-description">Création propice à la lecture, à l'étude et aux moments de retrait. L'améthyste diffuse une lumière profonde et calme, tandis que le cadre en Peau de gesso et bois de sipo finement travaillé apporte une présence tactile et visuelle qui soutient la concentration et la contemplation.</p>
+                        <p class="luminaire-materials">Améthyste indienne, "Peau de gesso", bois de sipo gougé à la main<br>42 × 33 × 16 cm</p>
+                        <p class="luminaire-description">Création propice à la lecture, à l'étude et aux moments de retrait. L'améthyste diffuse une lumière profonde et calme, tandis que le cadre en "Peau de gesso" et bois de sipo finement travaillé apporte une présence tactile et visuelle qui soutient la concentration et la contemplation.</p>
                     </div>
                 </article>
                 
@@ -1595,7 +1607,7 @@ footer p {
                     </div>
                     <div class="luminaire-info">
                         <h3 class="luminaire-title">Chartres</h3>
-                        <p class="luminaire-materials">Mosaïque d'agates du Brésil, Peau de gesso, bois de sipo gougé<br>42 × 33 × 16 cm</p>
+                        <p class="luminaire-materials">Mosaïque d'agates du Brésil, "Peau de gesso", bois de sipo gougé<br>42 × 33 × 16 cm</p>
                         <p class="luminaire-description">Inspirée par la cathédrale de Chartres et ses vitraux médiévaux, cette pièce travaille une mosaïque d'agates naturelles du Brésil aux teintes chaleureuses. La lumière, filtrée par la pierre, rappelle l'atmosphère des vitraux tout en restant contenue et enveloppante. "Chartres" est pensée pour des espaces où l'on cherche une lumière chaude, propice au recueillement.</p>
                     </div>
                 </article>
@@ -1655,7 +1667,7 @@ footer p {
             
             <h3 class="collection-category">COLLECTION ORGANIQUE</h3>
             <div class="intro" style="margin-bottom: 2rem;">
-                <p>La collection Organique est née de l'observation des lignes naturelles : courbes douces, formes arrondies qui font entrer une présence végétale dans l'espace. En atelier, les patrons sont créés à partir de pièces de mica ; selon les finitions, le gesso peut évoquer le cuir, la peau animale ou une matière minérale adoucie. Chaque pièce met l'accent sur la ligne et la texture plutôt que sur l'ornement.</p>
+                <p>La collection "Organique" est née de l'observation des lignes naturelles : courbes douces, formes arrondies qui font entrer une présence végétale dans l'espace. En atelier, les patrons sont créés à partir de pièces de mica ; selon les finitions, le gesso peut évoquer le cuir, la peau animale ou une matière minérale adoucie. Chaque pièce met l'accent sur la ligne et la texture plutôt que sur l'ornement.</p>
             </div>
             
             <div class="materials-samples organique">
